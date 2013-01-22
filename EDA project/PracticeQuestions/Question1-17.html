@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="EN" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/xml";
+charset=utf-8">
+<title>Bespoke Homework</title>
+
+<!-- begin{Schunk} !--> 
+
+
+<p class='character'><hr class='hr'></p>
+<ul>
+</center><li>
+
+<p class='character'> <br/><br/>What do you think the p-value is?</p>
+</ul>
+<ul>
+</center><li>
+
+<p class='logical'>FALSE</p>
+</ul>
+
+<br><hr class='hr'>
+
+<!--\end{Schunk}!-->
+<script type="text/javascript" src="Question1-17.js"></script>
+<script type="text/javascript" src="printChoices.js"></script>
+<script type = "text/javascript">
+//<![CDATA[
+
+function getAnswer(){
+var answerChoice = document.getElementsByName("choices");
+divFeedback = document.getElementById("divFeedback");
+divCorrectAnswer = document.getElementById("divCorrectAnswer");
+divNextQuestion = document.getElementById("divNextQuestion");
+
+for(i = 0; i < 4; i++){
+currentChoice = answerChoice[i];
+if(currentChoice.checked){
+var selectedChoice = currentChoice.value;
+}
+}
+
+if(unorderedChoices[selectedChoice][2] == "true"){
+var answerFeedback = "<b>Correct.</b>";
+} else{
+var answerFeedback = "<b>Incorrect.</b>";
+answerFeedback += "<p><b>Correct answer:</b></p>";
+}
+
+var correctFeedback = "<p>" + unorderedChoices[trueLocation][0]
++ "</p>";
+correctFeedback += "<p><em>" + unorderedChoices[trueLocation][1]
++ "</em></p>";
+
+var nQuestionTypes = 2;
+var QTypes = [1, 2];
+var QNumbers = [20, 20];
+
+var nextTypeNumber = Math.floor(Math.random()*nQuestionTypes);
+
+var nextQType = QTypes[nextTypeNumber];
+var nextQuestion = Math.ceil(Math.random()*QNumbers[nextTypeNumber]);
+
+var nextSite = "Q" + nextQType + "-" + nextQuestion + ".html";
+
+var nextButton = "<form method=\"link\" action=" + nextSite +" >" +
+"<input type = \"submit\" value = \"Next question\">" +
+"<\/form>";
+
+divFeedback.innerHTML = answerFeedback;
+divCorrectAnswer.innerHTML = correctFeedback;
+divNextQuestion.innerHTML = nextButton;
+
+var thatllDoButton = "<form method=\"link\" action=" +
+     "http://simplystatistics.tumblr.com>" +
+    "<input type = \"submit\" value = \"That\'ll do\">" +
+    "<\/form>";
+
+var thatllDo = document.getElementById("thatllDo");
+thatllDo.innerHTML = thatllDoButton;
+
+    var questionChoices = document.getElementById("qChoices");
+    questionChoices.innerHTML = " ";
+}
+
+//]]
+</script>
+</head>
+
+<body onload="giveChoices()">
+
+
+<table border = "0">
+  <tr>
+    <td><img src = "Question1-QFigure-17.png"></td>
+    <td></td>
+    </tr>
+    </table>
+
+
+<table border = "0" width = "600">
+  <tr>
+    <td> <br/><br/>What do you think the p-value is?</td>
+  </tr>
+<table>
+
+<table border="0" width = "600">
+  <tr><td>
+<div id="qChoices">
+<form>
+  <p><input type = "radio" name="choices"
+    value = "0" onClick="getAnswer()">A.
+  <span id="divOutputA"></span></p>
+    <p><input type = "radio" name="choices"
+    value = "1" onClick="getAnswer()">B.
+  <span id="divOutputB"></span></p>
+    <p><input type = "radio" name="choices"
+    value = "2" onClick="getAnswer()">C.
+  <span id="divOutputC"></span></p>
+  <p><input type = "radio" name="choices"
+    value = "3" onClick="getAnswer()">D.
+  <span id="divOutputD"></span></p>
+  </form>
+</div>
+</tr></td>
+<table>
+
+   
+<br>
+<table border = "0" width = "600">
+  <tr><td>
+<div id="divFeedback"></div>
+</td></tr>
+  <tr><td>
+<div id="divCorrectAnswer"></div>
+</td></tr>
+</table>
+<div id="divNextQuestion"></div>
+<div id="thatllDo"></div>
+</body>
+</html>

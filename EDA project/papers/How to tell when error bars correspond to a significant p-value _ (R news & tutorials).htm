@@ -1,0 +1,723 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"><head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>How to tell when error bars correspond to a significant p-value | (R news &amp; tutorials)</title>
+
+<link rel="stylesheet" href="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/style.css" type="text/css" media="screen">
+<style type="text/css">
+body { width: 1024px; }
+#mainwrapper { width: 1004px; }
+#sidebar { width: 180px; }
+#sidebar .side-widget { width: 160px; }
+#secondsidebar { width: 300px; }
+#secondsidebar .side-widget { width: 300px; }
+#leftcontent, #twocol, #threecol, #threecol2, .commentlist { width: 456px; }
+#leftcontent img, .wp-caption { max-width: 456px; }
+#leftcontent .wp-caption img, #leftcontent .gallery-thumb img { max-width: 444px; }
+<!-- fix for IE & Safari -->
+.threepost embed { width: 132.24px !important; }
+.twopost embed { width: 209.76px !important; }
+<!-- end fix for Safari -->
+</style>
+	<link rel="pingback" href="http://www.r-bloggers.com/xmlrpc.php">
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" href="http://www.r-bloggers.com/wp-content/themes/magazine-basic/iestyles.css" />
+<![endif]-->
+<script src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript" async="" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/quant.js"></script><script async="" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/cbgapi.loaded_0"></script><script type="text/javascript">
+	window.google_analytics_uacct = "UA-419807-53";
+</script>
+<link rel="alternate" type="application/rss+xml" title="R-bloggers » Feed" href="http://www.r-bloggers.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="R-bloggers » Comments Feed" href="http://www.r-bloggers.com/comments/feed/">
+<link rel="stylesheet" id="nrelate-style-common-0-05-1-css" href="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/nrelate-panels-common.css" type="text/css" media="all">
+<!--[if IE 6]>
+<link rel='stylesheet' id='nrelate-ie6-0-05-1-css'  href='http://static.nrelate.com/common_wp/0.05.1/ie6-panels.min.css' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="nrelate-style-huf-0-05-1-css" href="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/nrelate-panels-huf.css" type="text/css" media="all">
+<link rel="stylesheet" id="codebox-css" href="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/codebox.css" type="text/css" media="screen">
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/jquery.js"></script>
+<script type="text/javascript">try{jQuery.noConflict();}catch(e){};</script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/common_frontend.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/comment-reply.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/codebox.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.r-bloggers.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.r-bloggers.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="The Failure of Asset Allocation – Bonds Are An Imperfect Hedge" href="http://www.r-bloggers.com/the-failure-of-asset-allocation-bonds-are-an-imperfect-hedge/">
+<link rel="next" title="Civic Data Challenge closes July 29" href="http://www.r-bloggers.com/civic-data-challenge-closes-july-29/">
+<meta name="generator" content="WordPress 3.3.2">
+<link rel="shortlink" href="http://wp.me/pMm6L-ghL">
+
+<!-- All in One SEO Pack 1.6.14.5 by Michael Torbert of Semper Fi Web Design[300,385] -->
+<meta name="description" content="Can you tell when error bars based on 95 % CIs or standard errors correspond to a significant p-value? Don’t fret if you think it’s hard, a study from 2005 showed that researchers in psychogoly, behavior neuroscience and medicine had a hard time judging when error bars from two independent groups signified a significant difference.">
+<meta name="keywords" content="confidence interval,error bars,ggplot2,r,standard error,statistics">
+<link rel="canonical" href="http://www.r-bloggers.com/how-to-tell-when-error-bars-correspond-to-a-significant-p-value/">
+<!-- /all in one seo pack -->
+		<meta property="og:title" content="  How to tell when error bars correspond to a significant p-value">
+		<meta property="og:type" content="article">
+		<meta property="og:url" content="http://www.r-bloggers.com/how-to-tell-when-error-bars-correspond-to-a-significant-p-value/">        
+		 
+		
+	<meta property="og:site_name" content="R-bloggers">
+	<meta property="fb:admins" content="">
+	<meta property="og:description" content="Can you tell when error bars based on 95 % CIs or standard errors correspond to a significant p-value? Don’t fret if you think it’s hard, a study from 2005 showed that researchers in psychogoly, behavior neuroscience and medicine had a hard time judging when error bars from two independent groups signified a significant difference.">
+
+		<style type="text/css">
+		.better-tag-cloud-shortcode li,
+		.better-tag-cloud-shortcode li a,
+		li#better-tag-cloud ul.wp-tag-cloud li,
+		li#better-tag-cloud ul.wp-tag-cloud li a {
+			display:	inline;
+					}
+		</style> <link href="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shCore.css" type="text/css" rel="stylesheet"><link href="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shThemeDefault.css" type="text/css" rel="stylesheet"><meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3">
+<style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}
+.fb_invisible{display:none}
+.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}
+.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px}
+.fb_dialog_content{background:#fff;color:#333}
+.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\9;right:7px\9}
+.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}
+.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}
+.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}
+.fb_dialog_top_left,
+.fb_dialog_top_right,
+.fb_dialog_bottom_left,
+.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}
+.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}
+.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}
+.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}
+.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right,
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right{width:10px;height:100%}
+.fb_dialog_vert_left{margin-left:-10px}
+.fb_dialog_vert_right{right:0;margin-right:-10px}
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{width:100%;height:10px}
+.fb_dialog_horiz_top{margin-top:-10px}
+.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}
+.fb_dialog_iframe{line-height:0}
+.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}
+.fb_dialog_content .dialog_title > span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif)
+no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}
+body.fb_hidden{-webkit-transform:none;height:100%;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100%
+}
+.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif)
+white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}
+.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}
+#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}
+#fb-root #fb_dialog_ipad_overlay.hidden{display:none}
+.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}
+.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}
+.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%
+}
+.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100%, from(#4966A6),
+color-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,
+rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}
+.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}
+.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}
+.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}
+#fb_dialog_loader_close{float:left}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{position:relative;display:-moz-inline-block;display:inline-block}
+.fb_iframe_widget iframe{position:absolute}
+.fb_iframe_widget_lift{z-index:1}
+.fb_iframe_widget span{position:relative;display:inline-block;vertical-align:text-bottom;text-align:justify}
+.fb_hide_iframes iframe{position:relative;left:-10000px}
+.fb_iframe_widget_loader{position:relative;display:inline-block}
+.fb_iframe_widget_fluid{display:inline}
+.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}
+.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_button_simple,
+.fb_button_simple_rtl{background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yH/r/eIpbnVKI9lR.png);background-repeat:no-repeat;cursor:pointer;outline:none;text-decoration:none}
+.fb_button_simple_rtl{background-position:right 0}
+.fb_button_simple .fb_button_text{margin:0 0 0 20px;padding-bottom:1px}
+.fb_button_simple_rtl .fb_button_text{margin:0 10px 0 0}
+a.fb_button_simple:hover .fb_button_text,
+a.fb_button_simple_rtl:hover .fb_button_text,
+.fb_button_simple:hover .fb_button_text,
+.fb_button_simple_rtl:hover .fb_button_text{text-decoration:underline}
+.fb_button,
+.fb_button_rtl{background:#29447e url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/FGFbc80dUKj.png);background-repeat:no-repeat;cursor:pointer;display:inline-block;padding:0 0 0 1px;text-decoration:none;outline:none}
+.fb_button .fb_button_text,
+.fb_button_rtl .fb_button_text{background:#5f78ab url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/FGFbc80dUKj.png);border-top:solid 1px #879ac0;border-bottom:solid 1px #1a356e;color:#fff;display:block;font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-weight:bold;padding:2px 6px 3px 6px;margin:1px 1px 0 21px;text-shadow:none}
+a.fb_button,
+a.fb_button_rtl,
+.fb_button,
+.fb_button_rtl{text-decoration:none}
+a.fb_button:active .fb_button_text,
+a.fb_button_rtl:active .fb_button_text,
+.fb_button:active .fb_button_text,
+.fb_button_rtl:active .fb_button_text{border-bottom:solid 1px #29447e;border-top:solid 1px #45619d;background:#4f6aa3;text-shadow:none}
+.fb_button_xlarge,
+.fb_button_xlarge_rtl{background-position:left -60px;font-size:24px;line-height:30px}
+.fb_button_xlarge .fb_button_text{padding:3px 8px 3px 12px;margin-left:38px}
+a.fb_button_xlarge:active{background-position:left -99px}
+.fb_button_xlarge_rtl{background-position:right -268px}
+.fb_button_xlarge_rtl .fb_button_text{padding:3px 8px 3px 12px;margin-right:39px}
+a.fb_button_xlarge_rtl:active{background-position:right -307px}
+.fb_button_large,
+.fb_button_large_rtl{background-position:left -138px;font-size:13px;line-height:16px}
+.fb_button_large .fb_button_text{margin-left:24px;padding:2px 6px 4px 6px}
+a.fb_button_large:active{background-position:left -163px}
+.fb_button_large_rtl{background-position:right -346px}
+.fb_button_large_rtl .fb_button_text{margin-right:25px}
+a.fb_button_large_rtl:active{background-position:right -371px}
+.fb_button_medium,
+.fb_button_medium_rtl{background-position:left -188px;font-size:11px;line-height:14px}
+a.fb_button_medium:active{background-position:left -210px}
+.fb_button_medium_rtl{background-position:right -396px}
+.fb_button_text_rtl,
+.fb_button_medium_rtl .fb_button_text{padding:2px 6px 3px 6px;margin-right:22px}
+a.fb_button_medium_rtl:active{background-position:right -418px}
+.fb_button_small,
+.fb_button_small_rtl{background-position:left -232px;font-size:10px;line-height:10px}
+.fb_button_small .fb_button_text{padding:2px 6px 3px;margin-left:17px}
+a.fb_button_small:active,
+.fb_button_small:active{background-position:left -250px}
+.fb_button_small_rtl{background-position:right -440px}
+.fb_button_small_rtl .fb_button_text{padding:2px 6px;margin-right:18px}
+a.fb_button_small_rtl:active{background-position:right -458px}
+.fb_share_count_wrapper{position:relative;float:left}
+.fb_share_count{background:#b0b9ec none repeat scroll 0 0;color:#333;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;text-align:center}
+.fb_share_count_inner{background:#e8ebf2;display:block}
+.fb_share_count_right{margin-left:-1px;display:inline-block}
+.fb_share_count_right .fb_share_count_inner{border-top:solid 1px #e8ebf2;border-bottom:solid 1px #b0b9ec;margin:1px 1px 0 1px;font-size:10px;line-height:10px;padding:2px 6px 3px;font-weight:bold}
+.fb_share_count_top{display:block;letter-spacing:-1px;line-height:34px;margin-bottom:7px;font-size:22px;border:solid 1px #b0b9ec}
+.fb_share_count_nub_top{border:none;display:block;position:absolute;left:7px;top:35px;margin:0;padding:0;width:6px;height:7px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yU/r/bSOHtKbCGYI.png)}
+.fb_share_count_nub_right{border:none;display:inline-block;padding:0;width:5px;height:10px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yX/r/i_oIVTKMYsL.png);vertical-align:top;background-position:right 5px;z-index:10;left:2px;margin:0 2px 0 0;position:relative}
+.fb_share_no_count{display:none}
+.fb_share_size_Small .fb_share_count_right .fb_share_count_inner{font-size:10px}
+.fb_share_size_Medium .fb_share_count_right .fb_share_count_inner{font-size:11px;padding:2px 6px 3px;letter-spacing:-1px;line-height:14px}
+.fb_share_size_Large .fb_share_count_right .fb_share_count_inner{font-size:13px;line-height:16px;padding:2px 6px 4px;font-weight:normal;letter-spacing:-1px}
+.fb_share_count_hidden .fb_share_count_nub_top,
+.fb_share_count_hidden .fb_share_count_top,
+.fb_share_count_hidden .fb_share_count_nub_right,
+.fb_share_count_hidden .fb_share_count_right{visibility:hidden}
+.fb_connect_bar_container div,
+.fb_connect_bar_container span,
+.fb_connect_bar_container a,
+.fb_connect_bar_container img,
+.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}
+.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}
+.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}
+.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}
+.fb_connect_bar a:hover{color:#fff}
+.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}
+.fb_connect_bar div a,
+.fb_connect_bar span,
+.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}
+.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fb_edge_widget_with_comment{position:relative;*z-index:1000}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50% 50%;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender
+.FB_Loader{margin-top:0}
+.fbpluginrecommendationsbarleft,
+.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}
+/* @noflip */
+.fbpluginrecommendationsbarleft{left:10px}
+/* @noflip */
+.fbpluginrecommendationsbarright{right:10px}
+</style><link type="text/css" rel="stylesheet" href="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/widget.css"><style type="text/css">#twtr-widget-1 .twtr-avatar { display: block; } #twtr-widget-1 .twtr-user { display: inline; } #twtr-widget-1 .twtr-tweet-text { margin-left: 40px; }</style><style type="text/css">#twtr-widget-1 .twtr-doc,                      #twtr-widget-1 .twtr-hd a,                      #twtr-widget-1 h3,                      #twtr-widget-1 h4 {            background-color: #8ec1da !important;            color: #ffffff !important;          }          #twtr-widget-1 .twtr-tweet a {            color: #1985b5 !important;          }          #twtr-widget-1 .twtr-bd, #twtr-widget-1 .twtr-timeline i a,           #twtr-widget-1 .twtr-bd p {            color: #444444 !important;          }          #twtr-widget-1 .twtr-new-results,           #twtr-widget-1 .twtr-results-inner,           #twtr-widget-1 .twtr-timeline {            background: #ffffff !important;          }</style></head>
+
+<body data-twttr-rendered="true" class="single single-post postid-62605 single-format-standard">
+<!-- begin header -->
+<div id="header">
+		    	    <div id="title" class="aligncenter">
+    	<h2><a href="http://www.r-bloggers.com/">R-bloggers</a> </h2>    
+    </div>
+        <div id="description" class="aligncenter">
+        R news and tutorials contributed by (376) R bloggers    </div>     
+    <div class="main-navigation"><ul id="menu-top-nav" class="sf-menu sf-js-enabled sf-shadow"><li id="menu-item-48314" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-48314"><a href="http://www.r-bloggers.com/">Home</a></li>
+<li id="menu-item-48312" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48312"><a href="http://www.r-bloggers.com/about/">About</a></li>
+<li id="menu-item-48313" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48313"><a href="http://www.r-bloggers.com/add-your-blog/">add your blog!</a></li>
+<li id="menu-item-48311" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48311"><a href="http://www.r-bloggers.com/contact-us/">Contact us</a></li>
+<li id="menu-item-50111" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-50111"><a href="http://feeds.feedburner.com/RBloggers" onclick="javascript:_gaq.push(['_trackEvent','outbound-menu','http://feeds.feedburner.com/RBloggers']);">RSS</a></li>
+</ul></div>
+</div>
+<!-- end header -->
+
+
+<div id="mainwrapper">
+<!-- begin sidebar -->
+    <div id="sidebar">
+		<div class="side-widget"><h2>Welcome!</h2>			<div class="textwidget">Here you will find daily <strong>news and tutorials about R</strong>, contributed by over 300 bloggers. 
+
+You can <a href="http://feedburner.google.com/fb/a/mailverify?uri=RBloggers" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://feedburner.google.com/fb/a/mailverify?uri=RBloggers']);">subscribe for e-mail updates</a>:
+
+<form style="border:1px solid #ccc;padding:3px;text-align:center;" action="http://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=RBloggers', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+<input style="width:110px" onclick="if (this.value == 'Your e-mail here') this.value = '';" value="Your e-mail here" name="email" type="text">
+<input value="RBloggers" name="uri" type="hidden"><input name="loc" value="en_US" type="hidden"><input value="Subscribe" type="submit">
+<a href="http://feeds.feedburner.com/RBloggers" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://feeds.feedburner.com/RBloggers']);"><img src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/RBloggers.gif" style="border:0" alt="" height="26" width="88"></a>
+</form>
+And get updates to your Facebook:
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/en_GB.js"></script><script type="text/javascript">FB.init("f4a264d45dde87136dfe1d197cf48ae2");</script><fb:fan class="  fb_iframe_widget " profile_id="191414254890" stream="" connections="2" width="160" height="162"><span style="height: 162px; width: 160px;"><iframe src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/fan.htm" class="fb_ltr" style="border: medium none; overflow: hidden; height: 162px; width: 160px;" name="f14f0ae521e8b9e" id="f18fe9391a20b7c" scrolling="no"></iframe></span></fb:fan>
+
+<strong>If you are an R blogger yourself</strong> you are invited to <a href="http://www.r-bloggers.com/add-your-blog/">add your own R content feed to this site</a> (<strong>Non-English</strong> R bloggers should add themselves- <a href="http://www.r-bloggers.com/lang/add-your-blog">here</a>)</div>
+		</div><div class="side-widget">			<div class="textwidget"><br>
+<script charset="utf-8" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'search',
+  search: '#rstats',
+  interval: 30000,
+  title: 'Tweets from useR2012',
+  subject: 'Enjoy!',
+  width: 160,
+  height: 300,
+  theme: {
+    shell: {
+      background: '#8ec1da',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#444444',
+      links: '#1985b5'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: true,
+    live: true,
+    behavior: 'default'
+  }
+}).render().start();
+</script><div class="twtr-widget" id="twtr-widget-1"><div class="twtr-doc" style="width: 160px;">            <div class="twtr-hd"><h3><a target="_blank" style="color:#ffffff" href="https://twitter.com/search/%23rstats">Tweets from useR2012</a></h3>                      <h4><a target="_blank" style="color:#ffffff" href="https://twitter.com/search/%23rstats">Enjoy!</a></h4>             </div>            <div class="twtr-bd">              <div class="twtr-timeline" style="height: 300px;">                <div class="twtr-tweets">                  <div class="twtr-reference-tweet"></div><div style="opacity: 1; height: 108px;" class="twtr-tweet" id="tweet-id-689"><div class="twtr-tweet-wrap">         <div class="twtr-avatar">           <div class="twtr-img"><a target="_blank" href="https://twitter.com/intent/user?screen_name=tpoi"><img alt="tpoi profile" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/DSC01825_2_2-300x300_normal.png"></a></div>         </div>         <div class="twtr-tweet-text">           <p>             <a target="_blank" href="https://twitter.com/intent/user?screen_name=tpoi" class="twtr-user">tpoi</a> Spatially auto-correlated matrices with <a href="http://twitter.com/search?q=%23R" title="#R" class="tweet-url hashtag" target="_blank">#R</a>/#rstats: <a href="http://t.co/D7ulPd34" target="_blank" urlentities="[object Object]" rel="nofollow">is.gd/ytsP9m</a>             <em>            <a target="_blank" class="twtr-timestamp" time="Sat, 11 Aug 2012 16:06:10 +0000" href="https://twitter.com/tpoi/status/234319807665815552">2 days ago</a> ·            <a target="_blank" class="twtr-reply" href="https://twitter.com/intent/tweet?in_reply_to=234319807665815552">reply</a> ·             <a target="_blank" class="twtr-rt" href="https://twitter.com/intent/retweet?tweet_id=234319807665815552">retweet</a> ·             <a target="_blank" class="twtr-fav" href="https://twitter.com/intent/favorite?tweet_id=234319807665815552">favorite</a>             </em>           </p>         </div>       </div></div><div style="opacity: 1; height: 165px;" class="twtr-tweet" id="tweet-id-688"><div class="twtr-tweet-wrap">         <div class="twtr-avatar">           <div class="twtr-img"><a target="_blank" href="https://twitter.com/intent/user?screen_name=rOpenSci"><img alt="rOpenSci profile" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/twitter_normal.png"></a></div>         </div>         <div class="twtr-tweet-text">           <p>             <a target="_blank" href="https://twitter.com/intent/user?screen_name=rOpenSci" class="twtr-user">rOpenSci</a> In case you missed it, recent post on the blog by our Google Summer of Code 2012 intern: <a class="tweet-url username" data-screen-name="vertnetorg" href="http://twitter.com/vertnetorg" target="_blank">@vertnetorg</a> from <a href="http://twitter.com/search?q=%23rstats" title="#rstats" class="tweet-url hashtag" target="_blank">#rstats</a> <a href="http://t.co/3c0HmGL2" target="_blank" urlentities="[object Object]" rel="nofollow">bit.ly/RB6iBW</a>             <em>            <a target="_blank" class="twtr-timestamp" time="Sat, 11 Aug 2012 16:45:40 +0000" href="https://twitter.com/rOpenSci/status/234329750401847297">2 days ago</a> ·            <a target="_blank" class="twtr-reply" href="https://twitter.com/intent/tweet?in_reply_to=234329750401847297">reply</a> ·             <a target="_blank" class="twtr-rt" href="https://twitter.com/intent/retweet?tweet_id=234329750401847297">retweet</a> ·             <a target="_blank" class="twtr-fav" href="https://twitter.com/intent/favorite?tweet_id=234329750401847297">favorite</a>             </em>           </p>         </div>       </div></div><div style="opacity: 1; height: 122px;" class="twtr-tweet" id="tweet-id-687"><div class="twtr-tweet-wrap">         <div class="twtr-avatar">           <div class="twtr-img"><a target="_blank" href="https://twitter.com/intent/user?screen_name=or_1_eq_1"><img alt="or_1_eq_1 profile" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/pi49lyti0uo4bothffm7_normal.jpg"></a></div>         </div>         <div class="twtr-tweet-text">           <p>             <a target="_blank" href="https://twitter.com/intent/user?screen_name=or_1_eq_1" class="twtr-user">or_1_eq_1</a> <a href="http://twitter.com/search?q=%23BigData" title="#BigData" class="tweet-url hashtag" target="_blank">#BigData</a> is looking more like Clojure -Python everyday than <a href="http://twitter.com/search?q=%23rstats" title="#rstats" class="tweet-url hashtag" target="_blank">#rstats</a>             <em>            <a target="_blank" class="twtr-timestamp" time="Sun, 12 Aug 2012 03:49:02 +0000" href="https://twitter.com/or_1_eq_1/status/234496692794298369">yesterday</a> ·            <a target="_blank" class="twtr-reply" href="https://twitter.com/intent/tweet?in_reply_to=234496692794298369">reply</a> ·             <a target="_blank" class="twtr-rt" href="https://twitter.com/intent/retweet?tweet_id=234496692794298369">retweet</a> ·             <a target="_blank" class="twtr-fav" href="https://twitter.com/intent/favorite?tweet_id=234496692794298369">favorite</a>             </em>           </p>         </div>       </div></div><div style="opacity: 1; height: 165px;" class="twtr-tweet" id="tweet-id-686"><div class="twtr-tweet-wrap">         <div class="twtr-avatar">           <div class="twtr-img"><a target="_blank" href="https://twitter.com/intent/user?screen_name=Rbloggers"><img alt="Rbloggers profile" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/RblogLogo_normal.png"></a></div>         </div>         <div class="twtr-tweet-text">           <p>             <a target="_blank" href="https://twitter.com/intent/user?screen_name=Rbloggers" class="twtr-user">Rbloggers</a> What have I been doing all these years?!: 
+(This article was first published on   James Keirstead » R, a... <a href="http://t.co/2chvEKer" target="_blank" urlentities="[object Object]" rel="nofollow">bit.ly/R42Y4J</a> <a href="http://twitter.com/search?q=%23rstats" title="#rstats" class="tweet-url hashtag" target="_blank">#rstats</a>             <em>            <a target="_blank" class="twtr-timestamp" time="Sun, 12 Aug 2012 11:46:16 +0000" href="https://twitter.com/Rbloggers/status/234616792390176768">yesterday</a> ·            <a target="_blank" class="twtr-reply" href="https://twitter.com/intent/tweet?in_reply_to=234616792390176768">reply</a> ·             <a target="_blank" class="twtr-rt" href="https://twitter.com/intent/retweet?tweet_id=234616792390176768">retweet</a> ·             <a target="_blank" class="twtr-fav" href="https://twitter.com/intent/favorite?tweet_id=234616792390176768">favorite</a>             </em>           </p>         </div>       </div></div>                  <!-- tweets show here -->                </div>              </div>            </div>            <div class="twtr-ft">              <div><a target="_blank" href="https://twitter.com/"><img alt="" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/widget-bird.png"></a>                <span><a target="_blank" class="twtr-join-conv" style="color:#ffffff" href="https://twitter.com/search/%23rstats">Join the conversation</a></span>              </div>            </div>          </div></div></div>
+		</div><div class="side-widget"><h2>TOPICS OF INTEREST</h2><a href="http://www.r-bloggers.com/tag/ggplot2/" class="tag-link-27 nktagcloud-18" title="297 topics" rel="tag" style="font-size: 18pt;">ggplot2</a>
+<a href="http://www.r-bloggers.com/tag/r-project/" class="tag-link-752 nktagcloud-15" title="235 topics" rel="tag" style="font-size: 15.53pt;">r-project</a>
+<a href="http://www.r-bloggers.com/tag/graphics/" class="tag-link-76 nktagcloud-15" title="227 topics" rel="tag" style="font-size: 15.21pt;">graphics</a>
+<a href="http://www.r-bloggers.com/tag/programming/" class="tag-link-475 nktagcloud-14" title="214 topics" rel="tag" style="font-size: 14.69pt;">programming</a>
+<a href="http://www.r-bloggers.com/tag/rstats/" class="tag-link-765 nktagcloud-14" title="199 topics" rel="tag" style="font-size: 14.1pt;">rstats</a>
+<a href="http://www.r-bloggers.com/tag/r-language/" class="tag-link-99 nktagcloud-13" title="177 topics" rel="tag" style="font-size: 13.22pt;">R Language</a>
+<a href="http://www.r-bloggers.com/tag/books/" class="tag-link-680 nktagcloud-12" title="160 topics" rel="tag" style="font-size: 12.54pt;">Books</a>
+<a href="http://www.r-bloggers.com/tag/visualization/" class="tag-link-22 nktagcloud-12" title="147 topics" rel="tag" style="font-size: 12.02pt;">visualization</a>
+<a href="http://www.r-bloggers.com/tag/data/" class="tag-link-114 nktagcloud-10" title="116 topics" rel="tag" style="font-size: 10.79pt;">Data</a>
+<a href="http://www.r-bloggers.com/tag/r-english/" class="tag-link-2739 nktagcloud-10" title="114 topics" rel="tag" style="font-size: 10.71pt;">R-english</a>
+<a href="http://www.r-bloggers.com/tag/tutorial/" class="tag-link-423 nktagcloud-10" title="111 topics" rel="tag" style="font-size: 10.59pt;">tutorial</a>
+<a href="http://www.r-bloggers.com/tag/events/" class="tag-link-393 nktagcloud-10" title="110 topics" rel="tag" style="font-size: 10.55pt;">events</a>
+<a href="http://www.r-bloggers.com/tag/latex/" class="tag-link-63 nktagcloud-10" title="106 topics" rel="tag" style="font-size: 10.39pt;">LaTex</a>
+<a href="http://www.r-bloggers.com/tag/finance/" class="tag-link-394 nktagcloud-10" title="99 topics" rel="tag" style="font-size: 10.11pt;">finance</a>
+<a href="http://www.r-bloggers.com/tag/big-data/" class="tag-link-1009 nktagcloud-9" title="93 topics" rel="tag" style="font-size: 9.87pt;">Big Data</a>
+<a href="http://www.r-bloggers.com/tag/packages/" class="tag-link-279 nktagcloud-9" title="82 topics" rel="tag" style="font-size: 9.43pt;">packages</a>
+<a href="http://www.r-bloggers.com/tag/sweave/" class="tag-link-66 nktagcloud-9" title="79 topics" rel="tag" style="font-size: 9.31pt;">sweave</a>
+<a href="http://www.r-bloggers.com/tag/applications/" class="tag-link-395 nktagcloud-9" title="76 topics" rel="tag" style="font-size: 9.2pt;">applications</a>
+<a href="http://www.r-bloggers.com/tag/stocks/" class="tag-link-2206 nktagcloud-9" title="76 topics" rel="tag" style="font-size: 9.2pt;">stocks</a>
+<a href="http://www.r-bloggers.com/tag/computing/" class="tag-link-44 nktagcloud-9" title="75 topics" rel="tag" style="font-size: 9.16pt;">computing</a>
+<a href="http://www.r-bloggers.com/tag/r-programming/" class="tag-link-94 nktagcloud-9" title="73 topics" rel="tag" style="font-size: 9.08pt;">R Programming</a>
+<a href="http://www.r-bloggers.com/tag/software/" class="tag-link-274 nktagcloud-9" title="73 topics" rel="tag" style="font-size: 9.08pt;">Software</a>
+<a href="http://www.r-bloggers.com/tag/simulation/" class="tag-link-134 nktagcloud-9" title="72 topics" rel="tag" style="font-size: 9.04pt;">Simulation</a>
+<a href="http://www.r-bloggers.com/tag/bioinformatics/" class="tag-link-424 nktagcloud-9" title="71 topics" rel="tag" style="font-size: 9pt;">Bioinformatics</a>
+<a href="http://www.r-bloggers.com/tag/r-chemometrics/" class="tag-link-5587 nktagcloud-8" title="69 topics" rel="tag" style="font-size: 8.92pt;">"R" Chemometrics</a>
+<a href="http://www.r-bloggers.com/tag/ggplot/" class="tag-link-296 nktagcloud-8" title="69 topics" rel="tag" style="font-size: 8.92pt;">ggplot</a>
+<a href="http://www.r-bloggers.com/tag/python/" class="tag-link-425 nktagcloud-8" title="64 topics" rel="tag" style="font-size: 8.72pt;">Python</a>
+<a href="http://www.r-bloggers.com/tag/plot/" class="tag-link-28 nktagcloud-8" title="63 topics" rel="tag" style="font-size: 8.68pt;">plot</a>
+<a href="http://www.r-bloggers.com/tag/tutorials/" class="tag-link-277 nktagcloud-8" title="62 topics" rel="tag" style="font-size: 8.64pt;">Tutorials</a>
+<a href="http://www.r-bloggers.com/tag/rmedia/" class="tag-link-280 nktagcloud-8" title="61 topics" rel="tag" style="font-size: 8.6pt;">Rmedia</a>
+<a href="http://www.r-bloggers.com/tag/bms-extensions/" class="tag-link-3020 nktagcloud-8" title="60 topics" rel="tag" style="font-size: 8.56pt;">BMS Extensions</a>
+<a href="http://www.r-bloggers.com/tag/stats/" class="tag-link-766 nktagcloud-8" title="60 topics" rel="tag" style="font-size: 8.56pt;">stats</a>
+<a href="http://www.r-bloggers.com/tag/twitter/" class="tag-link-184 nktagcloud-8" title="60 topics" rel="tag" style="font-size: 8.56pt;">twitter</a>
+<a href="http://www.r-bloggers.com/tag/english/" class="tag-link-2600 nktagcloud-8" title="58 topics" rel="tag" style="font-size: 8.48pt;">English</a>
+<a href="http://www.r-bloggers.com/tag/random/" class="tag-link-281 nktagcloud-8" title="58 topics" rel="tag" style="font-size: 8.48pt;">random</a>
+<a href="http://www.r-bloggers.com/tag/cran/" class="tag-link-161 nktagcloud-8" title="57 topics" rel="tag" style="font-size: 8.44pt;">cran</a>
+<a href="http://www.r-bloggers.com/tag/quant-finance/" class="tag-link-2569 nktagcloud-8" title="56 topics" rel="tag" style="font-size: 8.4pt;">Quant finance</a>
+<a href="http://www.r-bloggers.com/tag/sas/" class="tag-link-224 nktagcloud-8" title="56 topics" rel="tag" style="font-size: 8.4pt;">SAS</a>
+<a href="http://www.r-bloggers.com/tag/lattice/" class="tag-link-82 nktagcloud-8" title="56 topics" rel="tag" style="font-size: 8.4pt;">lattice</a>
+<a href="http://www.r-bloggers.com/tag/blog/" class="tag-link-48 nktagcloud-8" title="55 topics" rel="tag" style="font-size: 8.36pt;">blog</a>
+<a href="http://www.r-bloggers.com/tag/science/" class="tag-link-186 nktagcloud-8" title="55 topics" rel="tag" style="font-size: 8.36pt;">science</a>
+<a href="http://www.r-bloggers.com/tag/announcements/" class="tag-link-270 nktagcloud-8" title="52 topics" rel="tag" style="font-size: 8.24pt;">Announcements</a>
+<a href="http://www.r-bloggers.com/tag/linux/" class="tag-link-217 nktagcloud-8" title="52 topics" rel="tag" style="font-size: 8.24pt;">linux</a>
+<a href="http://www.r-bloggers.com/tag/rblogs/" class="tag-link-4742 nktagcloud-8" title="50 topics" rel="tag" style="font-size: 8.16pt;">rblogs</a>
+<a href="http://www.r-bloggers.com/tag/abc/" class="tag-link-1978 nktagcloud-8" title="48 topics" rel="tag" style="font-size: 8.08pt;">ABC</a>
+<a href="http://www.r-bloggers.com/tag/climate-trends/" class="tag-link-412 nktagcloud-8" title="47 topics" rel="tag" style="font-size: 8.04pt;">Climate Trends</a>
+<a href="http://www.r-bloggers.com/tag/probability/" class="tag-link-127 nktagcloud-8" title="47 topics" rel="tag" style="font-size: 8.04pt;">Probability</a>
+<a href="http://www.r-bloggers.com/tag/rcpp/" class="tag-link-454 nktagcloud-8" title="47 topics" rel="tag" style="font-size: 8.04pt;">Rcpp</a>
+<a href="http://www.r-bloggers.com/tag/data-mining/" class="tag-link-461 nktagcloud-8" title="47 topics" rel="tag" style="font-size: 8.04pt;">data mining</a>
+<a href="http://www.r-bloggers.com/tag/r-bloggers/" class="tag-link-4 nktagcloud-8" title="46 topics" rel="tag" style="font-size: 8pt;">R bloggers</a></div><div class="side-widget"><form method="get" id="searchform" action="http://www.r-bloggers.com/">
+<div>
+<input class="search_input" value="Search &amp; Hit Enter" name="s" id="s" onfocus="if (this.value == 'Search &amp; Hit Enter') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search &amp; Hit Enter';}" type="text">
+<input id="searchsubmit" type="hidden">
+</div>
+</form></div>		<div class="side-widget">		<h2>Recent Posts</h2>		<ul>
+				<li><a href="http://www.r-bloggers.com/rcppclassic-0-9-2/" title="RcppClassic 0.9.2">RcppClassic 0.9.2</a></li>
+				<li><a href="http://www.r-bloggers.com/civic-data-challenge-closes-july-29/" title="Civic Data Challenge closes July 29">Civic Data Challenge closes July 29</a></li>
+				<li><a href="http://www.r-bloggers.com/how-to-tell-when-error-bars-correspond-to-a-significant-p-value/" title="How to tell when error bars correspond to a significant p-value">How to tell when error bars correspond to a significant p-value</a></li>
+				<li><a href="http://www.r-bloggers.com/the-failure-of-asset-allocation-bonds-are-an-imperfect-hedge/" title="The Failure of Asset Allocation – Bonds Are An Imperfect Hedge">The Failure of Asset Allocation – Bonds Are An Imperfect Hedge</a></li>
+				<li><a href="http://www.r-bloggers.com/whats-wrong-with-loess-for-palaeo-data/" title="What’s wrong with LOESS for palaeo data?">What’s wrong with LOESS for palaeo data?</a></li>
+				<li><a href="http://www.r-bloggers.com/williams-designs-with-5-products/" title="Williams designs with 5 products">Williams designs with 5 products</a></li>
+				<li><a href="http://www.r-bloggers.com/rcppgsl-0-2-0/" title="RcppGSL 0.2.0">RcppGSL 0.2.0</a></li>
+				<li><a href="http://www.r-bloggers.com/faster-r-in-hadoop-rmr-1-3-now-available/" title="Faster R in Hadoop: rmr 1.3 now available">Faster R in Hadoop: rmr 1.3 now available</a></li>
+				<li><a href="http://www.r-bloggers.com/deploy-rook-apps-with-rapache-part-i/" title="Deploy Rook Apps with rApache: Part I">Deploy Rook Apps with rApache: Part I</a></li>
+				<li><a href="http://www.r-bloggers.com/success-does-not-require-understanding/" title="Success does not require understanding">Success does not require understanding</a></li>
+				<li><a href="http://www.r-bloggers.com/estimating-required-hospital-bed-capacity/" title="Estimating required hospital bed capacity">Estimating required hospital bed capacity</a></li>
+				<li><a href="http://www.r-bloggers.com/modeling-trick-impact-coding-of-categorical-variables-with-many-levels/" title="Modeling Trick: Impact Coding of Categorical Variables with Many Levels">Modeling Trick: Impact Coding of Categorical Variables with Many Levels</a></li>
+				<li><a href="http://www.r-bloggers.com/computing-the-degree-of-dependency-jointness-among-explanatory-variables-using-bms/" title="Computing the degree of dependency (jointness) among explanatory variables using BMS">Computing the degree of dependency (jointness) among explanatory variables using BMS</a></li>
+				<li><a href="http://www.r-bloggers.com/third-year-wrap-up/" title="Third year wrap-up">Third year wrap-up</a></li>
+				<li><a href="http://www.r-bloggers.com/xlconnect-0-2-0/" title="XLConnect 0.2-0">XLConnect 0.2-0</a></li>
+				</ul>
+		</div><div class="side-widget"><h2>Other sites</h2>
+	<ul class="xoxo blogroll">
+<li><a href="http://www.forex-bloggers.com/" title="Forex news and updates from bloggers" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.forex-bloggers.com/']);">Forex blogs</a></li>
+<li><a href="http://www.proc-x.com/" title="SAS news gathered from bloggers" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.proc-x.com/']);">SAS blogs</a></li>
+
+	</ul>
+</div>
+<div class="side-widget"><h2>Popular Searches</h2>
+<ul>
+<li><a href="http://www.r-bloggers.com/search/ggplot">ggplot</a></li>
+<li><a href="http://www.r-bloggers.com/search/hadoop">hadoop</a></li>
+<li><a href="http://www.r-bloggers.com/search/RStudio">RStudio</a></li>
+<li><a href="http://www.r-bloggers.com/search/ggplot2">ggplot2</a></li>
+<li><a href="http://www.r-bloggers.com/search/trading">trading</a></li>
+<li><a href="http://www.r-bloggers.com/search/Web%20Scraping">Web Scraping</a></li>
+<li><a href="http://www.r-bloggers.com/search/animation">animation</a></li>
+<li><a href="http://www.r-bloggers.com/search/sweave">sweave</a></li>
+<li><a href="http://www.r-bloggers.com/search/finance">finance</a></li>
+<li><a href="http://www.r-bloggers.com/search/googleVis">googleVis</a></li>
+<li><a href="http://www.r-bloggers.com/search/PCA">PCA</a></li>
+<li><a href="http://www.r-bloggers.com/search/map">map</a></li>
+<li><a href="http://www.r-bloggers.com/search/tutorial">tutorial</a></li>
+<li><a href="http://www.r-bloggers.com/search/boxplot">boxplot</a></li>
+<li><a href="http://www.r-bloggers.com/search/excel">excel</a></li>
+<li><a href="http://www.r-bloggers.com/search/eclipse">eclipse</a></li>
+<li><a href="http://www.r-bloggers.com/search/knitr">knitr</a></li>
+<li><a href="http://www.r-bloggers.com/search/Rcmdr">Rcmdr</a></li>
+<li><a href="http://www.r-bloggers.com/search/Latex">Latex</a></li>
+<li><a href="http://www.r-bloggers.com/search/twitter">twitter</a></li>
+<li><a href="http://www.r-bloggers.com/search/heatmap">heatmap</a></li>
+<li><a href="http://www.r-bloggers.com/search/regression">regression</a></li>
+<li><a href="http://www.r-bloggers.com/search/Time%2520Series">Time%20Series</a></li>
+<li><a href="http://www.r-bloggers.com/search/quantmod">quantmod</a></li>
+<li><a href="http://www.r-bloggers.com/search/ecdf">ecdf</a></li>
+<li><a href="http://www.r-bloggers.com/search/GIS">GIS</a></li>
+<li><a href="http://www.r-bloggers.com/search/maps">maps</a></li>
+<li><a href="http://www.r-bloggers.com/search/sql">sql</a></li>
+<li><a href="http://www.r-bloggers.com/search/time%20series">time series</a></li>
+<li><a href="http://www.r-bloggers.com/search/coplot">coplot</a></li>
+</ul>
+
+</div>    </div>
+<!-- end sidebar -->	<div id="leftcontent">
+	
+		
+
+	<div id="post-62605" class="post-62605 post type-post status-publish format-standard hentry category-r-bloggers tag-confidence-interval tag-error-bars tag-ggplot2 tag-r tag-standard-error tag-statistics">
+					
+				
+                <h1>How to tell when error bars correspond to a significant p-value</h1>
+                <div class="meta"><div class="date">July 24, 2012</div>By <a href="http://www.r-bloggers.com/author/kristoffer-magnusson/" title="Posts by Kristoffer Magnusson" rel="author">Kristoffer Magnusson</a>
+<div class="like">
+<iframe src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/like_004.htm" allowtransparency="true" style="border:none; overflow:hidden; width:450px; height:24px; " frameborder="0" scrolling="no"></iframe>
+</div>
+</div><div class="entry"><p class="syndicated-attribution"></p><div style="border: 1px solid; background: none repeat scroll 0 0 #EDEDED; margin: 1px; font-size: 12px;">
+(This article was first published on  <strong><a href="http://rpsychologist.com/how-to-tell-when-error-bars-correspond-to-a-significant-p-value/"> R Psychologist » R</a></strong>, and kindly contributed to <a href="http://www.r-bloggers.com/">R-bloggers)</a>      
+</div><p></p>
+<script gapi_processed="true" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/plusone.js" type="text/javascript">
+</script>
+<script type="text/javascript">gapi.plusone.go();</script>
+<script gapi_processed="true" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/plusone.js" type="text/javascript">
+</script>
+<script type="text/javascript">gapi.plusone.go();</script>
+<p></p><div class="woo-sc-twitter left"><iframe title="Twitter Tweet Button" style="width: 109px; height: 20px;" class="twitter-share-button twitter-count-horizontal" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/tweet_button.htm" allowtransparency="true" frameborder="0" scrolling="no"></iframe><script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/widgets.js"></script></div>
+<div class="woo-fbshare left">
+<a name="fb_share" type="button" share_url="http://rpsychologist.com/how-to-tell-when-error-bars-correspond-to-a-significant-p-value/"></a>
+<script src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/FB.js" type="text/javascript">
+</script>
+</div>
+	
+<div class="woo-fblike fl">
+<iframe src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/like_003.htm" allowtransparency="true" style="border:none; overflow:hidden; width:130px; height:25px;" frameborder="0" scrolling="no"></iframe>
+</div>
+	<div class="shortcode-google-plusone fl"><div style="height: 20px; width: 32px; display: inline-block; text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;" id="___plusone_0"><iframe title="+1" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/fastbutton.htm" name="I0_1344881363090" id="I0_1344881363090" vspace="0" tabindex="0" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" marginwidth="0" marginheight="0" hspace="0" allowtransparency="true" frameborder="0" scrolling="no" width="100%"></iframe></div></div><!--/.shortcode-google-plusone-->
+
+<div class="woo-sc-divider flat"></div><p></p>
+<h1>Introduction</h1>
+<p>Belia, Fidler, Williams, and Cumming (2005) found that researchers in
+ psychology, behavior neuroscience and medicine are really bad at 
+interpreting when error bars signify that two means are significantly 
+different (<em>p</em> = 0.05). What they did was to email a bunch of 
+researchers and invite them to take a web-based test, and they got 473 
+usable responses.  The test consisted of an interactive plot with error 
+bars for two independent groups, the participants were asked to move the
+ error bars to a position they believed would represent a significant <em>t</em>-test at <em>p</em>=0.05.
+ They did this for error bars based on the 95 % CI and the group’s 
+standard errors. The participants did on average set the 95 % CI too far
+ apart with their mean placement corresponding to a <em>p</em> value of 
+.009. They did the opposite with the SE error bars, which they put too 
+close together yielding placements corresponding to <em>p</em> = 0.109. And if you’re wondering they found no difference between the three disciplines. </p>
+<h1>Plots</h1>
+<p>I wanted to pull my weight, and I have therefore created some various
+ plots in R that show error bars that are significant at various <em>p</em>-values. </p>
+<p><a href="http://rpsychologist.com/wp-content/uploads/2012/07/errorbar_05.png" ref="nofollow" target="_blank"><img src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/errorbar_05-1024x714.png" alt="Interpreting error bars and confidence intervals p = .05" title="Interpreting error bars and confidence intervals p = .05" class="aligncenter size-large wp-image-1427" width="600"></a></p>
+<h4>Figure 1. Error bars corresponding to a significant difference at p = .05 (equal group sizes and equal variances)</h4>
+<p><a href="http://rpsychologist.com/wp-content/uploads/2012/07/errorbar_01.png" ref="nofollow" target="_blank"><img src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/errorbar_01-1024x714.png" alt="Interpreting error bars and confidence intervals p = .01" title="Interpreting error bars and confidence intervals p = .01" class="aligncenter size-large wp-image-1428" width="600"></a></p>
+<h4>Figure 2. Error bars corresponding to a significant difference at p = .01 (equal group sizes and equal variances)</h4>
+<p><a href="http://rpsychologist.com/wp-content/uploads/2012/07/errorbar_001.png" ref="nofollow" target="_blank"><img src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/errorbar_001-1024x714.png" alt="Interpreting error bars and confidence intervals p = .001" title="Interpreting error bars and confidence intervals p = .001" class="aligncenter size-large wp-image-1429" width="600"></a></p>
+<h4>Figure 3. Error bars corresponding to a significant difference at p = .001 (equal group sizes and equal variances)</h4>
+<p>Based on the first plot we see that an overlap of about one third of the 95 % CIs corresponds to <em>p</em> = 0.5. For the SE error bars we see that they are about 1 SE apart when <em>p</em> = 0.05. </p>
+<h2>R Code</h2>
+<p>Here’s the complete R code used to produce these plots</p>
+<div><div id="highlighter_442188" class="syntaxhighlighter nogutter  r"><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="r functions">library</code><code class="r plain">(ggplot2)</code></div><div class="line number2 index1 alt1"><code class="r functions">library</code><code class="r plain">(plyr)</code></div><div class="line number3 index2 alt2"><code class="r plain">m2 &lt;- 100 </code><code class="r comments"># initital group size, should be the same as m1</code></div><div class="line number4 index3 alt1"><code class="r plain">p &lt;- 1 </code><code class="r comments"># starting p-value</code></div><div class="line number5 index4 alt2"><code class="r plain">m1 &lt;- 100 </code><code class="r comments"># mean group 1</code></div><div class="line number6 index5 alt1"><code class="r plain">sd1 &lt;- 10 </code><code class="r comments"># sd group 1</code></div><div class="line number7 index6 alt2"><code class="r plain">sd2 &lt;- 10 </code><code class="r comments"># sd group 2</code></div><div class="line number8 index7 alt1"><code class="r plain">n &lt;- 20 </code><code class="r comments"># n per group</code></div><div class="line number9 index8 alt2"><code class="r plain">s &lt;- </code><code class="r functions">sqrt</code><code class="r plain">(0.5 * (sd1^2 + sd2^2)) </code><code class="r comments"># pooled sd</code></div><div class="line number10 index9 alt1"><code class="r keyword">while</code><code class="r plain">(p&gt;0.05) { </code><code class="r comments"># loop til p = 0.05</code></div><div class="line number11 index10 alt2"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">t &lt;- (</code><code class="r functions">min</code><code class="r plain">(</code><code class="r functions">c</code><code class="r plain">(m1,m2)) - </code><code class="r functions">max</code><code class="r plain">(</code><code class="r functions">c</code><code class="r plain">(m1,m2))) / (s * </code><code class="r functions">sqrt</code><code class="r plain">(2/n)) </code><code class="r comments"># t statistics</code></div><div class="line number12 index11 alt1"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">df &lt;- (n*2)-2 </code><code class="r comments"># degress of freedom</code></div><div class="line number13 index12 alt2"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">p &lt;-</code><code class="r functions">pt</code><code class="r plain">(t, df)*2 </code><code class="r comments"># p value</code></div><div class="line number14 index13 alt1"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">m2 &lt;- m2 - (m2/10000) </code><code class="r comments"># adjust mean for group 2</code></div><div class="line number15 index14 alt2"><code class="r plain">}</code></div><div class="line number16 index15 alt1"><code class="r plain">get_CI &lt;- </code><code class="r keyword">function</code><code class="r plain">(x, sd, CI) { </code><code class="r comments"># calculate error bars</code></div><div class="line number17 index16 alt2"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">se &lt;- sd/</code><code class="r functions">sqrt</code><code class="r plain">(n) </code><code class="r comments"># standard error</code></div><div class="line number18 index17 alt1"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">lwr &lt;- </code><code class="r functions">c</code><code class="r plain">(x - </code><code class="r functions">qt</code><code class="r plain">((1 + CI)/2, n - 1) * se, x - se) </code><code class="r comments"># 95 % CI and SE lower limit</code></div><div class="line number19 index18 alt2"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">upr &lt;- </code><code class="r functions">c</code><code class="r plain">(x + </code><code class="r functions">qt</code><code class="r plain">((1 + CI)/2, n - 1) * se, x + se) </code><code class="r comments"># 95 % CI and SE upper limit</code></div><div class="line number20 index19 alt1"><code class="r spaces">&nbsp;&nbsp;</code><code class="r functions">data.frame</code><code class="r plain">(</code><code class="r string">"lwr"</code> <code class="r plain">= lwr, </code><code class="r string">"upr"</code> <code class="r plain">= upr, </code><code class="r string">"se"</code> <code class="r plain">= se) </code><code class="r comments"># result</code></div><div class="line number21 index20 alt2"><code class="r plain">}</code></div><div class="line number22 index21 alt1"><code class="r plain">plot_df &lt;- </code><code class="r functions">data.frame</code><code class="r plain">(</code><code class="r string">"mu"</code> <code class="r plain">= </code><code class="r functions">rep</code><code class="r plain">(</code><code class="r functions">c</code><code class="r plain">(m1,m2), each=2)) </code><code class="r comments"># means</code></div><div class="line number23 index22 alt2"><code class="r plain">plot_df$group &lt;- </code><code class="r functions">gl</code><code class="r plain">(2,2, labels=</code><code class="r functions">c</code><code class="r plain">(</code><code class="r string">"group1"</code><code class="r plain">, </code><code class="r string">"group2"</code><code class="r plain">)) </code><code class="r comments"># group factor</code></div><div class="line number24 index23 alt1"><code class="r plain">plot_df$type &lt;- </code><code class="r functions">gl</code><code class="r plain">(2,1,4, labels=</code><code class="r functions">c</code><code class="r plain">(</code><code class="r string">"95 % CI"</code><code class="r plain">, </code><code class="r string">"se errorbars"</code><code class="r plain">)) </code><code class="r comments"># type of errorbar</code></div><div class="line number25 index24 alt2"><code class="r plain">plot_df &lt;- </code><code class="r functions">cbind</code><code class="r plain">(plot_df, </code><code class="r functions">rbind</code><code class="r plain">(</code><code class="r functions">get_CI</code><code class="r plain">(m1, sd1, .95), </code><code class="r functions">get_CI</code><code class="r plain">(m2, sd2, .95))) </code><code class="r comments"># put it all together</code></div><div class="line number26 index25 alt1">&nbsp;</div><div class="line number27 index26 alt2"><code class="r plain">get_overlap &lt;- </code><code class="r keyword">function</code><code class="r plain">(arg) { </code><code class="r comments"># calculate overlap %</code></div><div class="line number28 index27 alt1"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">x &lt;-</code><code class="r functions">subset</code><code class="r plain">(plot_df, type == arg) </code><code class="r comments"># subset for type of errorbar</code></div><div class="line number29 index28 alt2"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">x_range &lt;- </code><code class="r functions">abs</code><code class="r plain">(</code><code class="r functions">mean</code><code class="r plain">(x$lwr - x$upr)) </code><code class="r comments"># length of error bar</code></div><div class="line number30 index29 alt1"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">x_lwr &lt;- </code><code class="r functions">max</code><code class="r plain">(x$lwr) </code><code class="r comments"># lwr limit for group with highest lwr limit</code></div><div class="line number31 index30 alt2"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">x_upr &lt;- </code><code class="r functions">min</code><code class="r plain">(x$upr) </code><code class="r comments"># upr limit for group with lowest lwr limit</code></div><div class="line number32 index31 alt1"><code class="r spaces">&nbsp;&nbsp;</code><code class="r plain">overlap &lt;- </code><code class="r functions">abs</code><code class="r plain">( (x_upr - x_lwr) / x_range) </code><code class="r comments"># % overlap</code></div><div class="line number33 index32 alt2"><code class="r spaces">&nbsp;&nbsp;</code><code class="r functions">data.frame</code><code class="r plain">(</code><code class="r string">"type"</code><code class="r plain">=arg, </code><code class="r string">"range"</code> <code class="r plain">= x_range, </code><code class="r string">"lwr"</code> <code class="r plain">= x_lwr, </code><code class="r string">"upr"</code> <code class="r plain">= x_upr, </code><code class="r string">"overlap"</code> <code class="r plain">= </code><code class="r functions">round</code><code class="r plain">(overlap, 2)) </code><code class="r comments"># result</code></div><div class="line number34 index33 alt1"><code class="r plain">}</code></div><div class="line number35 index34 alt2"><code class="r plain">overlap &lt;-</code><code class="r functions">ldply</code><code class="r plain">(</code><code class="r functions">levels</code><code class="r plain">(plot_df$type), get_overlap) </code><code class="r comments"># get overlap and put into dataframe</code></div><div class="line number36 index35 alt1"><code class="r plain">overlap$text &lt;- </code><code class="r functions">paste</code><code class="r plain">(overlap$overlap * 100, </code><code class="r string">"% of errorbar"</code><code class="r plain">) </code><code class="r comments"># label text</code></div><div class="line number37 index36 alt2"><code class="r plain">overlap$text_y &lt;- </code><code class="r functions">c</code><code class="r plain">(overlap[1,4], overlap[2,3]) </code><code class="r comments"># quick-fix</code></div><div class="line number38 index37 alt1">&nbsp;</div><div class="line number39 index38 alt2"><code class="r functions">ggplot</code><code class="r plain">(plot_df, </code><code class="r functions">aes</code><code class="r plain">(group, mu, group=group)) + </code></div><div class="line number40 index39 alt1"><code class="r spaces">&nbsp;&nbsp;</code><code class="r functions">geom_point</code><code class="r plain">(size=3) + </code><code class="r comments"># point for group mean</code></div><div class="line number41 index40 alt2"><code class="r spaces">&nbsp;&nbsp;</code><code class="r functions">geom_errorbar</code><code class="r plain">(</code><code class="r functions">aes</code><code class="r plain">(ymax=upr, ymin=lwr), width=0.2) + </code><code class="r comments"># error bars for means</code></div><div class="line number42 index41 alt1"><code class="r spaces">&nbsp;&nbsp;</code><code class="r functions">opts</code><code class="r plain">(title=</code><code class="r functions">paste</code><code class="r plain">(</code><code class="r string">"Illustration of errorbars for a significant 2-sample t-test, p ="</code><code class="r plain">, </code><code class="r functions">round</code><code class="r plain">(p,3))) +&nbsp; </code><code class="r comments"># plot title</code></div><div class="line number43 index42 alt2"><code class="r spaces">&nbsp;&nbsp;</code><code class="r functions">facet_grid</code><code class="r plain">(. ~ type) + </code><code class="r comments"># split plot after error bar type</code></div><div class="line number44 index43 alt1"><code class="r spaces">&nbsp;&nbsp;</code><code class="r functions">geom_errorbar</code><code class="r plain">(data=overlap, </code><code class="r functions">aes</code><code class="r plain">(ymax=upr, ymin=lwr, x=1.5, y=</code><code class="r keyword">NULL</code><code class="r plain">, group=type), width=0.1, color=</code><code class="r string">"red"</code><code class="r plain">) + </code><code class="r comments"># add overlap error bar</code></div><div class="line number45 index44 alt2"><code class="r spaces">&nbsp;&nbsp;</code><code class="r functions">geom_text</code><code class="r plain">(data=overlap, </code><code class="r functions">aes</code><code class="r plain">(label = text, group=type, y=text_y, x=1.5, vjust=-1)) + </code><code class="r comments"># annotate overlap</code></div><div class="line number46 index45 alt1"><code class="r spaces">&nbsp;&nbsp;</code><code class="r functions">ylab</code><code class="r plain">(</code><code class="r functions">expression</code><code class="r plain">(</code><code class="r functions">bar</code><code class="r plain">(x))) </code><code class="r comments"># change y label</code></div></div></td></tr></tbody></table></div></div>
+<div class="woo-sc-box normal   "><span style="float: left; padding: 5px;"><a href="http://www.researchblogging.org/" ref="nofollow" target="_blank"><img alt="ResearchBlogging.org" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/rb2_large_gray.png" style="border:0; box-shadow: 0 0 0px; -moz-box-shadow: 0 0 0px;"></a><br>
+</span><br>
+<span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.jtitle=Psychological+methods&amp;rft_id=info%3Apmid%2F16392994&amp;rfr_id=info%3Asid%2Fresearchblogging.org&amp;rft.atitle=Researchers+misunderstand+confidence+intervals+and+standard+error+bars.&amp;rft.issn=1082-989X&amp;rft.date=2005&amp;rft.volume=10&amp;rft.issue=4&amp;rft.spage=389&amp;rft.epage=96&amp;rft.artnum=&amp;rft.au=Belia+S&amp;rft.au=Fidler+F&amp;rft.au=Williams+J&amp;rft.au=Cumming+G&amp;rfe_dat=bpr3.included=1;bpr3.tags=Medicine%2CPsychology%2CSocial+Science%2CNeuroscience">Belia S, Fidler F, Williams J, &amp; Cumming G (2005). Researchers misunderstand confidence intervals and standard error bars. <span style="font-style: italic;">Psychological methods, 10</span> (4), 389-96 PMID: <a rev="review" href="http://www.ncbi.nlm.nih.gov/pubmed/16392994" ref="nofollow" target="_blank">16392994</a><br>
+</span><br>
+</div>
+<p></p><div class="woo-sc-twitter left"><iframe title="Twitter Tweet Button" style="width: 109px; height: 20px;" class="twitter-share-button twitter-count-horizontal" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/tweet_button_002.htm" allowtransparency="true" frameborder="0" scrolling="no"></iframe><script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/widgets.js"></script></div>
+<div class="woo-fbshare left">
+<a name="fb_share" type="button" share_url="http://rpsychologist.com/how-to-tell-when-error-bars-correspond-to-a-significant-p-value/"></a>
+<script src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/FB.js" type="text/javascript">
+</script>
+</div>
+	
+<div class="woo-fblike fl">
+<iframe src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/like_003.htm" allowtransparency="true" style="border:none; overflow:hidden; width:130px; height:25px;" frameborder="0" scrolling="no"></iframe>
+</div>
+	<div class="shortcode-google-plusone fl"><div style="height: 20px; width: 32px; display: inline-block; text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;" id="___plusone_1"><iframe title="+1" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/fastbutton_002.htm" name="I1_1344881363159" id="I1_1344881363159" vspace="0" tabindex="0" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" marginwidth="0" marginheight="0" hspace="0" allowtransparency="true" frameborder="0" scrolling="no" width="100%"></iframe></div></div><!--/.shortcode-google-plusone-->
+
+<div class="woo-sc-divider flat"></div><p></p>
+
+<p class="syndicated-attribution"></p><div style="border: 1px solid; background: none repeat scroll 0 0 #EDEDED; margin: 1px; font-size: 13px;">
+<div style="text-align: center;">To <strong>leave a comment</strong> for the author, please follow the link and comment on his blog: <strong><a href="http://rpsychologist.com/how-to-tell-when-error-bars-correspond-to-a-significant-p-value/"> R Psychologist » R</a></strong>.</div>
+<hr>
+<a href="http://www.r-bloggers.com/">R-bloggers.com</a> offers <strong><a href="http://feedburner.google.com/fb/a/mailverify?uri=RBloggers">daily e-mail updates</a></strong> about <a title="The R Project for Statistical Computing" href="http://www.r-project.org/">R</a> news and <a title="R tutorials" href="http://www.r-bloggers.com/?s=tutorial">tutorials</a> on topics such as: visualization (<a title="ggplot and ggplot2 tutorials" href="http://www.r-bloggers.com/?s=ggplot2">ggplot2</a>, <a title="Boxplots using lattice and ggplot2 tutorials" href="http://www.r-bloggers.com/?s=boxplot">Boxplots</a>, <a title="Maps and gis" href="http://www.r-bloggers.com/?s=map">maps</a>, <a title="Animation in R" href="http://www.r-bloggers.com/?s=animation">animation</a>), programming (<a title="RStudio IDE for R" href="http://www.r-bloggers.com/?s=RStudio">RStudio</a>, <a title="Sweave and literate programming" href="http://www.r-bloggers.com/?s=sweave">Sweave</a>, <a title="LaTeX in R" href="http://www.r-bloggers.com/?s=LaTeX">LaTeX</a>, <a title="SQL and databases" href="http://www.r-bloggers.com/?s=SQL">SQL</a>, <a title="Eclipse IDE for R" href="http://www.r-bloggers.com/?s=eclipse">Eclipse</a>, <a title="git and github, Version Control System" href="http://www.r-bloggers.com/?s=git">git</a>, <a title="Large data in R using Hadoop" href="http://www.r-bloggers.com/?s=hadoop">hadoop</a>, <a title="Web Scraping of google, facebook, yahoo, twitter and more using R" href="http://www.r-bloggers.com/?s=Web+Scraping">Web Scraping</a>) statistics (<a title="Regressions and ANOVA analysis tutorials" href="http://www.r-bloggers.com/?s=regression">regression</a>, <a title="principal component analysis tutorial" href="http://www.r-bloggers.com/?s=PCA">PCA</a>, <a title="Time series" href="http://www.r-bloggers.com/?s=time+series">time series</a>,<a title="ecdf" href="http://www.r-bloggers.com/?s=ecdf">ecdf</a>, <a title="finance trading" href="http://www.r-bloggers.com/?s=trading">trading</a>) and more...
+</div><p></p>
+<div class="like">
+<iframe src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/like_004.htm" allowtransparency="true" style="border:none; overflow:hidden; width:450px; height:24px; " frameborder="0" scrolling="no"></iframe>
+</div>
+<hr>
+<div class="nr_clear"></div>	
+	<div id="nrelate_related_1" class="nrelate nrelate_related nrelate_huf nr_1col nr_80"><h3 class="nr_title"><span>Related aRticles</span></h3><div class="nr_inner"><a style="height: 83px;" class="nr_panel nr_rc_link nr_link nr_internal nr_row_1 nr_col_1 nr_odd_row nr_odd_col nr_first_col nr_first_row" href="http://www.r-bloggers.com/the-aesthetics-of-error-bars/"><span class="nr_img_div"><img class="nr_img" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/c701daed287e62790e136013a9d1cbb8_thumb_dynamiteplot.png" style="height:80px; width:80px;" alt="The aesthetics of error bars" title="The aesthetics of error bars"></span><span class="nr_text"><span class="nr_post_title">The aesthetics of error bars</span><span class="nr_excerpt">(Colleagues
+ of mine will note that the quantity displayed by the error bars is not 
+labeled. This should always be clear from plot or ... </span></span><div class="nr_clear" style="height:1px;"></div></a><a style="height: 99px;" class="nr_panel nr_rc_link nr_link nr_internal nr_row_2 nr_col_1 nr_even_row nr_odd_col nr_first_col" href="http://www.r-bloggers.com/criticism-3-of-nhst-essential-information-is-lost-when-transforming-2d-data-into-a-1d-measure/"><span class="nr_img_div"><img class="nr_img" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/a8766f6e78a483e79c1617de89015701_thumb_three_studies1.png" style="height:80px; width:80px;" alt="Criticism 3 of NHST: Essential Information is Lost When Transforming 2D Data into a 1D Measure" title="Criticism 3 of NHST: Essential Information is Lost When Transforming 2D Data into a 1D Measure"></span><span class="nr_text"><span class="nr_post_title">Criticism 3 of NHST: Essential Information is Lost When Transforming 2D Data into a 1D Measure</span><span class="nr_excerpt">Introduction
+ Continuing on with my series on the weaknesses of NHST, I’d like to 
+focus on an issue that’s not specific to NHST, but ... </span></span><div class="nr_clear" style="height:1px;"></div></a><a style="height: 83px;" class="nr_panel nr_rc_link nr_link nr_internal nr_row_3 nr_col_1 nr_odd_row nr_odd_col nr_first_col nr_last_row" href="http://www.r-bloggers.com/forecasting-in-r-a-new-hope-with-ar10/"><span class="nr_img_div"><img class="nr_img" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/019cd8a5c4534aa7248be04108975309_thumb_LBQ.gif" style="height:80px; width:80px;" alt="Forecasting In R: A New Hope with AR(10)" title="Forecasting In R: A New Hope with AR(10)"></span><span class="nr_text"><span class="nr_post_title">Forecasting In R: A New Hope with AR(10)</span><span class="nr_excerpt">Most
+ importantly both the ACF and the PACF of the residuals check out for 
+the white noise process. In the ARIMA(2,2,2) model these weren't ... </span></span><div class="nr_clear" style="height:1px;"></div></a><div style="clear:both;"></div></div></div>
+	<!--[if IE 6]>
+		<script type="text/javascript">jQuery('.nrelate_huf').removeClass('nrelate_huf');</script>
+	<![endif]-->
+	
+	<script type="text/javascript">
+	/* <![CDATA[ */
+		nRelate.domain = "www.r-bloggers.com";
+		var entity_decoded_nr_url = jQuery('<span/>').html("http://api.nrelate.com/rcw_wp/0.51.2/?tag=nrelate_related&keywords=How+to+tell+when+error+bars+correspond+to+a+significant+p-value&domain=www.r-bloggers.com&url=http%3A%2F%2Fwww.r-bloggers.com%2Fhow-to-tell-when-error-bars-correspond-to-a-significant-p-value%2F&nr_div_number=1").text();
+		nRelate.getNrelatePosts(entity_decoded_nr_url);
+	/* ]]> */
+	</script>
+<div class="nr_clear"></div><hr>
+<div style="border: 1px solid #EB9349; background: none repeat scroll 0 0 #FDEADA; text-align: center; margin: 10px; font-size: 16px;">
+If you got this far, why not <strong><u>subscribe for updates</u> </strong>from the site?  Choose your flavor: <a href="http://feedburner.google.com/fb/a/mailverify?uri=RBloggers" rel="nofollow">e-mail</a>, <a href="https://twitter.com/#%21/rbloggers" rel="nofollow">twitter</a>, <a href="http://feeds.feedburner.com/RBloggers" rel="nofollow">RSS</a>, or <a href="http://www.facebook.com/pages/R-bloggers/191414254890" rel="nofollow">facebook</a>...
+</div><p class="tags"><small><strong>Tags:</strong> <a href="http://www.r-bloggers.com/tag/confidence-interval/" rel="tag">confidence interval</a>, <a href="http://www.r-bloggers.com/tag/error-bars/" rel="tag">error bars</a>, <a href="http://www.r-bloggers.com/tag/ggplot2/" rel="tag">ggplot2</a>, <a href="http://www.r-bloggers.com/tag/r/" rel="tag">R</a>, <a href="http://www.r-bloggers.com/tag/standard-error/" rel="tag">standard error</a>, <a href="http://www.r-bloggers.com/tag/statistics/" rel="tag">statistics</a></small></p></div>
+
+	</div><!-- #post-## -->
+
+
+
+   				<div id="comments">
+
+
+<div id="comment-user-details">
+
+
+
+
+
+		<p class="nocomments">Comments are closed.</p>
+
+
+
+								</div>
+
+</div><!-- #comments -->
+
+       
+	</div>
+    <!-- begin second sidebar -->
+    <div id="secondsidebar">
+
+		
+		<div class="side-widget"><form method="get" id="searchform" action="http://www.r-bloggers.com/">
+<div>
+<input class="search_input" value="Search &amp; Hit Enter" name="s" id="s" onfocus="if (this.value == 'Search &amp; Hit Enter') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search &amp; Hit Enter';}" type="text">
+<input id="searchsubmit" type="hidden">
+</div>
+</form></div><div class="side-widget"><h2>Top 7 articles of the week</h2>
+<ol class="wppp_list">
+	<li><a href="http://www.r-bloggers.com/create-an-r-package-in-under-6-minutes/" title="Create an R package in under 6 minutes">Create an R package in under 6 minutes</a></li>
+	<li><a href="http://www.r-bloggers.com/coke-vs-soda-vs-pop-linguistic-trends-analyzed-with-twitter-and-r/" title="Coke vs Soda vs Pop : Linguistic trends analyzed with Twitter and R">Coke vs Soda vs Pop : Linguistic trends analyzed with Twitter and R</a></li>
+	<li><a href="http://www.r-bloggers.com/the-r-packages-in-a-data-scientists-toolbox/" title="The R packages in a data scientist's toolbox">The R packages in a data scientist's toolbox</a></li>
+	<li><a href="http://www.r-bloggers.com/london-olympics-and-a-prediction-for-the-100m-final/" title="London Olympics and a prediction for the 100m final">London Olympics and a prediction for the 100m final</a></li>
+	<li><a href="http://www.r-bloggers.com/video-knitr-r-markdown-and-r-studio-introduction-to-reproducible-analysis/" title="Video: knitr, R Markdown, and R Studio: Introduction to Reproducible Analysis">Video: knitr, R Markdown, and R Studio: Introduction to Reproducible Analysis</a></li>
+	<li><a href="http://www.r-bloggers.com/select-operations-on-r-data-frames/" title="Select operations on R data frames">Select operations on R data frames</a></li>
+	<li><a href="http://www.r-bloggers.com/mapping-public-opinion-a-tutorial/" title="Mapping Public Opinion: A Tutorial">Mapping Public Opinion: A Tutorial</a></li>
+</ol>
+</div><div class="side-widget"><form method="get" id="searchform" action="http://www.r-bloggers.com/">
+<div>
+<input class="search_input" value="Search &amp; Hit Enter" name="s" id="s" onfocus="if (this.value == 'Search &amp; Hit Enter') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search &amp; Hit Enter';}" type="text">
+<input id="searchsubmit" type="hidden">
+</div>
+</form></div><div class="side-widget"><h2>Sponsors</h2>			<div class="textwidget"><a href="http://www.mango-solutions.com/">
+<img src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/Mango-Solutions-Logo-300x200-pixels.jpg" alt="Mango solutions"><br>mango-solutions.com
+</a>
+
+<br><hr>
+
+<a href="http://www.highstat.com/">
+<img src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/jjcgejbf.png" alt="Zero Inflated Models and Generalized Linear Mixed Models with R">
+Zero Inflated Models and Generalized Linear Mixed Models with R.
+Zuur, Saveliev, Ieno (2012).
+</a>
+
+
+
+
+<br><hr>
+
+<a href="http://www.quantide.com/">
+<img src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/quantide-logo.png" alt="Quantide: statistical consulting and training"><br> Quantide: statistical consulting and training.
+</a></div>
+		</div>    </div>
+<!-- end second sidebar --></div><div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/xd_arbiter.htm" name="fb_xdm_frame_http" id="fb_xdm_frame_http"></iframe><iframe src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/xd_arbiter_002.htm" name="fb_xdm_frame_https" id="fb_xdm_frame_https"></iframe></div><div><iframe src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/oauth.htm" class="FB_UI_Hidden" style="border: medium none; overflow: hidden; height: 240px; width: 575px;" name="f13dfa20ef1d46c" id="f2bd33e89e66e5c" scrolling="no"></iframe></div><div></div></div></div><div style="display: none;"><iframe frameborder="0"></iframe></div>
+<!-- begin footer -->
+<div id="footer">
+	<strong><a href="http://www.r-bloggers.com/">R-bloggers</a></strong> was founded by <a href="http://www.r-statistics.com/about/">Tal Galili</a>, with gratitude to the <a href="http://www.r-project.org/">R</a> community.  <br>
+    Is powered by <a href="http://www.wordpress.org/">WordPress</a> using a <a href="http://themes.bavotasan.com/" rel="nofollow">bavotasan.com</a> design.<br>
+    Copyright © 2012 <strong>R-bloggers</strong>. All Rights Reserved.<br>
+</div>
+
+<!--
+TPC! Memory Usage (http://webjawns.com)
+Memory Usage: 50933152
+Memory Peak Usage: 51387032
+WP Memory Limit: 168M
+PHP Memory Limit: 64M
+Checkpoints: 11
+-->
+
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shCore.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushAS3.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushBash.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushColdFusion.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushClojure.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushCpp.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushCSharp.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushCss.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushDelphi.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushDiff.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushErlang.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushFSharp.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushGroovy.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushJava.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushJavaFX.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushJScript.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushLatex.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushMatlabKey.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushObjC.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushPerl.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushPhp.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushPlain.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushPython.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushR.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushRuby.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushScala.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushSql.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushVb.js"></script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/shBrushXml.js"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://www.r-bloggers.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://www.r-bloggers.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/effects.js"></script>
+<!--stats_footer_test--><script src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/e-201230.js" type="text/javascript"></script>
+<script type="text/javascript">
+st_go({blog:'11524731',v:'ext',post:'62605'});
+var load_cmc = function(){linktracker_init(11524731,62605,2);};
+if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+else load_cmc();
+</script><img id="wpstats" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/g.gif" alt="">
+<script type="text/javascript" src="How%20to%20tell%20when%20error%20bars%20correspond%20to%20a%20significant%20p-value%20_%20%28R%20news%20&amp;%20tutorials%29_files/effects_002.js"></script> 
+<script type="text/javascript">
+/* <![CDATA[ */
+jQuery(function(){
+	jQuery("ul.sf-menu").supersubs({ 
+		minWidth:    12,
+		maxWidth:    27,
+		extraWidth:  1
+	}).superfish({ 
+		delay:       100,
+		speed:       250 
+	});	});
+/* ]]> */
+</script>
+
+
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.2.3 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-419807-53']);
+	_gaq.push(['_setCustomVar',1,'tags','confidence-interval error-bars ggplot2 r standard-error stat',3],['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+
+
+
+
+
+</body></html>
+<!-- Dynamic page generated in 0.966 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2012-07-25 05:59:20 -->
+<!-- Compression = gzip -->

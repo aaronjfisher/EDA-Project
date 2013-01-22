@@ -1,0 +1,95 @@
+.mainContent {
+  background-color: #FDF8AB;
+  background-image: url(images/bg_page.png);
+  background-repeat: repeat-y;
+  background-position: center top;
+  padding: 0;
+  margin: 0 auto;
+  width: 760px;
+}
+h1, h2, h3 {
+  color: #BD8100;
+  font-family: Baskerville, "Palatino Linotype", Times, serif;
+  border-top: 2px solid #86A100;
+  padding-top: 7px;
+  padding-left: 100px;
+}
+p {
+  color: #505050;
+  font-size: 1em;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  margin-left: 100px;
+}
+.formWrapper{
+width: 640px;
+border: 2px solid #666;
+background-color: lightyellow;
+margin-left: 60px;
+margin-top: 20px;
+margin-bottom: 20px;
+text-align: center;
+}
+.figureWrapper {
+width: 640px;
+}
+.graph img {
+padding: 10px 10px 10px 10px;
+}
+.figure {
+background-color: #FFF;
+border: 2px solid #666;
+padding: 10px 10px 10px 10px;
+float: left;
+width: 274px;
+margin: 10px 10px 10px 10px;
+}
+.figureA {
+background-color: #FFF;
+border: 2px solid #666;
+padding: 10px 10px 10px 10px;
+width: 274px;
+margin: 10px 10px 10px 170px;
+}
+.loginNote {
+color: #333;
+border: 1px dashed #BD8110;
+background-color: #FBF8A9;
+margin-top: 25px;
+margin-bottom: 25px;
+padding: 10px;
+font-size: 0.8em;
+}
+.loginNote strong {
+color: #FC6512;
+}
+#loginProblem {
+font-size: 1.2em;
+}
+#subForm{
+font-size: 0.9em;
+}
+#subForm .label {
+float: left;
+width: 360px;
+margin-right: 10px;
+text-align: right;
+font-weight: bold;
+clear: left;
+}
+#goToQuestions {
+  margin-left: 370px;
+  background-color: #CBD893;
+}
+#fieldOfStudy, #year{
+margin-top: -2px;
+}
+#fieldOfStudy {
+background-color: #FBEF99;
+font-family: 'Lucida Console", Monaco, monospace;
+font-size: .9em;
+width: 200px;
+}
+#fieldOfStudy:focus,
+#year:focus {
+background-color: #FDD041;
+}

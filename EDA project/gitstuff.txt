@@ -1,0 +1,5 @@
+
+cd Documents/JH/EDA project
+git remote add origin https://aaron_fisher@bitbucket.org/aaron_fisher/eda.git
+
+
