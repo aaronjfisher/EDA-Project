@@ -116,7 +116,8 @@ for(i in 1:nreps){
   drx<-diff(range(x))
   dry<-diff(range(y))
   
-  png(paste0("images/coursera2_#",i,'_',pres[i],'_pval-',round(pvals[i],digits=3),".png"), width = 400, height = 400)
+  probnum<-paste0(rep(1:7,each=2),rep(c('-1','-2'),times=7))
+  png(paste0("images/coursera2_#",probnum[i],'_',pres[i],'_pval-',round(pvals[i],digits=3),".png"), width = 400, height = 400)
     par(mfrow=c(1,1))
   	plot(x,y,xlab='X',ylab='Y',main=title)
   	if(style=='lowess') lines(lowess(x,y))
