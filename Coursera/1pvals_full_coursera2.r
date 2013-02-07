@@ -16,7 +16,7 @@ yes<-matrix(nrow=nreps,ncol=max(nes))
 xes<-matrix(nrow=nreps,ncol=max(nes))
 pvals<-1 #initialize variables
 tvals<-1
-pres<-c(rep('plain',length=6),rep(c('bestFit','axesScale','axesLabel','outlier'),each=2))
+pres<-(rep(c('n35','n100ref','n200','bestFit','axesScale','axesLabel','outlier'),each=2))
 #dropping Lowess here
 
 #First generate baseline data
@@ -97,5 +97,32 @@ for(i in which(pres=='outlier')){
 #load('data_for_1plots_coursera2.RData')
 
 
+#Note, this works b/c there's no replicates
+for(i in 1:nreps){
+  n<-nes[i]
+  x<-xes[i,1:n]
+  y<-yes[i,1:n]
+  pval<-pvals[i]
+  tval<-tvals[i]
+  m<-lm(y~x)
+  style<-pres[i]
 
-
+  t2<-'Data'
+  if(style=='lowess') t2<-'with Lowess Line'
+  if(style=='bestFit') t2<-'with OLS Best Fit Line'
+  title<-paste('Sample ',t2,sep='')
+  xl<-paste("Cranial Electrode",floor(runif(1,11,44)),"(Standardized)")
+  yl<-paste("Cranial Electrode",floor(runif(1,53,97)),"(Standardized)")
+  drx<-diff(range(x))
+  dry<-diff(range(y))
+  
+  png(paste0("images/coursera2_#",i,'_',pres[i],'_pval-',round(pvals[i],digits=3),".png"), width = 400, height = 400)
+    par(mfrow=c(1,1))
+  	plot(x,y,xlab='X',ylab='Y',main=title)
+  	if(style=='lowess') lines(lowess(x,y))
+  	if(style=='bestFit') abline(m$coef)
+  	if(style=='axesScale')plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-1.5*sd(x),max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))
+    if(style=='outlier')plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )
+  	if(style=='axesLabel') plot(x,y,xlab=xl,ylab=yl,main=title)
+  dev.off()
+}
