@@ -142,5 +142,5 @@ abline(h=nes,lty=2)
 text(pvals[pres!="plain"],nes[pres!="plain"]+10,pres[pres!="plain"])
 #text(pvals[whichrep],nes[whichrep]-10,"rep")
 
-save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres','nreplicates'),file='data_for_1plots_coursera1.RData')
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres','nreplicates'),file='data_for_1plots_coursera1.RData')
 

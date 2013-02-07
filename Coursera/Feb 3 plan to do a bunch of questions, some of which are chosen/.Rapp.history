@@ -1,0 +1,729 @@
+pie(1,col=c("red"),init.angle=0,radius=1,border=F,labels='Rafa',main='Pie Chart of statements made by professors \n  in support of pie charts \n(organized by professor)',cex=1.5)
+dev.copy2pdf(file='PieChart.pdf')
+I'm trying
+'sdfa slf'
+output
+'sdf'asdf
+'sdf'
+r<-4
+(1/2)-.5*cos(x/r)
+x<-3
+(1/2)-.5*cos(x/r)
+cos(0)
+-cos(x)/2+r/2
+initialize parameters#
+beta0<-nieveModel2$coef[1]#
+betat<-nieveModel2$coef[2]#
+betav<-nieveModel2$coef[3]#
+s_b<-sd(y)#
+b<-rep(0,ngroups)
+x<-rnorm(1000, 20)
+x<-rnorm(10000)
+for(i in 1:200){#
+	m<-mean(e^(i*x))#
+}
+for(i in 1:200){
+for(i in 1:200){#
+	m<-mean(e^(i*x))#
+}
+for(i in 1:200){#
+	m<-mean(exp(i*x))#
+}
+m
+for(i in 1:200){#
+	m[i]<-mean(exp(i*x))#
+}
+m
+for(i in -200:200){#
+	m[i]<-mean(exp(i*x))#
+}
+plot(m)
+plot(m[abs(m)<1000])
+plot(m,type='l')
+ngroups<-length(unique(group))
+sum(.5^n)
+n<- 1:1000
+sum(.5^n)
+r<-binom(1000,1,prob=.2)
+r<-rbinom(1000,1,prob=.2)
+r
+mean(r)
+r<-rbinom(10000,1,prob=.2)
+mean(r)
+r<-rbinom(10000,1,prob=.2)
+mean(r)
+mean(r^2)
+sample("Aaron","Amanda","Prasad","Therri")
+sample(c("Aaron","Amanda","Prasad","Therri"))
+JOOOSODIFOIJWEOIJWEOIJFWOIRWOI
+1+1
+3
+4
+library(MASS)
+simga<-array(c(2,1,1,4))
+simga<-array(c(2,1,1,4),dim=c(2,2))
+sigma
+simga
+mu<-c(2,3)
+x<-mvrnorm(100000,mu,sigma)
+x<-mvrnorm(100000,mu,simga)
+dim(x)
+y<-x[,2]
+x<-x[,1]
+cov(x,y)
+cor(x,y)
+1/(2*sqrt(2))
+mean(x+y)
+var(x+y)
+var(x-y)
+mean(x-y)
+cov(x+y,x-y)
+cov(-sqrt(2)*x+y,sqrt(2)*x+y)
+X<-mvrnorm(1000000,mu,simga)
+x<-X[,1]
+y<-X[,2]
+cov(-sqrt(2)*x+y,sqrt(2)*x+y)
+X<-mvrnorm(2000000,mu,simga)
+x<-X[,1]
+y<-X[,2]
+cov(-sqrt(2)*x+y,sqrt(2)*x+y)
+cor(-sqrt(2)*x+y,sqrt(2)*x+y)
+X<-mvrnorm(5000000,mu,simga)
+y<-X[,2]
+x<-X[,1]
+cor(-sqrt(2)*x+y,sqrt(2)*x+y)
+library(MASS)
+mu<-c(2,3)#
+sigma<-array(c(2,1,1,4))
+mu<-c(2,3)
+sigma<-array(c(2,1,1,4))
+mu<-c(2,3)
+sigma<-array(c(2,1,1,4))
+a<-mvrnorm(100000,my,sigma)
+a<-mvrnorm(100000,mu,sigma)
+mu<-c(2,3)#
+sigma<-array(c(2,1,1,4),dim=c(2,2))#
+a<-mvrnorm(100000,mu,sigma)
+dim(a)
+cov(x-y,4*x+6*y)
+x<-a[,1]
+y<-a[,2]
+cov(x-y,4*x+6*y)
+cor(x-y,4*x+6*y)
+cov(sqrt(2)*x-y,\sqrt(2)x+y)
+cov(sqrt(2)*x-y,sqrt(2)x+y)
+cov(sqrt(2)*x-y,sqrt(2)*x+y)
+cor(sqrt(2)*x-y,sqrt(2)*x+y)
+mu<-c(2,3)#
+sigma<-array(c(2,1,1,4),dim=c(2,2))#
+a<-mvrnorm(1000,mu,sigma)#
+#
+x<-a[,1]#
+y<-a[,2]#
+#
+cor(sqrt(2)*x-y,sqrt(2)*x+y)
+mu<-c(2,3)#
+sigma<-array(c(2,1,1,4),dim=c(2,2))#
+a<-mvrnorm(100,mu,sigma)#
+#
+x<-a[,1]#
+y<-a[,2]#
+#
+cor(sqrt(2)*x-y,sqrt(2)*x+y)
+mu<-c(2,3)#
+sigma<-array(c(2,1,1,4),dim=c(2,2))#
+a<-mvrnorm(400000,mu,sigma)#
+#
+x<-a[,1]#
+y<-a[,2]#
+#
+cor(sqrt(2)*x-y,sqrt(2)*x+y)
+testvar<-function(a,b,c,d){#
+	out<-a*c*2+b*d*4+(b*c+a*d)	#
+	return(out)#
+}
+testvar(-sqrt(2),1,sqrt(2),1)
+testvar(2,-1,4,6)
+testvar(1,1,1,-3/5)
+testvar(-1/2,1/4,-1/2,-1/4)
+testvar(-1/sqrt(2),1/sqrt(4),-1/sqrt(2),-1/2)
+library(MASS)
+x<-mvrnorm(100,20)
+x<-mvrnorm(100,20,Sigma=diag(1:20))
+diag(1:10)
+x<-mvrnorm(100,Sigma=diag(1:10))
+x<-mvrnorm(100,Sigma=diag(1:10),mu=1:10)
+x
+dim(x)
+y<-x[1:5]
+y<-x[,1:5]
+dim(y)
+cor(x,y)
+sample(c('dan drives','aaron drives'),1)
+get.seed()
+x<-c(95.8,#
+106.8,#
+96.2,#
+94.3,#
+99.7,#
+86.3,#
+94.8,#
+99.9,#
+102.3,#
+99.2,#
+98.7,#
+100.0)
+x
+> x<-c(95.8,#
++ 106.8,#
++ 96.2,#
++ 94.3,#
++ 99.7,#
++ 86.3,#
++ 94.8,#
++ 99.9,#
++ 102.3,#
++ 99.2,#
++ 98.7,#
++ 100.0)
+x<-c(95.8,#
++ 106.8,#
++ 96.2,#
++ 94.3,#
++ 99.7,#
++ 86.3,#
++ 94.8,#
++ 99.9,#
++ 102.3,#
++ 99.2,#
++ 98.7,#
++ 100.0)
+x
+rm(x)
+x<-c(95.8,#
++ 106.8,#
++ 96.2,#
++ 94.3,#
++ 99.7,#
++ 86.3,#
++ 94.8,#
++ 99.9,#
++ 102.3,#
++ 99.2,#
++ 98.7,#
++ 100.0)
+x
+hist(x)
+hist(x,breaks=8)
+hist(x,breaks=8,col='blue')
+hist(x,breaks=8,col='lightblue')
+hist(x,breaks=8,col='lightblue',main='Histogram of Final Grades')
+hist(x,breaks=8,col='lightblue',main='Histogram of Final Grades',xlab='% Grade')
+stem(x)
+hist(x,breaks=8,col='lightblue',main='Histogram of Final Grades',xlab='% Grade')
+dev.copy2pdf(file='Histogram of Final Grades Term 2 Essentials of Probability.pdf')
+getwd()
+1218/1199
+(1218+900)/1199
+1099*1.0766
+sample(c("aaron","prasad"))
+3584.7-918
+918*4
+918*3
+nreps<-1000#
+record<-1:nreps
+for(i in 1:nreps){#
+  print(i)#
+  n<-20#
+  x<-rnorm(n,mean=30)#
+  x<-x[order(x)]#
+  e<-rnorm(n)#
+  y<-x+e#
+  yp<-y-y[1]#
+  xp<-x-x[1]#
+  m<-lm(yp~xp-1)#
+  record[i]<-m$coef#
+}#
+var(record)
+for(i in 1:nreps){#
+  print(i)#
+  n<-300#
+  x<-rnorm(n,mean=30)#
+  x<-x[order(x)]#
+  e<-rnorm(n)#
+  y<-x+e#
+  yp<-y-y[1]#
+  xp<-x-x[1]#
+  m<-lm(yp~xp-1)#
+  record[i]<-m$coef#
+}#
+var(record)
+library(mlogit) #polr#
+library(Design) #lrm#
+library(nnet) #multinom#
+library(xtable)
+count<-c(63,16,12,35,53,15,10,36)#
+proc<-as.factor(c(1,1,1,1,0,0,0,0))#
+s<-as.factor(c(3,2,2,1,3,2,2,1)) #number of successes
+I think this makes the most sense!!#
+#Problem is that it simplifies the data too much?#
+#THAT'S the problem!#
+procexp<-rep(proc,count)#
+sexp<-rep(s,count)#
+podds3<-polr(sexp~procexp)#
+summary(podds3)#
+lrm(sexp~procexp) #confirmed basically#
+coeftab3<-summary(podds3)$coeff#
+pvals3<-pnorm(abs(coeftab3[,3]),mean=0,sd=1,lower.tail=F)#
+xtable(cbind(coeftab3,pvals3),digits=3)
+part e#
+counte<-c(63,16,12,35,53,15,10,36)*35/240#
+proce<-as.factor(c(1,1,1,1,0,0,0,0))#
+se<-as.factor(c(3,2,2,1,3,2,2,1)) #number of successes#
+procexpe<-rep(proce,counte)#
+sexpe<-rep(se,counte)#
+podds3e<-polr(sexpe~procexpe)#
+coeftab3e<-summary(podds3e)$coeff#
+pvals3e<-pnorm(abs(coeftab3e[,3]),mean=0,sd=1,lower.tail=F)#
+pvals3e#
+(1/2^2)*(.786/.189)*240
+One alternative:#
+pglm<-glm(count~s*proc,family=poisson)#
+pglmNull<-glm(count~s,family=poisson)#
+summary(pglm)#
+anova(pglmNull,pglm)
+alt alt?#
+mm<-multinom(sexp~procexp)#
+summary(mm)
+library(nnet)#
+library(xtable)
+rows<-c(132,179,120,42,7,12,172,123,100,56,8,15)#
+matrix(rows,ncol=3,byrow=T)
+party factor base; gender factor base, race factor base#
+pfb<-as.factor(c("dem","rep","ind","dem","rep","ind","dem","rep","ind","dem","rep","ind"))#
+gfb<-as.factor(rep(c("m","f"),each=6))#
+rfb<-as.factor(c("w","w","w","b","b","b","w","w","w","b","b","b"))
+install.packages(c("rj", "rj.gd"), repos="http://download.walware.de/rj-1.1")
+Lbinom=function(x,n,k=8,d=2,norm=F)#
+{#
+ est=x/n#
+ se=sqrt((est*(1-est))/n)#
+ l=max(est-4*se,0)#
+ u=min(est+4*se,1)#
+ theta=seq(l,u,length=500)#
+ like=dbinom(x,n,theta)#
+ like=like/max(like)#
+ if ( norm ){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+}#
+ else {like.line(like,theta,k,d)}#
+}
+Lbinom(c(1,0,1),n=3)
+like.line=function(likelihood,parameter,k1,d)#
+{#
+# This function plots a support line and text#
+# for a likelihood function#
+# The input needed is the likelihood#
+# function and the parameter and the level of support e.g. (8 or 32)#
+# d sets the number of digits in the display#
+# date 01-08-10#
+lik=likelihood#
+plot(parameter,likelihood,type="l")#
+r1=min(parameter[lik==max(lik)])#
+r2=max(parameter[lik==max(lik)])#
+r=(r1+r2)/2#
+a1 = min(parameter[lik >= 1/k1])#
+b1 = max(parameter[lik >= 1/k1])#
+parameter1 = parameter[parameter >= a1]#
+parameter1 = parameter1[parameter1 <= b1]#
+i1 = rep(1/k1, length(parameter1))#
+lines(parameter1, i1, type = "l")#
+lines(c(a1,a1),c(0,1/k1),lty=1)#
+lines(c(b1,b1),c(0,1/k1),lty=1)#
+if(r <= (min(parameter) + max(parameter))/2) whr=.8*length(parameter)#
+else whr=.2*length(parameter)#
+K1=1/k1#
+text(parameter[whr], 0.95, paste("Max at ", round(r, digits = d)))#
+text(parameter[whr], 0.85, paste("1/",k1, "LI (", round(a1, digits = d),#
+ ",", round(b1, digits = d), ")"))#
+ }
+Lbinom(c(1,0,1),n=3)
+Lbinom(c(1,0,1,0,1,0,1),n=7)
+Lbinom(c(1,0,1,0,1,0,1))
+Lbinom(c(1,0,1,0,1,0,1),n=7)
+n
+x
+x<-c(1,0,1,0)
+n<-4
+est=x/n
+se=sqrt((est*(1-est))/n)
+l=max(est-4*se,0)
+u=min(est+4*se,1)
+theta=seq(l,u,length=500)
+est
+Lbinom(x=3,n=7)
+Lbinom(x=5,n=10)
+Lbinom(x=50,n=100)
+Lbinom(x=5,n=10)
+Lbinom(x=50,n=100)
+Lbinom(x=500,n=1000)
+Lbinom(x=5,n=10)
+Lbinom(x=50,n=100)
+Lbinom(x=5,n=10)
+Lbinom(x=50,n=100)
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1))#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}
+Lexp(5)
+Lexp(c(5,2,3,5))
+Lexp(c(5,2,3,5),norm=T)
+Lexp(c(5,2,3,5),norm=F)
+Lexp(c(5,2,3,5),norm=T)
+Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+Lexp(c(5,2,3,5))
+dexp(c(3,2),1)
+x
+x<-x+2
+x
+dexp(x,1)
+dexp(x,c(1,2))
+theta<-3
+y=(est/theta)
+est
+est=mean(x)
+y=(est/theta)
+y
+y^n*exp(-n*(y-1)) #Getting the joint by hand
+(theta^n)*(exp(-theta*sum(x)))
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
+ #??????????????????????????????#
+ #Why not:#
+ like=(theta^n)*(exp(-theta*sum(x)))#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+Lexp(c(5,2,3,5))
+mean(x)
+x
+x<-c(5,2,3,5)
+x
+Lexp(c(5,2,3,5))
+mean(x)
+1/mean(x)
+1/.26
+x<-c(5,2,3,4,4,3,2,4,5,2,5)
+Lexp(x)
+1/.29
+Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
+ #Note - Using theta as E(X), not 1/E(X)#
+ like=(theta^n)*(exp(-theta*sum(x)))#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+x<-c(5,2,3,4,4,3,2,4,5,2,5)#
+Lexp(x)
+Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
+ #Note - Using theta as E(X), not 1/E(X)#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+x<-c(5,2,3,4,4,3,2,4,5,2,5)#
+Lexp(x)
+Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=1/theta^n*exp(-n*(y-1)) #Getting the joint by hand#
+ #Note - Using theta as E(X), not 1/E(X)#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+x<-c(5,2,3,4,4,3,2,4,5,2,5)#
+Lexp(x)
+Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(est/theta)) #Getting the joint by hand#
+ #Note - Using theta as E(X), not 1/E(X)#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+x<-c(5,2,3,4,4,3,2,4,5,2,5)#
+Lexp(x)
+{
+x<-c(1,2,3)
+x
+mean(x)
+sd(x)
+plot(x)
+x=c(1,2,3)
+like.line(like,theta,k,d)
+Lbinom=function(x,n,k=8,d=2,norm=F)#
+{#
+ est=x/n #calculate MLE#
+ se=sqrt((est*(1-est))/n)#
+ l=max(est-4*se,0) #Give a range for the MLE#
+ u=min(est+4*se,1)#
+ theta=seq(l,u,length=500) #range to calculate likelihood over#
+ like=dbinom(x,n,theta)#
+ like=like/max(like) #scale so max is 1#
+ if ( norm ){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+}#
+ else {like.line(like,theta,k,d)}#
+}
+rbinom(1,25,.5)
+COURSERA STUFF#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera - pvals - feb3")#
+nreps<-40 #
+pbreaks<-c(.001,.01,.05,.15,1)#
+pbins<-rep(1:5,length=nreps)#
+nes<-rep(c(30,70,140,225,225,140,225,30,70,30,70,140,70,30,70,225,30,225,140,140),2)#
+cbind(nes[1:5],nes[6:10],nes[11:15],nes[16:20])#
+xes<-matrix(nrow=nreps,ncol=max(nes)) #NOTE some rows will have NA values because of the different nes variable values.#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+plot((pbreaks[pbins]),(nes),pch=19,log='x',xaxt='n',col=rep(c('black','blue'),c(10,10)))#
+axis(side=1,pbreaks,at=pbreaks)#
+abline(v=pbreaks[pbins],lty=2)#
+abline(h=nes,lty=2)#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#then add replicates of all of the vector to see how consistent people are on the exact same stuff#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}	#
+	#plot(x,y,main=n)#
+	#readline(prompt='go')#
+}#
+################################################
+#add same plot with new presentation style#
+#
+npres<-20#
+pres<-c(rep('plain',length=20),c('outlier','lowess','bestFit','axesScale','axesLabel')[c(4,4,3,1,5,5,2,3,1,2,3, 1, 3, 1, 5,4, 2, 2, 5, 4)])#
+cbind(pres,pbreaks,nes)#
+#
+#THIS IS NO LONGER HOW YOU MAKE DATA FOR THE SURVEY!!!!!!!#
+#NOW THE VECTORS ARE SET APRIORI AT THEIR FULL SIZE, THEY AREN'T DOUBLED LATER.#
+#Double check to make sure you didn't already do it#
+#if(dim(xes)[1]==nreps){#
+	#nes<-c(nes,nes[1:npres])#
+	#pbreaks<-c(pbreaks,pbreaks[1:npres])#
+	#pbins<-c(pbins,pbins[1:npres])#
+	#xes<-rbind(xes,xes[1:npres,])#
+	#yes<-rbind(yes,yes[1:npres,])#
+	#pvals<-c(pvals,pvals[1:npres])#
+	#tvals<-c(tvals,tvals[1:npres])#
+#}#
+#origPlot<-c(1:nreps,1:npres)#
+#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the right corner#
+for(i in which(pres=='outlier')){#
+	n<-nes[i]#
+	#grab the middle point from x and y#
+	mx<-rep(mean(x),n)#
+	my<-rep(mean(y),n)#
+	x<-xes[i,1:n]#
+	y<-yes[i,1:n]#
+	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+	switch<-which(distvec==min(distvec))#
+	#should we add it to the top of the graph or the bottom?#
+	updown<-sample(c('up','down'),1)#
+	#tval conveys if the best fit line is pos or neg#
+	if(updown=='down' & tvals[i]<1) {#
+		x[switch]<-max(x)+sd(x)#
+		y[switch]<-min(y)-sd(y)#
+	}#
+	if(updown=='down' & tvals[i]>1) {#
+		x[switch]<-min(x)-sd(x)#
+		y[switch]<-min(y)-sd(y)#
+	}#
+	if(updown=='up' & tvals[i]<1) {#
+		x[switch]<-min(x)-sd(x)#
+		y[switch]<-max(y)+sd(y)#
+	}#
+	if(updown=='up' & tvals[i]>1) {#
+		x[switch]<-max(x)+sd(x)#
+		y[switch]<-max(y)+sd(y)#
+	}#
+#
+	tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+	pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+	xes[i,1:n]<-x#
+	yes[i,1:n]<-y#
+}#
+#
+#################################################
+#NO REPLICATES HERE!!!!!!#
+#If you want to add them, re add 'whichrep'& 'beforeRep'to the save command#
+#Repeat numbers 2 and 4#
+#
+nreplicates<-0#
+#
+# whichrep<-c(2,4)#
+#
+# if(dim(xes)[1]==nreps){#
+# 	nes<-c(nes,nes[whichrep])#
+# 	pbins<-c(pbins,pbins[whichrep])#
+# 	xes<-rbind(xes,xes[whichrep,])#
+# 	yes<-rbind(yes,yes[whichrep,])#
+# 	pvals<-c(pvals,pvals[whichrep])#
+# 	tvals<-c(tvals,tvals[whichrep])#
+# 	pres<-c(pres,pres[whichrep])#
+	#origPlot<-c(origPlot,origPlot[whichrep]) ## used when there's overlaping data between plain and styled#
+#}#
+# beforeRep<-c(1:(nreps*2),whichrep)#
+#beforeRep has 20 unique values, and 2 indexes at the end refering to the original index of the graphs that are replicated#
+#
+plot(pvals,(nes),pch=19,log='x',xaxt='n',yaxt='n',col=c('blue','black')[(pres=='plain')+1],ylim=c(0,300))#
+axis(side=1,pbreaks,at=pbreaks)#
+axis(side=2,unique(nes),at=unique(nes))#
+abline(v=pbreaks[pbins],lty=2)#
+abline(h=nes,lty=2)#
+text(pvals[pres!="plain"],nes[pres!="plain"]+10,pres[pres!="plain"])#
+#text(pvals[whichrep],nes[whichrep]-10,"rep")#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres','nreplicates'),file='data_for_1plots_coursera1.RData')
+which(nes==70)
+which(new==140)
+which(nes==140)
+plot(xes[9,],yes[9,])
+plot(xes[3,],yes[3,])
+plot(xes[6,],yes[6,])
+plot(xes[2,],yes[2,])
+plot(xes[20,],yes[20,])
+plot(xes[23,],yes[23,])
+plot(xes[22,],yes[22,])

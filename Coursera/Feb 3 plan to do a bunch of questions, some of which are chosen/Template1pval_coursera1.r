@@ -79,7 +79,7 @@ for(i in 1:nreps){
   	if(style=='lowess') lines(lowess(x,y))
   	if(style=='bestFit') abline(m$coef)
   	if(style=='axesScale')plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-1.5*sd(x),max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))
-    if(style=='outlier')plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.2*drx,max(x)+.2*drx),ylim=c(min(y)-.2*dry,max(y)+.2*dry) )
+    if(style=='outlier')plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )
   	if(style=='axesLabel') plot(x,y,xlab=xl,ylab=yl,main=title)
   dev.off()
 }

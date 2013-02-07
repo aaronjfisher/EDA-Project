@@ -81,7 +81,7 @@ for(i in 1:nreps){
 
 
 setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera - pvals - feb3")
-save(list=c('n4','nreps','p4','pbins','n4same','pbreaks','x4','y4'),file='data_for_4plots_coursera1.RData')
+#save(list=c('n4','nreps','p4','pbins','n4same','pbreaks','x4','y4'),file='data_for_4plots_coursera1.RData')
 
 
 ##Practice Graphing it

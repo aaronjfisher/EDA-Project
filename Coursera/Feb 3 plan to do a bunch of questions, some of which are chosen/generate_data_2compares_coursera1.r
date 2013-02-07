@@ -73,7 +73,7 @@ round(p2,digits=5)
 # b4replicates2<-c(1:nreps,newreps)
 
 setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera - pvals - feb3")
-save(list=c('n2','nes2','nreps','p2','pbins','pbreaks','x2','y2'),file='data_for_2compare_coursera1.RData')
+#save(list=c('n2','nes2','nreps','p2','pbins','pbreaks','x2','y2'),file='data_for_2compare_coursera1.RData')
 
 
 ##Practice Graphing it
