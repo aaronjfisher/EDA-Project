@@ -11,7 +11,7 @@ set.seed(234032)
 #Intro question:
 setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")
 
-pbreaks<-c(.01,.03,.01,.5,1)
+pbreaks<-c(.02,.03,.3,.4,1)
 pbins<-rep(c(2,4),times=5)
 nplain<-6
 pres<-c('n35','n35','n100','n100','n200','n200')

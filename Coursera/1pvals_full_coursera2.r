@@ -9,7 +9,7 @@ set.seed(234032)
 #Intro question:
 setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")
 nreps<-14
-pbreaks<-c(.01,.03,.07,.5,1)
+pbreaks<-c(.02,.03,.3,.4,1)
 pbins<-rep(c(2,4),times=7)
 nes<-c(35,35,100,100,200,200,rep(100,times=8))
 yes<-matrix(nrow=nreps,ncol=max(nes))
