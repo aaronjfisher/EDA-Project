@@ -57,25 +57,24 @@ for(i in 1:nreps){
 #if it's not sig, add the outlier close to above the mean.
 
 for(i in which(pres=='outlier')){
-  tryAgain<-TRUE
-  while(tryAgain){
+
+  	x<-xes[i,1:n]
+  	y<-yes[i,1:n]
   	n<-nes[i]
     sig.i<-pvals[i]<.05
   	#grab the middle point from x and y
   	mx<-rep(mean(x),n)
   	my<-rep(mean(y),n)
-  	x<-xes[i,1:n]
-  	y<-yes[i,1:n]
   	distvec<-sqrt((mx-x)^2+(my-y)^2)
   	switch<-which(distvec==min(distvec))
   	
     #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED
     #Put it in an UPPER CORNER
-  	if(tvals[i]<1 & sig.i) { #slope going down
+  	if(tvals[i]<0 & sig.i) { #slope going down
   		x[switch]<-min(x)-sd(x)
   		y[switch]<-max(y)+sd(y)
   	}
-  	if(tvals[i]>1 & sig.i) {
+  	if(tvals[i]>0 & sig.i) {
   		x[switch]<-max(x)+sd(x)
   		y[switch]<-max(y)+sd(y)
   	}
@@ -86,9 +85,7 @@ for(i in which(pres=='outlier')){
   
   	tvals[i]<-summary(lm(y~x))$coeff[2,3]
   	pvals[i]<-summary(lm(y~x))$coeff[2,4]
-    if(sig.i&pvals[i]<.04) tryAgain=FALSE
-    if(!sig.i&pvals[i]>.06) tryAgain=FALSE
-  }
+
 	xes[i,1:n]<-x
 	yes[i,1:n]<-y
 }

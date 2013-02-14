@@ -1,0 +1,4440 @@
+Lbinom=function(x,n,k=8,d=2,norm=F)#
+{#
+ est=x/n#
+ se=sqrt((est*(1-est))/n)#
+ l=max(est-4*se,0)#
+ u=min(est+4*se,1)#
+ theta=seq(l,u,length=500)#
+ like=dbinom(x,n,theta)#
+ like=like/max(like)#
+ if ( norm ){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+}#
+ else {like.line(like,theta,k,d)}#
+}
+Lbinom(c(1,0,1),n=3)
+like.line=function(likelihood,parameter,k1,d)#
+{#
+# This function plots a support line and text#
+# for a likelihood function#
+# The input needed is the likelihood#
+# function and the parameter and the level of support e.g. (8 or 32)#
+# d sets the number of digits in the display#
+# date 01-08-10#
+lik=likelihood#
+plot(parameter,likelihood,type="l")#
+r1=min(parameter[lik==max(lik)])#
+r2=max(parameter[lik==max(lik)])#
+r=(r1+r2)/2#
+a1 = min(parameter[lik >= 1/k1])#
+b1 = max(parameter[lik >= 1/k1])#
+parameter1 = parameter[parameter >= a1]#
+parameter1 = parameter1[parameter1 <= b1]#
+i1 = rep(1/k1, length(parameter1))#
+lines(parameter1, i1, type = "l")#
+lines(c(a1,a1),c(0,1/k1),lty=1)#
+lines(c(b1,b1),c(0,1/k1),lty=1)#
+if(r <= (min(parameter) + max(parameter))/2) whr=.8*length(parameter)#
+else whr=.2*length(parameter)#
+K1=1/k1#
+text(parameter[whr], 0.95, paste("Max at ", round(r, digits = d)))#
+text(parameter[whr], 0.85, paste("1/",k1, "LI (", round(a1, digits = d),#
+ ",", round(b1, digits = d), ")"))#
+ }
+Lbinom(c(1,0,1),n=3)
+Lbinom(c(1,0,1,0,1,0,1),n=7)
+Lbinom(c(1,0,1,0,1,0,1))
+Lbinom(c(1,0,1,0,1,0,1),n=7)
+n
+x
+x<-c(1,0,1,0)
+n<-4
+est=x/n
+se=sqrt((est*(1-est))/n)
+l=max(est-4*se,0)
+u=min(est+4*se,1)
+theta=seq(l,u,length=500)
+est
+Lbinom(x=3,n=7)
+Lbinom(x=5,n=10)
+Lbinom(x=50,n=100)
+Lbinom(x=5,n=10)
+Lbinom(x=50,n=100)
+Lbinom(x=500,n=1000)
+Lbinom(x=5,n=10)
+Lbinom(x=50,n=100)
+Lbinom(x=5,n=10)
+Lbinom(x=50,n=100)
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1))#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}
+Lexp(5)
+Lexp(c(5,2,3,5))
+Lexp(c(5,2,3,5),norm=T)
+Lexp(c(5,2,3,5),norm=F)
+Lexp(c(5,2,3,5),norm=T)
+Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+Lexp(c(5,2,3,5))
+dexp(c(3,2),1)
+x
+x<-x+2
+x
+dexp(x,1)
+dexp(x,c(1,2))
+theta<-3
+y=(est/theta)
+est
+est=mean(x)
+y=(est/theta)
+y
+y^n*exp(-n*(y-1)) #Getting the joint by hand
+(theta^n)*(exp(-theta*sum(x)))
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
+ #??????????????????????????????#
+ #Why not:#
+ like=(theta^n)*(exp(-theta*sum(x)))#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+Lexp(c(5,2,3,5))
+mean(x)
+x
+x<-c(5,2,3,5)
+x
+Lexp(c(5,2,3,5))
+mean(x)
+1/mean(x)
+1/.26
+x<-c(5,2,3,4,4,3,2,4,5,2,5)
+Lexp(x)
+1/.29
+Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
+ #Note - Using theta as E(X), not 1/E(X)#
+ like=(theta^n)*(exp(-theta*sum(x)))#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+x<-c(5,2,3,4,4,3,2,4,5,2,5)#
+Lexp(x)
+Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
+ #Note - Using theta as E(X), not 1/E(X)#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+x<-c(5,2,3,4,4,3,2,4,5,2,5)#
+Lexp(x)
+Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=1/theta^n*exp(-n*(y-1)) #Getting the joint by hand#
+ #Note - Using theta as E(X), not 1/E(X)#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+x<-c(5,2,3,4,4,3,2,4,5,2,5)#
+Lexp(x)
+Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(est/theta)) #Getting the joint by hand#
+ #Note - Using theta as E(X), not 1/E(X)#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+x<-c(5,2,3,4,4,3,2,4,5,2,5)#
+Lexp(x)
+{
+x<-c(1,2,3)
+x
+mean(x)
+sd(x)
+plot(x)
+x=c(1,2,3)
+like.line(like,theta,k,d)
+Lbinom=function(x,n,k=8,d=2,norm=F)#
+{#
+ est=x/n #calculate MLE#
+ se=sqrt((est*(1-est))/n)#
+ l=max(est-4*se,0) #Give a range for the MLE#
+ u=min(est+4*se,1)#
+ theta=seq(l,u,length=500) #range to calculate likelihood over#
+ like=dbinom(x,n,theta)#
+ like=like/max(like) #scale so max is 1#
+ if ( norm ){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+}#
+ else {like.line(like,theta,k,d)}#
+}
+rbinom(1,25,.5)
+X is a sum of bernoullis#
+Lbinom=function(x,n,k=8,d=2,norm=F)#
+{#
+ est=x/n #calculate MLE#
+ se=sqrt((est*(1-est))/n)#
+ l=max(est-4*se,0) #Give a range for the MLE#
+ u=min(est+4*se,1)#
+ theta=seq(l,u,length=500) #range to calculate likelihood over#
+ like=dbinom(x,n,theta)#
+ like=like/max(like) #scale so max is 1#
+ if ( norm ){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+}#
+ else {like.line(like,theta,k,d)}#
+}#
+Lbinom(x=5,n=10) #
+Lbinom(x=50,n=100) #Note the change in the X axis.#
+#Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1))#
+ #Getting the joint by hand#
+ #Note - Using theta as E(X), not 1/E(X)#
+ #the -1 will cancel away because it's just multiplying by e^-1#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+x<-c(5,2,3,4,4,3,2,4,5,2,5)#
+#Lexp(x)#
+#
+Lhyper=function(x,n,N,k=8,d=2,norm=F)#
+  {#
+   D=seq(0,N,by=1)#
+   est=x*N/n#
+   se=sqrt(est*(N-est)*(N-n)/(n*(N-1)))#
+   like=dhyper(x,D,N-D,n,log=FALSE)#
+   like=like/max(like)#
+ if (norm){#
+ like.line(like,D,k,d)#
+ lines(D,LnormC(D,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,D,k,d)}#
+}#
+#
+#*************#
+#using symmetry of the normal density#
+#we're using the fact that the sample mean is the "sufficient statistic"#
+Lnorm=function(est,se,k=8,d=2)#
+{#
+ l=est-4*se#
+ u=est+4*se#
+ theta=seq(l,u,length=500)#
+ like=dnorm(theta,est,se) #could also switch est & theta#
+ like=like/max(like)#
+ like.line(like,theta,k,d)#
+}#
+Lnorm(2,.4)#
+#
+Lpois=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=sqrt(est/n)#
+ l=max(est-4*se,0)#
+ u=min(est+4*se)#
+ theta=seq(l,u,length=1000)#
+ like=dpois(n*est,n*theta)#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+Lunif=function(y,n,k=8,d=2)#
+{#
+u=y+5*(y/(n+1))#
+theta=seq(y,u,length=500)#
+like=(y/theta)^n#
+like.line(like,theta,k,d)#
+}#
+like.line=function(likelihood,parameter,k1,d)#
+{#
+# This function plots a support line and text#
+# for a likelihood function#
+# The input needed is the likelihood#
+# function and the parameter and the level of support e.g. (8 or 32)#
+# d sets the number of digits in the display#
+# date 01-08-10#
+lik=likelihood#
+plot(parameter,likelihood,type="l")#
+r1=min(parameter[lik==max(lik)])#
+r2=max(parameter[lik==max(lik)])#
+r=(r1+r2)/2 #get MLE#
+a1 = min(parameter[lik >= 1/k1]) #k1 is level of support#
+b1 = max(parameter[lik >= 1/k1]) #get range for all values in 1/k1 interval#
+parameter1 = parameter[parameter >= a1]#
+parameter1 = parameter1[parameter1 <= b1] #isolate the coordinates in that region#
+i1 = rep(1/k1, length(parameter1)) #get y coordinates for the invertval line#
+lines(parameter1, i1, type = "l")#
+lines(c(a1,a1),c(0,1/k1),lty=1)#
+lines(c(b1,b1),c(0,1/k1),lty=1) #whr is where to put the text#
+if(r <= (min(parameter) + max(parameter))/2) whr=.8*length(parameter)#
+else whr=.2*length(parameter)#
+K1=1/k1#
+text(parameter[whr], 0.95, paste("Max at ", round(r, digits = d)))#
+text(parameter[whr], 0.85, paste("1/",k1, "LI (", round(a1, digits = d),#
+ ",", round(b1, digits = d), ")"))#
+ }#
+LnormC=function(theta,est,se)#
+{#
+ like=dnorm(theta,est,se)#
+ like=like/max(like)#
+}#
+#
+Lgamma=function(x,alpha,k=8,d=2,norm=F)#
+{#
+ est=mean(x)/alpha#
+ n=length(x)#
+ se=est/sqrt(n*alpha)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=(y^n*exp(-n*(y-1)))^(alpha)#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}
+Lgamma
+x<-rgamma(25,shape=3,scale=2)
+Lgamma(x,alpha=2)
+3/2
+Lgamma(x,alpha=3)
+x<-rgamma(25,shape=3,scale=2)
+Lgamma(x,alpha=3)
+x<-rgamma(250,shape=3,scale=2)
+Lgamma(x,alpha=3)
+?setseed
+?set.seed
+set.seed()
+3
+Lgamma(x,alpha=3)
+x<-rgamma(2500,shape=3,scale=2)
+Lgamma(x,alpha=3)
+x<-rgamma(250000,shape=3,scale=2)
+Lgamma(x,alpha=3)
+x<-rgamma(2500,shape=3,scale=2)
+Lgamma(x,alpha=3)
+x<-rgamma(2500,shape=3,scale=2)
+Lgamma(x,alpha=3)
+load("/Users/aaronfisher/Documents/JH/ADAMachine/five_shape.RData")
+X is a sum of bernoullis#
+Lbinom=function(x,n,k=8,d=2,norm=F)#
+{#
+ est=x/n #calculate MLE#
+ se=sqrt((est*(1-est))/n)#
+ l=max(est-4*se,0) #Give a range for the MLE#
+ u=min(est+4*se,1)#
+ theta=seq(l,u,length=500) #range to calculate likelihood over#
+ like=dbinom(x,n,theta)#
+ like=like/max(like) #scale so max is 1#
+ if ( norm ){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+}#
+ else {like.line(like,theta,k,d)}#
+}#
+Lbinom(x=5,n=10) #
+Lbinom(x=50,n=100) #Note the change in the X axis.#
+#Here the input is a vector#
+Lexp=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=est/sqrt(n)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=y^n*exp(-n*(y-1))#
+ #Getting the joint by hand#
+ #Note - Using theta as E(X), not 1/E(X)#
+ #the -1 will cancel away because it's just multiplying by e^-1#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+x<-c(5,2,3,4,4,3,2,4,5,2,5)#
+#Lexp(x)#
+#
+Lhyper=function(x,n,N,k=8,d=2,norm=F)#
+  {#
+   D=seq(0,N,by=1)#
+   est=x*N/n#
+   se=sqrt(est*(N-est)*(N-n)/(n*(N-1)))#
+   like=dhyper(x,D,N-D,n,log=FALSE)#
+   like=like/max(like)#
+ if (norm){#
+ like.line(like,D,k,d)#
+ lines(D,LnormC(D,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,D,k,d)}#
+}#
+#
+#*************#
+#using symmetry of the normal density#
+#we're using the fact that the sample mean is the "sufficient statistic"#
+Lnorm=function(est,se,k=8,d=2)#
+{#
+ l=est-4*se#
+ u=est+4*se#
+ theta=seq(l,u,length=500)#
+ like=dnorm(theta,est,se) #could also switch est & theta#
+ like=like/max(like)#
+ like.line(like,theta,k,d)#
+}#
+Lnorm(2,.4)#
+#
+Lpois=function(x,k=8,d=2,norm=F)#
+{#
+ est=mean(x)#
+ n=length(x)#
+ se=sqrt(est/n)#
+ l=max(est-4*se,0)#
+ u=min(est+4*se)#
+ theta=seq(l,u,length=1000)#
+ like=dpois(n*est,n*theta)#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}#
+Lunif=function(y,n,k=8,d=2)#
+{#
+u=y+5*(y/(n+1))#
+theta=seq(y,u,length=500)#
+like=(y/theta)^n#
+like.line(like,theta,k,d)#
+}#
+like.line=function(likelihood,parameter,k1,d)#
+{#
+# This function plots a support line and text#
+# for a likelihood function#
+# The input needed is the likelihood#
+# function and the parameter and the level of support e.g. (8 or 32)#
+# d sets the number of digits in the display#
+# date 01-08-10#
+lik=likelihood#
+plot(parameter,likelihood,type="l")#
+r1=min(parameter[lik==max(lik)])#
+r2=max(parameter[lik==max(lik)])#
+r=(r1+r2)/2 #get MLE#
+a1 = min(parameter[lik >= 1/k1]) #k1 is level of support#
+b1 = max(parameter[lik >= 1/k1]) #get range for all values in 1/k1 interval#
+parameter1 = parameter[parameter >= a1]#
+parameter1 = parameter1[parameter1 <= b1] #isolate the coordinates in that region#
+i1 = rep(1/k1, length(parameter1)) #get y coordinates for the invertval line#
+lines(parameter1, i1, type = "l")#
+lines(c(a1,a1),c(0,1/k1),lty=1)#
+lines(c(b1,b1),c(0,1/k1),lty=1) #whr is where to put the text#
+if(r <= (min(parameter) + max(parameter))/2) whr=.8*length(parameter)#
+else whr=.2*length(parameter)#
+K1=1/k1#
+text(parameter[whr], 0.95, paste("Max at ", round(r, digits = d)))#
+text(parameter[whr], 0.85, paste("1/",k1, "LI (", round(a1, digits = d),#
+ ",", round(b1, digits = d), ")"))#
+ }#
+LnormC=function(theta,est,se)#
+{#
+ like=dnorm(theta,est,se)#
+ like=like/max(like)#
+}#
+#
+Lgamma=function(x,alpha,k=8,d=2,norm=F)#
+{#
+ est=mean(x)/alpha#
+ n=length(x)#
+ se=est/sqrt(n*alpha)#
+ l=max(0.001,est-5*se)#
+ u=est+5*se#
+ theta=seq(l,u,length=500)#
+ y=(est/theta)#
+ like=(y^n*exp(-n*(y-1)))^(alpha)#
+ like=like/max(like)#
+ if (norm){#
+ like.line(like,theta,k,d)#
+ lines(theta,LnormC(theta,est,se),lty=2)#
+ }#
+ else{#
+ like.line(like,theta,k,d)}#
+}
+set.seed(13083)
+b<-rnorm(25,3,1)
+Lnorm(mean(b))
+Lnorm(mean(b),se=1)
+set.seed(100)
+xgamma<-rgamma(25,shape=3,scale=2)
+Lgamma(xgamma,3)
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nreps<-length(pbins)#
+nes<-c(35,35,100,100,200,200,rep(100,times=5))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+pres<-c(rep(c('n35','n100ref','n200'),each=2),rep('all',5))#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+  tryAgain<-TRUE#
+  if(sig.i=='default') sig.i<- pvals[i]<.05#
+  while(tryAgain){#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+    if(sig.i&pvals.i<.05) tryAgain=FALSE#
+    if(!sig.i) tryAgain=FALSE#
+  }#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:6){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+for(i in 7:nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-3,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+i
+rm(list=ls())
+ls()
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-4#
+pres<-c(rep(c('n35','n100ref','n200'),each=2)#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200)#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+  tryAgain<-TRUE#
+  if(sig.i=='default') sig.i<- pvals[i]<.05#
+  while(tryAgain){#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+    if(sig.i&pvals.i<.05) tryAgain=FALSE#
+    if(!sig.i) tryAgain=FALSE#
+  }#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+for(i in (nreps-nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-3,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+set.seed(234032)
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")
+pbreaks<-c(.01,.03,.07,.5,1)
+pbins<-rep(c(2,4),times=5)
+nplain<-4
+pres<-c(rep(c('n35','n100ref','n200'),each=2)
+nreps<-length(pbins)
+pres<-rep(c('n35','n200'),each=2)
+pres
+pres<-c('n35','n35','n200','n200')
+nreps<-length(pbins)
+rm(list=ls())
+ls()
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-4#
+pres<-c('n35','n35','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200)#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+  tryAgain<-TRUE#
+  if(sig.i=='default') sig.i<- pvals[i]<.05#
+  while(tryAgain){#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+    if(sig.i&pvals.i<.05) tryAgain=FALSE#
+    if(!sig.i) tryAgain=FALSE#
+  }#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+for(i in (nreps-nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-3,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+n
+i
+xes
+rm(list=ls())
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-4#
+pres<-c('n35','n35','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200)#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+  tryAgain<-TRUE#
+  if(sig.i=='default') sig.i<- pvals[i]<.05#
+  while(tryAgain){#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+    if(sig.i&pvals.i<.05) tryAgain=FALSE#
+    if(!sig.i) tryAgain=FALSE#
+  }#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+print('cehck')#
+for(i in (nreps-nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-3,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+i
+(nreps-nplain):nreps
+Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}
+i
+nplain
+print('cehck')#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-3,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+i
+n<-nes[i]
+x<-xes[i,1:n]
+n
+nes
+nes<-c(35,35,200,200,rep(100,nreps-nplain))
+nes
+rm(list=ls())
+rml
+?rml
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-4#
+pres<-c('n35','n35','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+  tryAgain<-TRUE#
+  if(sig.i=='default') sig.i<- pvals[i]<.05#
+  while(tryAgain){#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+    if(sig.i&pvals.i<.05) tryAgain=FALSE#
+    if(!sig.i) tryAgain=FALSE#
+  }#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+print('cehck')#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-3,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+i
+nrepts
+nreps
+i
+nreps
+n<-nes[i]
+x<-xes[i,1:n]
+y<-yes[i,1:n]
+pval<-pvals[i]
+tval<-tvals[i]
+m<-lm(y~x)
+t2<-'Data'
+style
+styles
+if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }
+x
+y
+plot(x,y)
+pvals
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(lis
+rm(list=ls())
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-4#
+pres<-c('n35','n35','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+print('check')#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-3,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-4#
+pres<-c('n35','n35','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+print('check')#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-3,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-4#
+pres<-c('n35','n35','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+print('check')#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=4)#
+nplain<-4#
+pres<-c('n35','n35','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+print('check')#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+  summary(lm(y~x))$coeff[2,4]#
+}
+print(summary(lm(y~x))$coeff[2,4])
+print('check')#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+  print(summary(lm(y~x))$coeff[2,4])#
+}
+print('check')#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+summary(lm(y~x))$coeff[2,4]#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+  print(summary(lm(y~x))$coeff[2,4])#
+}
+print('check')#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+summary(lm(y~x))$coeff[2,4]#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+  print(summary(lm(y~x))$coeff[2,4])#
+}
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+print(summary(lm(y~x))$coeff[2,4])#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+  print(summary(lm(y~x))$coeff[2,4])#
+}
+for(i in (1+nplain):nreps){#
+	print(summary(lm(y~x))$coeff[2,4])#
+#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+  print(summary(lm(y~x))$coeff[2,4])#
+}
+print(summary(m)[2,4]==pvals[i])
+print(summary(m)[2,4]==pvals[i])
+summary(m)[2,4]
+print(summary(m)$coef[2,4]==pvals[i])
+for(i in (1+nplain):nreps){#
+#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  print(summary(m)$coef[2,4]==pvals[i])#
+#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+  print(summary(lm(y~x))$coeff[2,4])#
+}
+for(i in (1+nplain):nreps){#
+#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  print(summary(m)$coef[2,4]==pvals[i])#
+#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+  print(summary(lm(y~x))$coeff[2,4])#
+}
+pvals[5]
+i<-5
+n<-nes[i]
+x<-xes[i,1:n]
+y<-yes[i,1:n]
+pval<-pvals[i]
+tval<-tvals[i]
+summary(m)$coef[2,4]
+rm(list=ls())
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=4)#
+nplain<-4#
+pres<-c('n35','n35','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+for(i in (1+nplain):nreps){#
+#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  print(summary(m)$coef[2,4]==pvals[i])#
+#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+  print(summary(lm(y~x))$coeff[2,4])#
+}
+x
+y
+pval
+for(i in (1+nplain):nreps){#
+#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  print(summary(m)$coef[2,4]==pvals)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+  print(summary(lm(y~x))$coeff[2,4])#
+}
+print(summary(m)$coef[2,4]==pvals)
+print(summary(m)$coef[2,4]==pval)
+for(i in (1+nplain):nreps){#
+#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  print(summary(m)$coef[2,4]==pval)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+  print(summary(lm(y~x))$coeff[2,4])#
+}
+rm(list=ls())
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=4)#
+nplain<-4#
+pres<-c('n35','n35','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next}#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-6#
+pres<-c('n35','n35','n100','n100','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next} #otherwise...#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+nreps
+pbins<-rep(c(2,4),times=5)
+nplain<-6
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-6#
+pres<-c('n35','n35','n100','n100','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1
+nreps
+plain
+nplain
+nes
+length(nes)
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-6#
+pres<-c('n35','n35','n100','n100','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,100,100,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next} #otherwise...#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+rm(list=ls())
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-6#
+pres<-c('n35','n35','n100','n100','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,100,100,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next} #otherwise...#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.01,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-6#
+pres<-c('n35','n35','n100','n100','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,100,100,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next} #otherwise...#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+rm(list=ls())
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.01,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-6#
+pres<-c('n35','n35','n100','n100','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,100,100,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<1 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>1 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next} #otherwise...#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+pbins
+pbreaks
+out<-addOutlier(10)
+plot(out$x,out$y)
+plot(out$x,out$y,sig.i=T)
+out<-addOutlier(10,sig.i=T)
+plot(out$x,out$y,sig.i=T)
+i<-10
+sig.i<-T
+if(sig.i=='default') sig.i<- pvals[i]<.05
+sig.i
+n<-nes[i]
+x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))
+switch
+tvals[i]<1 & sig.i
+tvals[i]
+plot(x,y)
+tvals[i]<1
+tvals[i]
+hist(tvals)
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<0 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>0 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')
+rm(list=ls())
+COURSERA STUFF#
+#Here we're using 7 questions#
+#Each with 2 versions, one significant one not#
+#Questions are: Small sample (35), medium sample (100) (reference),#
+#large sample (200), axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+nreps<-14#
+pbreaks<-c(.01,.03,.07,.5,1)#
+pbins<-rep(c(2,4),times=7)#
+nes<-c(35,35,100,100,200,200,rep(100,times=8))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+pres<-(rep(c('n35','n100ref','n200','bestFit','axesScale','axesLabel','outlier'),each=2))#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}	#
+	#plot(x,y,main=n)#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+for(i in which(pres=='outlier')){#
+#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	n<-nes[i]#
+    sig.i<-pvals[i]<.05#
+  	#grab the middle point from x and y#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<0 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>0 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+  	pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+#
+	xes[i,1:n]<-x#
+	yes[i,1:n]<-y#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+for(i in 1:nreps){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  style<-pres[i]#
+#
+  t2<-'Data'#
+  if(style=='lowess') t2<-'with Lowess Line'#
+  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+  title<-paste('Sample ',t2,sep='')#
+  xl<-paste("Cranial Electrode",floor(runif(1,11,44)),"(Standardized)")#
+  yl<-paste("Cranial Electrode",floor(runif(1,53,97)),"(Standardized)")#
+  drx<-diff(range(x))#
+  dry<-diff(range(y))#
+  probnum<-paste0(rep(1:7,each=2),rep(c('-1','-2'),times=7))#
+  png(paste0("images/coursera2_#",probnum[i],'_',pres[i],'_pval-',round(pvals[i],digits=3),".png"), width = 400, height = 400)#
+    par(mfrow=c(1,1))#
+  	plot(x,y,xlab='X',ylab='Y',main=title)#
+  	if(style=='lowess') lines(lowess(x,y))#
+  	if(style=='bestFit') abline(m$coef)#
+  	if(style=='axesScale')plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-1.5*sd(x),max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+    if(style=='outlier')plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+  	if(style=='axesLabel') plot(x,y,xlab=xl,ylab=yl,main=title)#
+  dev.off()#
+}
+rm(list=ls())
+getwd()
+COURSERA STUFF#
+#Here we're using 7 questions#
+#2 are just large & small data#
+#5 are the same data, with random options of which presentation style you see.#
+#Questions are: Small sample (35), #
+#large sample (200)#
+#medium sample (100):axis scale, labels, outlier, bestfit#
+#
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.01,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-6#
+pres<-c('n35','n35','n100','n100','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,100,100,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<0 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>0 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next} #otherwise...#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.01,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-6#
+pres<-c('n35','n35','n100','n100','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,100,100,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<0 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>0 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next} #otherwise...#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
+rm(list=ls())
+set.seed(234032)#
+#
+#Intro question:#
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
+#
+pbreaks<-c(.01,.03,.01,.5,1)#
+pbins<-rep(c(2,4),times=5)#
+nplain<-6#
+pres<-c('n35','n35','n100','n100','n200','n200')#
+nreps<-length(pbins)#
+nes<-c(35,35,100,100,200,200,rep(100,nreps-nplain))#
+yes<-matrix(nrow=nreps,ncol=max(nes))#
+xes<-matrix(nrow=nreps,ncol=max(nes))#
+pvals<-1 #initialize variables#
+tvals<-1#
+#
+#dropping Lowess here#
+#
+#First generate baseline data#
+#then add presentation data (same data + presentaion vector)#
+#then change data for when the twist is adding an outlier#
+#
+for(i in 1:nreps){#
+	tryagain<-T#
+#	if(i %in% c(1:100*nreps/100)) print(i)#
+	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
+		#get t close to what we want#
+		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
+		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
+		n<-nes[i]#
+		x<-rnorm(n)#
+		e<-rnorm(n)#
+		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
+		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
+		y<-x*bhat*sample(c(-1,1),1)+e#
+#
+		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
+		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
+		xes[i,1:n]<-x#
+		yes[i,1:n]<-y#
+#
+		pi<-pvals[i]#
+		bini<-min(which(pi<pbreaks))#
+		if(bini==pbins[i]) tryagain<-F#
+	}#
+	print(c(i,pvals[i]))	#
+	#plot(x,y,main=pvals[i])#
+	#readline(prompt='go')#
+}#
+#################################################
+#Fix those that now get an extra outlier#
+#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
+#if it's not sig, add the outlier close to above the mean.#
+#
+addOutlier<-function(i,sig.i='default'){#
+#
+    if(sig.i=='default') sig.i<- pvals[i]<.05#
+#
+  	n<-nes[i]#
+  	#grab the middle point from x and y#
+  	x<-xes[i,1:n]#
+  	y<-yes[i,1:n]#
+  	mx<-rep(mean(x),n)#
+  	my<-rep(mean(y),n)#
+  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
+  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
+    #Put it in an UPPER CORNER#
+  	if(tvals[i]<0 & sig.i) { #slope going down#
+  		x[switch]<-min(x)-sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+  	if(tvals[i]>0 & sig.i) {#
+  		x[switch]<-max(x)+sd(x)#
+  		y[switch]<-max(y)+sd(y)#
+  	}#
+    if(!sig.i){#
+      #leave X where it is now#
+      y[switch]<-max(y)+sd(y)*sqrt(2)#
+    }#
+  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
+  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
+	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
+}#
+#
+#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
+#load('data_for_1plots_coursera2.RData')#
+#Note, this works b/c there's no replicates#
+probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
+styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
+for(i in 1:nplain){#
+  n<-nes[i]#
+  x<-xes[i,1:n]#
+  y<-yes[i,1:n]#
+  pval<-pvals[i]#
+  tval<-tvals[i]#
+  m<-lm(y~x)#
+  title<-"Sample Data"#
+  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
+  plot(x,y,xlab='X',ylab='Y',main=title)#
+  dev.off()#
+}#
+#
+for(i in (1+nplain):nreps){#
+  for(style in styles){#
+  	print(style)#
+  	  n<-nes[i]#
+	  x<-xes[i,1:n]#
+	  y<-yes[i,1:n]#
+	  pval<-pvals[i]#
+	  tval<-tvals[i]#
+	  m<-lm(y~x)#
+	  t2<-'Data'#
+	  if(style=='outlierUp'){#
+	  	out.i<-addOutlier(i,sig.i<-FALSE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='outlierCorner'){#
+	  	out.i<-addOutlier(i,sig.i<-TRUE)#
+	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
+	  }#
+	  if(style=='lowess') t2<-'with Lowess Line'#
+	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
+	  title<-paste0('Sample ',t2)#
+	  xl<-'X'#
+	  yl<-'Y'#
+	  if(style=='axesLabel'){#
+		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
+		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
+	 }#
+	  drx<-diff(range(x))#
+	  dry<-diff(range(y))#
+	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
+#
+	    par(mfrow=c(1,1))#
+	    if(style %in% c('outlierUp','outlierCorner')){#
+	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
+	    	dev.off(); next} #otherwise...#
+        plot(x,y,xlab=xl,ylab=yl,main=title)#
+	  	if(style=='lowess') lines(lowess(x,y))#
+	  	if(style=='bestFit') abline(m$coef)#
+	  	if(style=='axesScale'){ #
+	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
+	dev.off(); next}#
+#
+	  dev.off()#
+  }#
+}
