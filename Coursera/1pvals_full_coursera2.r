@@ -1,31 +1,54 @@
 #COURSERA STUFF
-#Here we're using 7 questions
-#Each with 2 versions, one significant one not
+
+#Here we're using 8 questions
+#Each with 2 options people can see (with one exception), one significant one not
 #Questions are: Small sample (35), medium sample (100) (reference),
 #large sample (200), axis scale, labels, outlier, bestfit
+#For the medium "reference" sample, each person HAS to see both questions (sig and not) so we have something to compare against.
+#Then, to cancel out any effects of a "bad generated sample" we make 5 versions of each 
+#All p-values are fixed to be in the range (.023,.025) or in the range (.33,.35).
+
 
 set.seed(234032)
 
 #Intro question:
-setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")
-nreps<-14
-pbreaks<-c(.02,.03,.3,.4,1)
-pbins<-rep(c(2,4),times=7)
-nes<-c(35,35,100,100,200,200,rep(100,times=8))
+setwd("/Users/aaronfisher/Documents/JH/EDA Versions/EDA Git Repo/Coursera")
+
+nversions<-5 #how many times to generate the data?
+
+pbreaks<-c(.023,.025,.33,.35,1)
+pbins.base<-rep(c(2,4),times=7)
+nes.base<-c(35,35,100,100,200,200,rep(100,times=8))
+pres.base<-(rep(c('n35','n100ref','n200','bestFit','axesScale','axesLabel','outlier'),each=2))
+version.base<-rep(1:nversions)#Note, divide by two because sig and nonsig are two diff versions
+probnum.base<-paste0(rep(1:7,each=2),rep(c('-1','-2'),times=7))
+  
+probnum<-rep(probnum.base,each=nversions) #before version
+pbins<-rep(pbins.base,each=nversions)
+nes<-rep(nes.base,each=nversions)
+pres<-rep(pres.base,each=nversions)
+version<-rep(version.base,times=length(pbins.base))
+
+cbind(pbins,nes,pres,version)
+
+nreps<-length(pbins)
+
 yes<-matrix(nrow=nreps,ncol=max(nes))
 xes<-matrix(nrow=nreps,ncol=max(nes))
 pvals<-1 #initialize variables
 tvals<-1
-pres<-(rep(c('n35','n100ref','n200','bestFit','axesScale','axesLabel','outlier'),each=2))
+
 #dropping Lowess here
 
 #First generate baseline data
 #then add presentation data (same data + presentaion vector)
 #then change data for when the twist is adding an outlier
 
+print(paste('nreps = ',nreps))
+pb<-txtProgressBar(min = 1, max = nreps,  char = "=", style = 3)
+
 for(i in 1:nreps){
 	tryagain<-T
-#	if(i %in% c(1:100*nreps/100)) print(i)
 	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges
 		#get t close to what we want
 		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)
@@ -46,6 +69,7 @@ for(i in 1:nreps){
 		bini<-min(which(pi<pbreaks))
 		if(bini==pbins[i]) tryagain<-F
 	}	
+	setTxtProgressBar(pb,i)
 	#plot(x,y,main=n)
 	#readline(prompt='go')
 }
@@ -57,10 +81,10 @@ for(i in 1:nreps){
 #if it's not sig, add the outlier close to above the mean.
 
 for(i in which(pres=='outlier')){
-
+  	n<-nes[i]
   	x<-xes[i,1:n]
   	y<-yes[i,1:n]
-  	n<-nes[i]
+
     sig.i<-pvals[i]<.05
   	#grab the middle point from x and y
   	mx<-rep(mean(x),n)
@@ -93,8 +117,6 @@ for(i in which(pres=='outlier')){
 #save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')
 #load('data_for_1plots_coursera2.RData')
 
-
-#Note, this works b/c there's no replicates
 for(i in 1:nreps){
   n<-nes[i]
   x<-xes[i,1:n]
@@ -113,8 +135,8 @@ for(i in 1:nreps){
   drx<-diff(range(x))
   dry<-diff(range(y))
   
-  probnum<-paste0(rep(1:7,each=2),rep(c('-1','-2'),times=7))
-  png(paste0("images/coursera2_#",probnum[i],'_',pres[i],'_pval-',round(pvals[i],digits=3),".png"), width = 400, height = 400)
+  probnum.base<-paste0(rep(1:7,each=2),rep(c('-1','-2'),times=7))
+  png(paste0("images/coursera2_#",probnum[i],'_datVer-',version[i],'_',pres[i],'_pval-',round(pvals[i],digits=3),".png"), width = 400, height = 400)
     par(mfrow=c(1,1))
   	plot(x,y,xlab='X',ylab='Y',main=title)
   	if(style=='lowess') lines(lowess(x,y))
@@ -124,3 +146,4 @@ for(i in 1:nreps){
   	if(style=='axesLabel') plot(x,y,xlab=xl,ylab=yl,main=title)
   dev.off()
 }
+#rm(list=ls())
