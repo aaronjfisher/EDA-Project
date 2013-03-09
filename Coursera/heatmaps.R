@@ -63,7 +63,9 @@ c.d.hcl<-function(x,n=1000, hue=c(0,260), ...){ #cut divergent_hcl
 ##############          HEATMAPS           #############
 ########################################################
 
-setwd('/Users/aaronfisher/Documents/JH/EDA Versions/EDA Git Repo/Coursera/Heatmaps')
+
+set.seed(148192)
+setwd('~/Documents/JH/EDA Versions/EDA Git Repo/Coursera')
 
 mycol<-c.d.hcl(-50:50,h=c(0,180),c=100)
 mycol<-c.d.hcl(-80:80,h=c(295,40))
@@ -105,11 +107,54 @@ for(i in 1:length(magnitudes)){
 	}
 	QNum<-which(unique(magnitudes)==mag.i)
 	VerNum<-which(unique(groupsizes)==ngroups.i)
-filename.i<-paste0('Heatmap_Images/','Q-',QNum,'_Ver-',VerNum,'_Mag-',mag.i,'_ngroups-',ngroups.i,'.png')
-	png(filename=filename.i,height=800,width=800)
-	heatmap(X,col=mycol)
-	dev.off()
 	
+	X.ind<-heatmap(X,col=mycol)
+	XSort<-X[X.ind$rowInd[p:1],]
+	filename.i<-paste0('Heatmap_Images/' , 'Q-', QNum,'_Ver-', VerNum,'_Mag-',mag.i,'_ngroups-',ngroups.i,'.png')
+	png(filename=filename.i,height=800,width=800)
+	pheatmap(XSort,col=mycol,cluster_rows=FALSE)
+	dev.off()
+
 	Xes[[i]]<-X
 	
 }
+
+
+############################################################
+############################################################
+#Workspace
+
+library(pheatmap)
+
+X.ind<-heatmap(X,col=mycol)
+XSort<-X[X.ind$rowInd[p:1],X.ind$colInd]
+image(X)
+image(XSort)
+
+dev.off()
+
+quartz()
+png(filename='normTest.png')
+heatmap(X,col=mycol)
+dev.off()
+#quartz()
+#pheatmap(X,col=mycol,cluster_rows=FALSE)
+quartz()
+png(filename='prettyTest.png')
+pheatmap(XSort,col=mycol,cluster_rows=FALSE,cluster_cols=TRUE)
+dev.off()
+
+xind2<-pheatmap(XSort,col=mycol,cluster_rows=FALSE,cluster_cols=TRUE)
+quartz()
+plot(xind2[[2]])
+
+
+#hclust is doing well!!!!
+X.ind<-heatmap(X,col=mycol)
+XSort<-X[X.ind$rowInd[p:1],]
+pheathcl<-pheatmap(XSort,cluster_rows=FALSE,plot=F)
+par(mfrow=c(2,1))
+dx<-dist(t(X))
+plot(hclust(dx))
+
+plot(pheathcl[[2]])
