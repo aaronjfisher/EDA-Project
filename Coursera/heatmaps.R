@@ -1,0 +1,115 @@
+########################################################
+##############          FUNCTIONS          #############
+########################################################
+
+# Load Aaron's little functions for plotting with colorspace
+library(colorspace)
+library(plotrix)
+
+pal <- function(col, border = "light gray", ...)
+#Copy pasted from HCL-Based Color Palettes in R
+#http://cran.r-project.org/web/packages/colorspace/vignettes/hcl-colors.pdf
+ {
+ n <- length(col)
+ plot(0, 0, type="n", xlim = c(0, 1), ylim = c(0, 1),
+ axes = FALSE, xlab = "", ylab = "", ...)
+ rect(0:(n-1)/n, 0, 1:n/n, 1, col = col, border = border)
+ }
+#rainbow_hcl(10)
+#pal(rainbow_hcl(50,c=100,l=80))
+#pal(sequential_hcl(50))
+
+
+c.r.hcl<-function(x,n=1000, ...){ #cut rainbow_hcl
+	xCut<-cut(x,breaks=n)
+	colors<-rainbow_hcl(n=n, ...)
+	out<-colors[xCut]
+	return(out)
+}
+c.s.hcl<-function(x,n=1000,only.up.to=n, ...){ #cut sequantial_hcl
+	xCut<-1 #these two lines guard against errors caused when this function is piped into c.d.hcl
+	if(only.up.to>1) xCut <-cut(x,breaks=only.up.to)
+	colors<-sequential_hcl(n=n, ...)[n:(n-only.up.to)]#reverse the order
+	#if you don't want the full sequence, this will chop it short!
+	out<-colors[xCut]
+	return(out)
+}
+
+c.d.hcl<-function(x,n=1000, hue=c(0,260), ...){ #cut divergent_hcl
+#hues: 0 is low, 260 is the higher.
+	xNegInd <- which(x<0)
+	xPosInd <- which(x>=0)
+	
+	nNeg <- length(xNegInd) #so we only get more faded parts on the side of the spectrum that doesn't have the same magnitude
+	nPos <- length(xPosInd)
+	biggerN<-max(nPos,nNeg)
+	
+	out<-rep(0,length(x))	
+	if(!length(xNegInd)==0){
+		xNegCol<-c.s.hcl(abs(x[xNegInd]),n=biggerN,only.up.to=nNeg,h=hue[1])
+		out[xNegInd]<-xNegCol
+	}
+	if(!length(xPosInd)==0){
+		xPosCol<-c.s.hcl(x[xPosInd],n=biggerN,only.up.to=nPos,h=hue[2])
+		out[xPosInd]<-xPosCol
+	}
+
+	return(out)
+}
+
+
+
+########################################################
+##############          HEATMAPS           #############
+########################################################
+
+setwd('/Users/aaronfisher/Documents/JH/EDA Versions/EDA Git Repo/Coursera/Heatmaps')
+
+mycol<-c.d.hcl(-50:50,h=c(0,180),c=100)
+mycol<-c.d.hcl(-80:80,h=c(295,40))
+pal(mycol)
+
+#6 different group sizes, 2:7
+#3 difficulty levels, with different max magnitudes of signal
+groupsizes<-rep(2:7,times=3)
+magnitudes<-rep(1:3*sd.x,each=6)
+Xes<-list()
+
+N<-30
+p<-500
+sd.x<-1
+
+maxIndex<-6*3
+pb<-txtProgressBar(min = 1, max = maxIndex,  char = "=", style = 3)
+
+for(i in 1:length(magnitudes)){
+	setTxtProgressBar(pb,i)
+
+	mag.i<-magnitudes[i] #magnitude of max possible signal
+	ngroups.i<-groupsizes[i]
+
+	X = matrix(rnorm(N*p,mean=0,sd=sd.x),nrow=p)
+
+	#Assign Groups
+	smallestGroupSize<-0
+	while(smallestGroupSize<4) {
+		groupId<-sample(ngroups.i,N,replace=T)
+		smallestGroupSize <- min(table(groupId))
+	}
+	#heatmap(X,col=mycol)
+
+	#Add signals
+	for(j in 2:ngroups.i){ #leave first group as ref
+		sig.j<-runif(p,-1*mag.i,mag.i)
+		X[,groupId==j] <- 	X[,groupId==j] + sig.j
+	}
+	QNum<-which(unique(magnitudes)==mag.i)
+	VerNum<-which(unique(groupsizes)==ngroups.i)
+filename.i<-paste0('Heatmap_Images/','Q-',QNum,'_Ver-',VerNum,'_Mag-',mag.i,'_ngroups-',ngroups.i,'.png')
+	png(filename=filename.i,height=800,width=800)
+	heatmap(X,col=mycol)
+	dev.off()
+	
+	Xes[[i]]<-X
+	
+}
