@@ -35,7 +35,7 @@ c.s.hcl<-function(x,n=1000,only.up.to=n, ...){ #cut sequantial_hcl
 	return(out)
 }
 
-c.d.hcl<-function(x,n=1000, hue=c(0,260), ...){ #cut divergent_hcl
+c.d.hcl<-function(x,n=1000, h=c(0,260), ...){ #cut divergent_hcl
 #hues: 0 is low, 260 is the higher.
 	xNegInd <- which(x<0)
 	xPosInd <- which(x>=0)
@@ -46,11 +46,11 @@ c.d.hcl<-function(x,n=1000, hue=c(0,260), ...){ #cut divergent_hcl
 	
 	out<-rep(0,length(x))	
 	if(!length(xNegInd)==0){
-		xNegCol<-c.s.hcl(abs(x[xNegInd]),n=biggerN,only.up.to=nNeg,h=hue[1])
+		xNegCol<-c.s.hcl(abs(x[xNegInd]),n=biggerN,only.up.to=nNeg,h=h[1])
 		out[xNegInd]<-xNegCol
 	}
 	if(!length(xPosInd)==0){
-		xPosCol<-c.s.hcl(x[xPosInd],n=biggerN,only.up.to=nPos,h=hue[2])
+		xPosCol<-c.s.hcl(x[xPosInd],n=biggerN,only.up.to=nPos,h=h[2])
 		out[xPosInd]<-xPosCol
 	}
 
@@ -67,17 +67,20 @@ c.d.hcl<-function(x,n=1000, hue=c(0,260), ...){ #cut divergent_hcl
 set.seed(148192)
 setwd('~/Documents/JH/EDA Versions/EDA Git Repo/Coursera')
 
+testcol<-c.r.hcl(0:18*20,c=60,l=50)
+pal(testcol)
 mycol<-c.d.hcl(-50:50,h=c(0,180),c=100)
+pal(mycol)
 mycol<-c.d.hcl(-80:80,h=c(295,40))
 pal(mycol)
 
 #6 different group sizes, 2:7
 #3 difficulty levels, with different max magnitudes of signal
 groupsizes<-rep(2:7,times=3)
-magnitudes<-rep(1:3*sd.x,each=6)
+magnitudes<-rep(c(3,2,1)*sd.x,each=6)
 Xes<-list()
 
-N<-30
+N<-40
 p<-500
 sd.x<-1
 
@@ -109,10 +112,12 @@ for(i in 1:length(magnitudes)){
 	VerNum<-which(unique(groupsizes)==ngroups.i)
 	
 	X.ind<-heatmap(X,col=mycol)
+	dev.off()
+	
 	XSort<-X[X.ind$rowInd[p:1],]
 	filename.i<-paste0('Heatmap_Images/' , 'Q-', QNum,'_Ver-', VerNum,'_Mag-',mag.i,'_ngroups-',ngroups.i,'.png')
-	png(filename=filename.i,height=800,width=800)
-	pheatmap(XSort,col=mycol,cluster_rows=FALSE)
+	png(filename=filename.i,height=600,width=600)
+	pheatmap(XSort,cluster_rows=FALSE,col=mycol)
 	dev.off()
 
 	Xes[[i]]<-X

@@ -20,9 +20,10 @@ pvalue plot images
   	 * "coursera2_#1-2_datVer-1_n35_pval-0.338.png" is the same as the first file, but now with insignificant data. Note, a user would only see one of these three mentioned files, or maybe even a different version.
 
 
-Heatmap_Images
+Heatmaps
 -----
-*Images for heatmap. The generating script is in this folder
+* Images for heatmap in heatmaps_images. The generating script is in this folder
+* "mag" in file name denotes absolute value of max signal (normal noise has stdev=1.
 
 Some stuff in the "old stuff" folder
 ----------

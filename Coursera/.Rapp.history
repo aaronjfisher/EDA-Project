@@ -1,1307 +1,261 @@
-for(i in 1:200){#
-	m<-mean(exp(i*x))#
-}
-m
-for(i in 1:200){#
-	m[i]<-mean(exp(i*x))#
-}
-m
-for(i in -200:200){#
-	m[i]<-mean(exp(i*x))#
-}
-plot(m)
-plot(m[abs(m)<1000])
-plot(m,type='l')
-ngroups<-length(unique(group))
-sum(.5^n)
-n<- 1:1000
-sum(.5^n)
-r<-binom(1000,1,prob=.2)
-r<-rbinom(1000,1,prob=.2)
-r
-mean(r)
-r<-rbinom(10000,1,prob=.2)
-mean(r)
-r<-rbinom(10000,1,prob=.2)
-mean(r)
-mean(r^2)
-sample("Aaron","Amanda","Prasad","Therri")
-sample(c("Aaron","Amanda","Prasad","Therri"))
-JOOOSODIFOIJWEOIJWEOIJFWOIRWOI
-1+1
-3
-4
-library(MASS)
-simga<-array(c(2,1,1,4))
-simga<-array(c(2,1,1,4),dim=c(2,2))
-sigma
-simga
-mu<-c(2,3)
-x<-mvrnorm(100000,mu,sigma)
-x<-mvrnorm(100000,mu,simga)
-dim(x)
-y<-x[,2]
-x<-x[,1]
-cov(x,y)
-cor(x,y)
-1/(2*sqrt(2))
-mean(x+y)
-var(x+y)
-var(x-y)
-mean(x-y)
-cov(x+y,x-y)
-cov(-sqrt(2)*x+y,sqrt(2)*x+y)
-X<-mvrnorm(1000000,mu,simga)
-x<-X[,1]
-y<-X[,2]
-cov(-sqrt(2)*x+y,sqrt(2)*x+y)
-X<-mvrnorm(2000000,mu,simga)
-x<-X[,1]
-y<-X[,2]
-cov(-sqrt(2)*x+y,sqrt(2)*x+y)
-cor(-sqrt(2)*x+y,sqrt(2)*x+y)
-X<-mvrnorm(5000000,mu,simga)
-y<-X[,2]
-x<-X[,1]
-cor(-sqrt(2)*x+y,sqrt(2)*x+y)
-library(MASS)
-mu<-c(2,3)#
-sigma<-array(c(2,1,1,4))
-mu<-c(2,3)
-sigma<-array(c(2,1,1,4))
-mu<-c(2,3)
-sigma<-array(c(2,1,1,4))
-a<-mvrnorm(100000,my,sigma)
-a<-mvrnorm(100000,mu,sigma)
-mu<-c(2,3)#
-sigma<-array(c(2,1,1,4),dim=c(2,2))#
-a<-mvrnorm(100000,mu,sigma)
-dim(a)
-cov(x-y,4*x+6*y)
-x<-a[,1]
-y<-a[,2]
-cov(x-y,4*x+6*y)
-cor(x-y,4*x+6*y)
-cov(sqrt(2)*x-y,\sqrt(2)x+y)
-cov(sqrt(2)*x-y,sqrt(2)x+y)
-cov(sqrt(2)*x-y,sqrt(2)*x+y)
-cor(sqrt(2)*x-y,sqrt(2)*x+y)
-mu<-c(2,3)#
-sigma<-array(c(2,1,1,4),dim=c(2,2))#
-a<-mvrnorm(1000,mu,sigma)#
-#
-x<-a[,1]#
-y<-a[,2]#
-#
-cor(sqrt(2)*x-y,sqrt(2)*x+y)
-mu<-c(2,3)#
-sigma<-array(c(2,1,1,4),dim=c(2,2))#
-a<-mvrnorm(100,mu,sigma)#
-#
-x<-a[,1]#
-y<-a[,2]#
-#
-cor(sqrt(2)*x-y,sqrt(2)*x+y)
-mu<-c(2,3)#
-sigma<-array(c(2,1,1,4),dim=c(2,2))#
-a<-mvrnorm(400000,mu,sigma)#
-#
-x<-a[,1]#
-y<-a[,2]#
-#
-cor(sqrt(2)*x-y,sqrt(2)*x+y)
-testvar<-function(a,b,c,d){#
-	out<-a*c*2+b*d*4+(b*c+a*d)	#
-	return(out)#
-}
-testvar(-sqrt(2),1,sqrt(2),1)
-testvar(2,-1,4,6)
-testvar(1,1,1,-3/5)
-testvar(-1/2,1/4,-1/2,-1/4)
-testvar(-1/sqrt(2),1/sqrt(4),-1/sqrt(2),-1/2)
-library(MASS)
-x<-mvrnorm(100,20)
-x<-mvrnorm(100,20,Sigma=diag(1:20))
-diag(1:10)
-x<-mvrnorm(100,Sigma=diag(1:10))
-x<-mvrnorm(100,Sigma=diag(1:10),mu=1:10)
-x
-dim(x)
-y<-x[1:5]
-y<-x[,1:5]
-dim(y)
-cor(x,y)
-sample(c('dan drives','aaron drives'),1)
-get.seed()
-x<-c(95.8,#
-106.8,#
-96.2,#
-94.3,#
-99.7,#
-86.3,#
-94.8,#
-99.9,#
-102.3,#
-99.2,#
-98.7,#
-100.0)
-x
-> x<-c(95.8,#
-+ 106.8,#
-+ 96.2,#
-+ 94.3,#
-+ 99.7,#
-+ 86.3,#
-+ 94.8,#
-+ 99.9,#
-+ 102.3,#
-+ 99.2,#
-+ 98.7,#
-+ 100.0)
-x<-c(95.8,#
-+ 106.8,#
-+ 96.2,#
-+ 94.3,#
-+ 99.7,#
-+ 86.3,#
-+ 94.8,#
-+ 99.9,#
-+ 102.3,#
-+ 99.2,#
-+ 98.7,#
-+ 100.0)
-x
-rm(x)
-x<-c(95.8,#
-+ 106.8,#
-+ 96.2,#
-+ 94.3,#
-+ 99.7,#
-+ 86.3,#
-+ 94.8,#
-+ 99.9,#
-+ 102.3,#
-+ 99.2,#
-+ 98.7,#
-+ 100.0)
-x
-hist(x)
-hist(x,breaks=8)
-hist(x,breaks=8,col='blue')
-hist(x,breaks=8,col='lightblue')
-hist(x,breaks=8,col='lightblue',main='Histogram of Final Grades')
-hist(x,breaks=8,col='lightblue',main='Histogram of Final Grades',xlab='% Grade')
-stem(x)
-hist(x,breaks=8,col='lightblue',main='Histogram of Final Grades',xlab='% Grade')
-dev.copy2pdf(file='Histogram of Final Grades Term 2 Essentials of Probability.pdf')
-getwd()
-1218/1199
-(1218+900)/1199
-1099*1.0766
-sample(c("aaron","prasad"))
-3584.7-918
-918*4
-918*3
-nreps<-1000#
-record<-1:nreps
-for(i in 1:nreps){#
-  print(i)#
-  n<-20#
-  x<-rnorm(n,mean=30)#
-  x<-x[order(x)]#
-  e<-rnorm(n)#
-  y<-x+e#
-  yp<-y-y[1]#
-  xp<-x-x[1]#
-  m<-lm(yp~xp-1)#
-  record[i]<-m$coef#
-}#
-var(record)
-for(i in 1:nreps){#
-  print(i)#
-  n<-300#
-  x<-rnorm(n,mean=30)#
-  x<-x[order(x)]#
-  e<-rnorm(n)#
-  y<-x+e#
-  yp<-y-y[1]#
-  xp<-x-x[1]#
-  m<-lm(yp~xp-1)#
-  record[i]<-m$coef#
-}#
-var(record)
-library(mlogit) #polr#
-library(Design) #lrm#
-library(nnet) #multinom#
-library(xtable)
-count<-c(63,16,12,35,53,15,10,36)#
-proc<-as.factor(c(1,1,1,1,0,0,0,0))#
-s<-as.factor(c(3,2,2,1,3,2,2,1)) #number of successes
-I think this makes the most sense!!#
-#Problem is that it simplifies the data too much?#
-#THAT'S the problem!#
-procexp<-rep(proc,count)#
-sexp<-rep(s,count)#
-podds3<-polr(sexp~procexp)#
-summary(podds3)#
-lrm(sexp~procexp) #confirmed basically#
-coeftab3<-summary(podds3)$coeff#
-pvals3<-pnorm(abs(coeftab3[,3]),mean=0,sd=1,lower.tail=F)#
-xtable(cbind(coeftab3,pvals3),digits=3)
-part e#
-counte<-c(63,16,12,35,53,15,10,36)*35/240#
-proce<-as.factor(c(1,1,1,1,0,0,0,0))#
-se<-as.factor(c(3,2,2,1,3,2,2,1)) #number of successes#
-procexpe<-rep(proce,counte)#
-sexpe<-rep(se,counte)#
-podds3e<-polr(sexpe~procexpe)#
-coeftab3e<-summary(podds3e)$coeff#
-pvals3e<-pnorm(abs(coeftab3e[,3]),mean=0,sd=1,lower.tail=F)#
-pvals3e#
-(1/2^2)*(.786/.189)*240
-One alternative:#
-pglm<-glm(count~s*proc,family=poisson)#
-pglmNull<-glm(count~s,family=poisson)#
-summary(pglm)#
-anova(pglmNull,pglm)
-alt alt?#
-mm<-multinom(sexp~procexp)#
-summary(mm)
-library(nnet)#
-library(xtable)
-rows<-c(132,179,120,42,7,12,172,123,100,56,8,15)#
-matrix(rows,ncol=3,byrow=T)
-party factor base; gender factor base, race factor base#
-pfb<-as.factor(c("dem","rep","ind","dem","rep","ind","dem","rep","ind","dem","rep","ind"))#
-gfb<-as.factor(rep(c("m","f"),each=6))#
-rfb<-as.factor(c("w","w","w","b","b","b","w","w","w","b","b","b"))
-install.packages(c("rj", "rj.gd"), repos="http://download.walware.de/rj-1.1")
-Lbinom=function(x,n,k=8,d=2,norm=F)#
-{#
- est=x/n#
- se=sqrt((est*(1-est))/n)#
- l=max(est-4*se,0)#
- u=min(est+4*se,1)#
- theta=seq(l,u,length=500)#
- like=dbinom(x,n,theta)#
- like=like/max(like)#
- if ( norm ){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
-}#
- else {like.line(like,theta,k,d)}#
-}
-Lbinom(c(1,0,1),n=3)
-like.line=function(likelihood,parameter,k1,d)#
-{#
-# This function plots a support line and text#
-# for a likelihood function#
-# The input needed is the likelihood#
-# function and the parameter and the level of support e.g. (8 or 32)#
-# d sets the number of digits in the display#
-# date 01-08-10#
-lik=likelihood#
-plot(parameter,likelihood,type="l")#
-r1=min(parameter[lik==max(lik)])#
-r2=max(parameter[lik==max(lik)])#
-r=(r1+r2)/2#
-a1 = min(parameter[lik >= 1/k1])#
-b1 = max(parameter[lik >= 1/k1])#
-parameter1 = parameter[parameter >= a1]#
-parameter1 = parameter1[parameter1 <= b1]#
-i1 = rep(1/k1, length(parameter1))#
-lines(parameter1, i1, type = "l")#
-lines(c(a1,a1),c(0,1/k1),lty=1)#
-lines(c(b1,b1),c(0,1/k1),lty=1)#
-if(r <= (min(parameter) + max(parameter))/2) whr=.8*length(parameter)#
-else whr=.2*length(parameter)#
-K1=1/k1#
-text(parameter[whr], 0.95, paste("Max at ", round(r, digits = d)))#
-text(parameter[whr], 0.85, paste("1/",k1, "LI (", round(a1, digits = d),#
- ",", round(b1, digits = d), ")"))#
- }
-Lbinom(c(1,0,1),n=3)
-Lbinom(c(1,0,1,0,1,0,1),n=7)
-Lbinom(c(1,0,1,0,1,0,1))
-Lbinom(c(1,0,1,0,1,0,1),n=7)
-n
-x
-x<-c(1,0,1,0)
-n<-4
-est=x/n
-se=sqrt((est*(1-est))/n)
-l=max(est-4*se,0)
-u=min(est+4*se,1)
-theta=seq(l,u,length=500)
-est
-Lbinom(x=3,n=7)
-Lbinom(x=5,n=10)
-Lbinom(x=50,n=100)
-Lbinom(x=5,n=10)
-Lbinom(x=50,n=100)
-Lbinom(x=500,n=1000)
-Lbinom(x=5,n=10)
-Lbinom(x=50,n=100)
-Lbinom(x=5,n=10)
-Lbinom(x=50,n=100)
-Lexp=function(x,k=8,d=2,norm=F)#
-{#
- est=mean(x)#
- n=length(x)#
- se=est/sqrt(n)#
- l=max(0.001,est-5*se)#
- u=est+5*se#
- theta=seq(l,u,length=500)#
- y=(est/theta)#
- like=y^n*exp(-n*(y-1))#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}
-Lexp(5)
-Lexp(c(5,2,3,5))
-Lexp(c(5,2,3,5),norm=T)
-Lexp(c(5,2,3,5),norm=F)
-Lexp(c(5,2,3,5),norm=T)
-Here the input is a vector#
-Lexp=function(x,k=8,d=2,norm=F)#
-{#
- est=mean(x)#
- n=length(x)#
- se=est/sqrt(n)#
- l=max(0.001,est-5*se)#
- u=est+5*se#
- theta=seq(l,u,length=500)#
- y=(est/theta)#
- like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}#
-Lexp(c(5,2,3,5))
-dexp(c(3,2),1)
-x
-x<-x+2
-x
-dexp(x,1)
-dexp(x,c(1,2))
-theta<-3
-y=(est/theta)
-est
-est=mean(x)
-y=(est/theta)
-y
-y^n*exp(-n*(y-1)) #Getting the joint by hand
-(theta^n)*(exp(-theta*sum(x)))
-Lexp=function(x,k=8,d=2,norm=F)#
-{#
- est=mean(x)#
- n=length(x)#
- se=est/sqrt(n)#
- l=max(0.001,est-5*se)#
- u=est+5*se#
- theta=seq(l,u,length=500)#
- y=(est/theta)#
- like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
- #??????????????????????????????#
- #Why not:#
- like=(theta^n)*(exp(-theta*sum(x)))#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}#
-Lexp(c(5,2,3,5))
-mean(x)
-x
-x<-c(5,2,3,5)
-x
-Lexp(c(5,2,3,5))
-mean(x)
-1/mean(x)
-1/.26
-x<-c(5,2,3,4,4,3,2,4,5,2,5)
-Lexp(x)
-1/.29
-Here the input is a vector#
-Lexp=function(x,k=8,d=2,norm=F)#
-{#
- est=mean(x)#
- n=length(x)#
- se=est/sqrt(n)#
- l=max(0.001,est-5*se)#
- u=est+5*se#
- theta=seq(l,u,length=500)#
- y=(est/theta)#
- like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
- #Note - Using theta as E(X), not 1/E(X)#
- like=(theta^n)*(exp(-theta*sum(x)))#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}#
-x<-c(5,2,3,4,4,3,2,4,5,2,5)#
-Lexp(x)
-Here the input is a vector#
-Lexp=function(x,k=8,d=2,norm=F)#
-{#
- est=mean(x)#
- n=length(x)#
- se=est/sqrt(n)#
- l=max(0.001,est-5*se)#
- u=est+5*se#
- theta=seq(l,u,length=500)#
- y=(est/theta)#
- like=y^n*exp(-n*(y-1)) #Getting the joint by hand#
- #Note - Using theta as E(X), not 1/E(X)#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}#
-x<-c(5,2,3,4,4,3,2,4,5,2,5)#
-Lexp(x)
-Here the input is a vector#
-Lexp=function(x,k=8,d=2,norm=F)#
-{#
- est=mean(x)#
- n=length(x)#
- se=est/sqrt(n)#
- l=max(0.001,est-5*se)#
- u=est+5*se#
- theta=seq(l,u,length=500)#
- y=(est/theta)#
- like=1/theta^n*exp(-n*(y-1)) #Getting the joint by hand#
- #Note - Using theta as E(X), not 1/E(X)#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}#
-x<-c(5,2,3,4,4,3,2,4,5,2,5)#
-Lexp(x)
-Here the input is a vector#
-Lexp=function(x,k=8,d=2,norm=F)#
-{#
- est=mean(x)#
- n=length(x)#
- se=est/sqrt(n)#
- l=max(0.001,est-5*se)#
- u=est+5*se#
- theta=seq(l,u,length=500)#
- y=(est/theta)#
- like=y^n*exp(-n*(est/theta)) #Getting the joint by hand#
- #Note - Using theta as E(X), not 1/E(X)#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}#
-x<-c(5,2,3,4,4,3,2,4,5,2,5)#
-Lexp(x)
-{
-x<-c(1,2,3)
-x
-mean(x)
-sd(x)
-plot(x)
-x=c(1,2,3)
-like.line(like,theta,k,d)
-Lbinom=function(x,n,k=8,d=2,norm=F)#
-{#
- est=x/n #calculate MLE#
- se=sqrt((est*(1-est))/n)#
- l=max(est-4*se,0) #Give a range for the MLE#
- u=min(est+4*se,1)#
- theta=seq(l,u,length=500) #range to calculate likelihood over#
- like=dbinom(x,n,theta)#
- like=like/max(like) #scale so max is 1#
- if ( norm ){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
-}#
- else {like.line(like,theta,k,d)}#
-}
-rbinom(1,25,.5)
-X is a sum of bernoullis#
-Lbinom=function(x,n,k=8,d=2,norm=F)#
-{#
- est=x/n #calculate MLE#
- se=sqrt((est*(1-est))/n)#
- l=max(est-4*se,0) #Give a range for the MLE#
- u=min(est+4*se,1)#
- theta=seq(l,u,length=500) #range to calculate likelihood over#
- like=dbinom(x,n,theta)#
- like=like/max(like) #scale so max is 1#
- if ( norm ){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
-}#
- else {like.line(like,theta,k,d)}#
-}#
-Lbinom(x=5,n=10) #
-Lbinom(x=50,n=100) #Note the change in the X axis.#
-#Here the input is a vector#
-Lexp=function(x,k=8,d=2,norm=F)#
-{#
- est=mean(x)#
- n=length(x)#
- se=est/sqrt(n)#
- l=max(0.001,est-5*se)#
- u=est+5*se#
- theta=seq(l,u,length=500)#
- y=(est/theta)#
- like=y^n*exp(-n*(y-1))#
- #Getting the joint by hand#
- #Note - Using theta as E(X), not 1/E(X)#
- #the -1 will cancel away because it's just multiplying by e^-1#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}#
-x<-c(5,2,3,4,4,3,2,4,5,2,5)#
-#Lexp(x)#
-#
-Lhyper=function(x,n,N,k=8,d=2,norm=F)#
-  {#
-   D=seq(0,N,by=1)#
-   est=x*N/n#
-   se=sqrt(est*(N-est)*(N-n)/(n*(N-1)))#
-   like=dhyper(x,D,N-D,n,log=FALSE)#
-   like=like/max(like)#
- if (norm){#
- like.line(like,D,k,d)#
- lines(D,LnormC(D,est,se),lty=2)#
- }#
- else{#
- like.line(like,D,k,d)}#
-}#
-#
-#*************#
-#using symmetry of the normal density#
-#we're using the fact that the sample mean is the "sufficient statistic"#
-Lnorm=function(est,se,k=8,d=2)#
-{#
- l=est-4*se#
- u=est+4*se#
- theta=seq(l,u,length=500)#
- like=dnorm(theta,est,se) #could also switch est & theta#
- like=like/max(like)#
- like.line(like,theta,k,d)#
-}#
-Lnorm(2,.4)#
-#
-Lpois=function(x,k=8,d=2,norm=F)#
-{#
- est=mean(x)#
- n=length(x)#
- se=sqrt(est/n)#
- l=max(est-4*se,0)#
- u=min(est+4*se)#
- theta=seq(l,u,length=1000)#
- like=dpois(n*est,n*theta)#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}#
-Lunif=function(y,n,k=8,d=2)#
-{#
-u=y+5*(y/(n+1))#
-theta=seq(y,u,length=500)#
-like=(y/theta)^n#
-like.line(like,theta,k,d)#
-}#
-like.line=function(likelihood,parameter,k1,d)#
-{#
-# This function plots a support line and text#
-# for a likelihood function#
-# The input needed is the likelihood#
-# function and the parameter and the level of support e.g. (8 or 32)#
-# d sets the number of digits in the display#
-# date 01-08-10#
-lik=likelihood#
-plot(parameter,likelihood,type="l")#
-r1=min(parameter[lik==max(lik)])#
-r2=max(parameter[lik==max(lik)])#
-r=(r1+r2)/2 #get MLE#
-a1 = min(parameter[lik >= 1/k1]) #k1 is level of support#
-b1 = max(parameter[lik >= 1/k1]) #get range for all values in 1/k1 interval#
-parameter1 = parameter[parameter >= a1]#
-parameter1 = parameter1[parameter1 <= b1] #isolate the coordinates in that region#
-i1 = rep(1/k1, length(parameter1)) #get y coordinates for the invertval line#
-lines(parameter1, i1, type = "l")#
-lines(c(a1,a1),c(0,1/k1),lty=1)#
-lines(c(b1,b1),c(0,1/k1),lty=1) #whr is where to put the text#
-if(r <= (min(parameter) + max(parameter))/2) whr=.8*length(parameter)#
-else whr=.2*length(parameter)#
-K1=1/k1#
-text(parameter[whr], 0.95, paste("Max at ", round(r, digits = d)))#
-text(parameter[whr], 0.85, paste("1/",k1, "LI (", round(a1, digits = d),#
- ",", round(b1, digits = d), ")"))#
- }#
-LnormC=function(theta,est,se)#
-{#
- like=dnorm(theta,est,se)#
- like=like/max(like)#
-}#
-#
-Lgamma=function(x,alpha,k=8,d=2,norm=F)#
-{#
- est=mean(x)/alpha#
- n=length(x)#
- se=est/sqrt(n*alpha)#
- l=max(0.001,est-5*se)#
- u=est+5*se#
- theta=seq(l,u,length=500)#
- y=(est/theta)#
- like=(y^n*exp(-n*(y-1)))^(alpha)#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}
-Lgamma
-x<-rgamma(25,shape=3,scale=2)
-Lgamma(x,alpha=2)
-3/2
-Lgamma(x,alpha=3)
-x<-rgamma(25,shape=3,scale=2)
-Lgamma(x,alpha=3)
-x<-rgamma(250,shape=3,scale=2)
-Lgamma(x,alpha=3)
-?setseed
-?set.seed
-set.seed()
-3
-Lgamma(x,alpha=3)
-x<-rgamma(2500,shape=3,scale=2)
-Lgamma(x,alpha=3)
-x<-rgamma(250000,shape=3,scale=2)
-Lgamma(x,alpha=3)
-x<-rgamma(2500,shape=3,scale=2)
-Lgamma(x,alpha=3)
-x<-rgamma(2500,shape=3,scale=2)
-Lgamma(x,alpha=3)
-load("/Users/aaronfisher/Documents/JH/ADAMachine/five_shape.RData")
-X is a sum of bernoullis#
-Lbinom=function(x,n,k=8,d=2,norm=F)#
-{#
- est=x/n #calculate MLE#
- se=sqrt((est*(1-est))/n)#
- l=max(est-4*se,0) #Give a range for the MLE#
- u=min(est+4*se,1)#
- theta=seq(l,u,length=500) #range to calculate likelihood over#
- like=dbinom(x,n,theta)#
- like=like/max(like) #scale so max is 1#
- if ( norm ){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
-}#
- else {like.line(like,theta,k,d)}#
-}#
-Lbinom(x=5,n=10) #
-Lbinom(x=50,n=100) #Note the change in the X axis.#
-#Here the input is a vector#
-Lexp=function(x,k=8,d=2,norm=F)#
-{#
- est=mean(x)#
- n=length(x)#
- se=est/sqrt(n)#
- l=max(0.001,est-5*se)#
- u=est+5*se#
- theta=seq(l,u,length=500)#
- y=(est/theta)#
- like=y^n*exp(-n*(y-1))#
- #Getting the joint by hand#
- #Note - Using theta as E(X), not 1/E(X)#
- #the -1 will cancel away because it's just multiplying by e^-1#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}#
-x<-c(5,2,3,4,4,3,2,4,5,2,5)#
-#Lexp(x)#
-#
-Lhyper=function(x,n,N,k=8,d=2,norm=F)#
-  {#
-   D=seq(0,N,by=1)#
-   est=x*N/n#
-   se=sqrt(est*(N-est)*(N-n)/(n*(N-1)))#
-   like=dhyper(x,D,N-D,n,log=FALSE)#
-   like=like/max(like)#
- if (norm){#
- like.line(like,D,k,d)#
- lines(D,LnormC(D,est,se),lty=2)#
- }#
- else{#
- like.line(like,D,k,d)}#
-}#
-#
-#*************#
-#using symmetry of the normal density#
-#we're using the fact that the sample mean is the "sufficient statistic"#
-Lnorm=function(est,se,k=8,d=2)#
-{#
- l=est-4*se#
- u=est+4*se#
- theta=seq(l,u,length=500)#
- like=dnorm(theta,est,se) #could also switch est & theta#
- like=like/max(like)#
- like.line(like,theta,k,d)#
-}#
-Lnorm(2,.4)#
-#
-Lpois=function(x,k=8,d=2,norm=F)#
-{#
- est=mean(x)#
- n=length(x)#
- se=sqrt(est/n)#
- l=max(est-4*se,0)#
- u=min(est+4*se)#
- theta=seq(l,u,length=1000)#
- like=dpois(n*est,n*theta)#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}#
-Lunif=function(y,n,k=8,d=2)#
-{#
-u=y+5*(y/(n+1))#
-theta=seq(y,u,length=500)#
-like=(y/theta)^n#
-like.line(like,theta,k,d)#
-}#
-like.line=function(likelihood,parameter,k1,d)#
-{#
-# This function plots a support line and text#
-# for a likelihood function#
-# The input needed is the likelihood#
-# function and the parameter and the level of support e.g. (8 or 32)#
-# d sets the number of digits in the display#
-# date 01-08-10#
-lik=likelihood#
-plot(parameter,likelihood,type="l")#
-r1=min(parameter[lik==max(lik)])#
-r2=max(parameter[lik==max(lik)])#
-r=(r1+r2)/2 #get MLE#
-a1 = min(parameter[lik >= 1/k1]) #k1 is level of support#
-b1 = max(parameter[lik >= 1/k1]) #get range for all values in 1/k1 interval#
-parameter1 = parameter[parameter >= a1]#
-parameter1 = parameter1[parameter1 <= b1] #isolate the coordinates in that region#
-i1 = rep(1/k1, length(parameter1)) #get y coordinates for the invertval line#
-lines(parameter1, i1, type = "l")#
-lines(c(a1,a1),c(0,1/k1),lty=1)#
-lines(c(b1,b1),c(0,1/k1),lty=1) #whr is where to put the text#
-if(r <= (min(parameter) + max(parameter))/2) whr=.8*length(parameter)#
-else whr=.2*length(parameter)#
-K1=1/k1#
-text(parameter[whr], 0.95, paste("Max at ", round(r, digits = d)))#
-text(parameter[whr], 0.85, paste("1/",k1, "LI (", round(a1, digits = d),#
- ",", round(b1, digits = d), ")"))#
- }#
-LnormC=function(theta,est,se)#
-{#
- like=dnorm(theta,est,se)#
- like=like/max(like)#
-}#
-#
-Lgamma=function(x,alpha,k=8,d=2,norm=F)#
-{#
- est=mean(x)/alpha#
- n=length(x)#
- se=est/sqrt(n*alpha)#
- l=max(0.001,est-5*se)#
- u=est+5*se#
- theta=seq(l,u,length=500)#
- y=(est/theta)#
- like=(y^n*exp(-n*(y-1)))^(alpha)#
- like=like/max(like)#
- if (norm){#
- like.line(like,theta,k,d)#
- lines(theta,LnormC(theta,est,se),lty=2)#
- }#
- else{#
- like.line(like,theta,k,d)}#
-}
-set.seed(13083)
-b<-rnorm(25,3,1)
-Lnorm(mean(b))
-Lnorm(mean(b),se=1)
-set.seed(100)
-xgamma<-rgamma(25,shape=3,scale=2)
-Lgamma(xgamma,3)
-COURSERA STUFF#
-#Here we're using 7 questions#
-#2 are just large & small data#
-#5 are the same data, with random options of which presentation style you see.#
-#Questions are: Small sample (35), #
-#large sample (200)#
-#medium sample (100):axis scale, labels, outlier, bestfit#
-#
-set.seed(234032)#
-#
-#Intro question:#
-setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
-#
-pbreaks<-c(.02,.03,.3,.4,1)#
-pbins<-rep(c(2,4),times=5)#
-nplain<-6#
-pres<-c('n35','n35','n100','n100','n200','n200')#
-nreps<-length(pbins)#
-nes<-c(35,35,100,100,200,200,rep(100,nreps-nplain))#
-yes<-matrix(nrow=nreps,ncol=max(nes))#
-xes<-matrix(nrow=nreps,ncol=max(nes))#
-pvals<-1 #initialize variables#
-tvals<-1#
-#
-#dropping Lowess here#
-#
-#First generate baseline data#
-#then add presentation data (same data + presentaion vector)#
-#then change data for when the twist is adding an outlier#
-#
-for(i in 1:nreps){#
-	tryagain<-T#
-#	if(i %in% c(1:100*nreps/100)) print(i)#
-	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
-		#get t close to what we want#
-		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
-		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
-		n<-nes[i]#
-		x<-rnorm(n)#
-		e<-rnorm(n)#
-		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
-		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
-		y<-x*bhat*sample(c(-1,1),1)+e#
-#
-		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
-		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
-		xes[i,1:n]<-x#
-		yes[i,1:n]<-y#
-#
-		pi<-pvals[i]#
-		bini<-min(which(pi<pbreaks))#
-		if(bini==pbins[i]) tryagain<-F#
-	}#
-	print(c(i,pvals[i]))	#
-	#plot(x,y,main=pvals[i])#
-	#readline(prompt='go')#
-}#
-#################################################
-#Fix those that now get an extra outlier#
-#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
-#if it's not sig, add the outlier close to above the mean.#
-#
-addOutlier<-function(i,sig.i='default'){#
-#
-    if(sig.i=='default') sig.i<- pvals[i]<.05#
-#
-  	n<-nes[i]#
-  	#grab the middle point from x and y#
-  	x<-xes[i,1:n]#
-  	y<-yes[i,1:n]#
-  	mx<-rep(mean(x),n)#
-  	my<-rep(mean(y),n)#
-  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
-  	switch<-which(distvec==min(distvec))#
-    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
-    #Put it in an UPPER CORNER#
-  	if(tvals[i]<0 & sig.i) { #slope going down#
-  		x[switch]<-min(x)-sd(x)#
-  		y[switch]<-max(y)+sd(y)#
-  	}#
-  	if(tvals[i]>0 & sig.i) {#
-  		x[switch]<-max(x)+sd(x)#
-  		y[switch]<-max(y)+sd(y)#
-  	}#
-    if(!sig.i){#
-      #leave X where it is now#
-      y[switch]<-max(y)+sd(y)*sqrt(2)#
-    }#
-  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
-  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
-	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
-}#
-#
-#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
-#load('data_for_1plots_coursera2.RData')#
-#Note, this works b/c there's no replicates#
-probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
-styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
-for(i in 1:nplain){#
-  n<-nes[i]#
-  x<-xes[i,1:n]#
-  y<-yes[i,1:n]#
-  pval<-pvals[i]#
-  tval<-tvals[i]#
-  m<-lm(y~x)#
-  title<-"Sample Data"#
-  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
-  plot(x,y,xlab='X',ylab='Y',main=title)#
-  dev.off()#
-}#
-#
-for(i in (1+nplain):nreps){#
-  for(style in styles){#
-  	print(style)#
-  	  n<-nes[i]#
-	  x<-xes[i,1:n]#
-	  y<-yes[i,1:n]#
-	  pval<-pvals[i]#
-	  tval<-tvals[i]#
-	  m<-lm(y~x)#
-	  t2<-'Data'#
-	  if(style=='outlierUp'){#
-	  	out.i<-addOutlier(i,sig.i<-FALSE)#
-	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
-	  }#
-	  if(style=='outlierCorner'){#
-	  	out.i<-addOutlier(i,sig.i<-TRUE)#
-	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
-	  }#
-	  if(style=='lowess') t2<-'with Lowess Line'#
-	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
-	  title<-paste0('Sample ',t2)#
-	  xl<-'X'#
-	  yl<-'Y'#
-	  if(style=='axesLabel'){#
-		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
-		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
-	 }#
-	  drx<-diff(range(x))#
-	  dry<-diff(range(y))#
-	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
-#
-	    par(mfrow=c(1,1))#
-	    if(style %in% c('outlierUp','outlierCorner')){#
-	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
-	    	dev.off(); next} #otherwise...#
-        plot(x,y,xlab=xl,ylab=yl,main=title)#
-	  	if(style=='lowess') lines(lowess(x,y))#
-	  	if(style=='bestFit') abline(m$coef)#
-	  	if(style=='axesScale'){ #
-	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
-	dev.off(); next}#
-#
-	  dev.off()#
-  }#
-}
+plot(log(log(x))/log(x),type='l')
+x<-x*2
+plot(log(log(x))/log(x),type='l')
+x[15]
+exp(exp(1))
+loglog(20)/log(20)
+log(log(20))/log(20)
+log(log(10))/log(10)
+log(log(exp(exp(1)))/log(exp(exp(1))
+)
+h<-exp(exp(1))
+log(log(h))
+log(log(h))/log(h)
+k<-25^2
+k
+k<-25^4
+k
+kstar<-log(log(k))/log(k)
+kstar
+dk<-kstar/(1-kstar)
+dk
+k/log(k)
+k^(1/(1+dk))
+k^(1/(1+dk-.01))
+k^(1/(1+dk+.01))
+(k-1)^(1/(1+dk))
+(k-1)/log(k-1)
+k<-1023102
+log(k)/(log(k)-log(log(k) ))
+log(k)/(log(k)-log(log(k) ))-1
+kstar<-log(log(k))/log(k)
+d_k<-kstar/(1-kstar)
+d_k
+δ
+δ<-6
+δ+5
+β=3
+δ+β
+β ≤ 3
+∞
+∞<-3
+∞
+α <-3
+α
 rm(list=ls())
-COURSERA STUFF#
-#Here we're using 7 questions#
-#2 are just large & small data#
-#5 are the same data, with random options of which presentation style you see.#
-#Questions are: Small sample (35), #
-#large sample (200)#
-#medium sample (100):axis scale, labels, outlier, bestfit#
-#
-set.seed(234032)#
-#
-#Intro question:#
-setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
-#
-pbreaks<-c(.02,.03,.3,.4,1)#
-pbins<-rep(c(2,4),times=5)#
-nplain<-6#
-pres<-c('n35','n35','n100','n100','n200','n200')#
-nreps<-length(pbins)#
-nes<-c(35,35,100,100,200,200,rep(100,nreps-nplain))#
-yes<-matrix(nrow=nreps,ncol=max(nes))#
-xes<-matrix(nrow=nreps,ncol=max(nes))#
-pvals<-1 #initialize variables#
-tvals<-1#
-#
-#dropping Lowess here#
-#
-#First generate baseline data#
-#then add presentation data (same data + presentaion vector)#
-#then change data for when the twist is adding an outlier#
-#
-for(i in 1:nreps){#
-	tryagain<-T#
-#	if(i %in% c(1:100*nreps/100)) print(i)#
-	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
-		#get t close to what we want#
-		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
-		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
-		n<-nes[i]#
-		x<-rnorm(n)#
-		e<-rnorm(n)#
-		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
-		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
-		y<-x*bhat*sample(c(-1,1),1)+e#
-#
-		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
-		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
-		xes[i,1:n]<-x#
-		yes[i,1:n]<-y#
-#
-		pi<-pvals[i]#
-		bini<-min(which(pi<pbreaks))#
-		if(bini==pbins[i]) tryagain<-F#
-	}#
-	print(c(i,pvals[i]))	#
-	#plot(x,y,main=pvals[i])#
-	#readline(prompt='go')#
-}#
-#################################################
-#Fix those that now get an extra outlier#
-#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
-#if it's not sig, add the outlier close to above the mean.#
-#
-addOutlier<-function(i,sig.i='default'){#
-#
-    if(sig.i=='default') sig.i<- pvals[i]<.05#
-#
-  	n<-nes[i]#
-  	#grab the middle point from x and y#
-  	x<-xes[i,1:n]#
-  	y<-yes[i,1:n]#
-  	mx<-rep(mean(x),n)#
-  	my<-rep(mean(y),n)#
-  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
-  	switch<-which(distvec==min(distvec))#
-    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
-    #Put it in an UPPER CORNER#
-  	if(tvals[i]<0 & sig.i) { #slope going down#
-  		x[switch]<-min(x)-sd(x)#
-  		y[switch]<-max(y)+sd(y)#
-  	}#
-  	if(tvals[i]>0 & sig.i) {#
-  		x[switch]<-max(x)+sd(x)#
-  		y[switch]<-max(y)+sd(y)#
-  	}#
-    if(!sig.i){#
-      #leave X where it is now#
-      y[switch]<-max(y)+sd(y)*sqrt(2)#
-    }#
-  	tvals.i<-summary(lm(y~x))$coeff[2,3]#
-  	pvals.i<-summary(lm(y~x))$coeff[2,4]#
-	return(list(x=x,y=y,pval=pvals.i,tval=tvals.i))#
-}#
-#
-#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
-#load('data_for_1plots_coursera2.RData')#
-#Note, this works b/c there's no replicates#
-probnum1to6<-paste0(rep(1:3,each=2),rep(c('-1','-2'),times=3)) #
-styles<-c('n100', 'bestFit', 'axesScale', 'axesLabel', 'outlierUp', 'outlierCorner')#
-for(i in 1:nplain){#
-  n<-nes[i]#
-  x<-xes[i,1:n]#
-  y<-yes[i,1:n]#
-  pval<-pvals[i]#
-  tval<-tvals[i]#
-  m<-lm(y~x)#
-  title<-"Sample Data"#
-  png(paste0("images alt/coursera2Alt_#",probnum1to6[i],'_',pres[i],'_pval-',round(pval,digits=3),".png"), width = 400, height = 400); #
-  plot(x,y,xlab='X',ylab='Y',main=title)#
-  dev.off()#
-}#
-#
-for(i in (1+nplain):nreps){#
-  for(style in styles){#
-  	print(style)#
-  	  n<-nes[i]#
-	  x<-xes[i,1:n]#
-	  y<-yes[i,1:n]#
-	  pval<-pvals[i]#
-	  tval<-tvals[i]#
-	  m<-lm(y~x)#
-	  t2<-'Data'#
-	  if(style=='outlierUp'){#
-	  	out.i<-addOutlier(i,sig.i<-FALSE)#
-	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
-	  }#
-	  if(style=='outlierCorner'){#
-	  	out.i<-addOutlier(i,sig.i<-TRUE)#
-	  	x<-out.i$x; y<-out.i$y; pval<-out.i$pval; tval<-out.i$tval#
-	  }#
-	  if(style=='lowess') t2<-'with Lowess Line'#
-	  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
-	  title<-paste0('Sample ',t2)#
-	  xl<-'X'#
-	  yl<-'Y'#
-	  if(style=='axesLabel'){#
-		  xl<-paste("Cranial Electrode", floor(runif(1,11,44)), "(Standardized)")#
-		  yl<-paste("Cranial Electrode", floor(runif(1,53,97)), "(Standardized)")#
-	 }#
-	  drx<-diff(range(x))#
-	  dry<-diff(range(y))#
-	  png(paste0("images alt/coursera2Alt_#",i-nplain/2,'_',style,'_pval-',round(pval,digits=3),".png"), width = 400, height = 400)#
-#
-	    par(mfrow=c(1,1))#
-	    if(style %in% c('outlierUp','outlierCorner')){#
-	    	plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
-	    	dev.off(); next} #otherwise...#
-        plot(x,y,xlab=xl,ylab=yl,main=title)#
-	  	if(style=='lowess') lines(lowess(x,y))#
-	  	if(style=='bestFit') abline(m$coef)#
-	  	if(style=='axesScale'){ #
-	plot(x,y,xlab='X', ylab='Y',main=title, xlim= c(min(x)-1.5 *sd(x), max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
-	dev.off(); next}#
-#
-	  dev.off()#
-  }#
-}
-COURSERA STUFF#
-#Here we're using 7 questions#
-#Each with 2 versions, one significant one not#
-#Questions are: Small sample (35), medium sample (100) (reference),#
-#large sample (200), axis scale, labels, outlier, bestfit#
-#
-set.seed(234032)#
-#
-#Intro question:#
-setwd("/Users/aaronfisher/Documents/JH/EDA Versions/Sourcetree EDA Git Repo/Coursera")#
-nreps<-14#
-pbreaks<-c(.02,.03,.3,.4,1)#
-pbins<-rep(c(2,4),times=7)#
-nes<-c(35,35,100,100,200,200,rep(100,times=8))#
-yes<-matrix(nrow=nreps,ncol=max(nes))#
-xes<-matrix(nrow=nreps,ncol=max(nes))#
-pvals<-1 #initialize variables#
-tvals<-1#
-pres<-(rep(c('n35','n100ref','n200','bestFit','axesScale','axesLabel','outlier'),each=2))#
-#dropping Lowess here#
-#
-#First generate baseline data#
-#then add presentation data (same data + presentaion vector)#
-#then change data for when the twist is adding an outlier#
-#
-for(i in 1:nreps){#
-	tryagain<-T#
-#	if(i %in% c(1:100*nreps/100)) print(i)#
-	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges#
-		#get t close to what we want#
-		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)#
-		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size#
-		n<-nes[i]#
-		x<-rnorm(n)#
-		e<-rnorm(n)#
-		bhat<-t*sd(e)/(sqrt(n)*sd(x))#
-		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null#
-		y<-x*bhat*sample(c(-1,1),1)+e#
-#
-		tvals[i]<-summary(lm(y~x))$coeff[2,3]#
-		pvals[i]<-summary(lm(y~x))$coeff[2,4]#
-		xes[i,1:n]<-x#
-		yes[i,1:n]<-y#
-#
-		pi<-pvals[i]#
-		bini<-min(which(pi<pbreaks))#
-		if(bini==pbins[i]) tryagain<-F#
-	}	#
-	#plot(x,y,main=n)#
-	#readline(prompt='go')#
-}#
-#################################################
-#Fix those that now get an extra outlier#
-#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#
-#if it's not sig, add the outlier close to above the mean.#
-#
-for(i in which(pres=='outlier')){#
-#
-  	x<-xes[i,1:n]#
-  	y<-yes[i,1:n]#
-  	n<-nes[i]#
-    sig.i<-pvals[i]<.05#
-  	#grab the middle point from x and y#
-  	mx<-rep(mean(x),n)#
-  	my<-rep(mean(y),n)#
-  	distvec<-sqrt((mx-x)^2+(my-y)^2)#
-  	switch<-which(distvec==min(distvec))#
-    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED#
-    #Put it in an UPPER CORNER#
-  	if(tvals[i]<0 & sig.i) { #slope going down#
-  		x[switch]<-min(x)-sd(x)#
-  		y[switch]<-max(y)+sd(y)#
-  	}#
-  	if(tvals[i]>0 & sig.i) {#
-  		x[switch]<-max(x)+sd(x)#
-  		y[switch]<-max(y)+sd(y)#
-  	}#
-    if(!sig.i){#
-      #leave X where it is now#
-      y[switch]<-max(y)+sd(y)*sqrt(2)#
-    }#
-  	tvals[i]<-summary(lm(y~x))$coeff[2,3]#
-  	pvals[i]<-summary(lm(y~x))$coeff[2,4]#
-#
-	xes[i,1:n]<-x#
-	yes[i,1:n]<-y#
-}#
-#
-#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#
-#load('data_for_1plots_coursera2.RData')#
-#Note, this works b/c there's no replicates#
-for(i in 1:nreps){#
-  n<-nes[i]#
-  x<-xes[i,1:n]#
-  y<-yes[i,1:n]#
-  pval<-pvals[i]#
-  tval<-tvals[i]#
-  m<-lm(y~x)#
-  style<-pres[i]#
-#
-  t2<-'Data'#
-  if(style=='lowess') t2<-'with Lowess Line'#
-  if(style=='bestFit') t2<-'with OLS Best Fit Line'#
-  title<-paste('Sample ',t2,sep='')#
-  xl<-paste("Cranial Electrode",floor(runif(1,11,44)),"(Standardized)")#
-  yl<-paste("Cranial Electrode",floor(runif(1,53,97)),"(Standardized)")#
-  drx<-diff(range(x))#
-  dry<-diff(range(y))#
-  probnum<-paste0(rep(1:7,each=2),rep(c('-1','-2'),times=7))#
-  png(paste0("images/coursera2_#",probnum[i],'_',pres[i],'_pval-',round(pvals[i],digits=3),".png"), width = 400, height = 400)#
-    par(mfrow=c(1,1))#
-  	plot(x,y,xlab='X',ylab='Y',main=title)#
-  	if(style=='lowess') lines(lowess(x,y))#
-  	if(style=='bestFit') abline(m$coef)#
-  	if(style=='axesScale')plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-1.5*sd(x),max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))#
-    if(style=='outlier')plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )#
-  	if(style=='axesLabel') plot(x,y,xlab=xl,ylab=yl,main=title)#
-  dev.off()#
-}
+x<-matrix(1:10,nrow=2)
+x
+d<-matrix(c(1,0),nrow=1)
+d
+d<-matrix(c(1,0),nrow=2)
+d
+x%*%d
+d<-matrix(c(1,0,0,0,0),nrow=2)
+d
+d<-matrix(c(1,0,0,0,0),nrow=5)
+d
+x%*%d
+β<-4
+α<-2
+β+α
+gamma(2)
+gamma(3)
+gamma(4)
+factorial(3)
+x<-1:10
+x2<-x^2
+cor(x,x2)
+x<-1:100
+cor(x,x2)
+x2<-x^2
+cor(x,x2)
+cor(x,sin(x))
+882.5*12+918*8
+882.5*12+918*8+1800
+882.5*12+918*8+1800+221.53
+times <- c(70, 11, 66, 5, 20, 4, 35, 40, 29, 9) n <- length(times)theta.hat <- mean(times)alpha <- 0.05L <- qgamma(alpha/2, n, 1)U <- qgamma(1 - alpha/2, n, 1)## 95% CIc(theta.hat * n/U, theta.hat * n/L)
+times <- c(70, 11, 66, 5, 20, 4, 35, 40, 29, 9)
+times <- c(70, 11, 66, 5, 20, 4, 35, 40, 29, 9) n <- length(times)
+theta.hat <- mean(times)
+times <- c(70, 11, 66, 5, 20, 4, 35, 40, 29, 9) n <- length(times)
+times <- c(70, 11, 66, 5, 20, 4, 35, 40, 29, 9)
+n <- length(times)
+theta.hat <- mean(times)
+alpha <- 0.05
+L <- qgamma(alpha/2, n, 1)
+U <- qgamma(1 - alpha/2, n, 1)
+c(theta.hat * n/U, theta.hat * n/L)
+L
+U
+alpha/2
+theta.hat
+mean(times)
+473.96+1083.33+677.08+2184
+473.96+1083.33+677.08+2184+918*4
+getwd()
+x<-read.csv('/Users/aaronfisher/Documents/JH/Causal Liz Stewart/HW3/dat80.csv')
+x
+class(x)
+dim(x)
+head(x)
+x<-read.csv(file='/Users/aaronfisher/Documents/JH/Causal Liz Stewart/HW3/dat80.csv')
+names(x)
+attach(x)
+head(samesex)
+head(morekids)
+?t.test
+t.test(morekids[samesex],morekids[!samesex])
+mean(morekids)
+mean(morekids[samesex])
+mean(morekids[samesex==1])
+t.test(morekids[samesex==0],morekids[samesex==1])
+mean(morekids[samesex==0])
+mean(morekids[samesex==1])
+t.test(morekids[samesex==0],morekids[samesex==1])
+mean(morekids[samesex==1])-mean(morekids[samesex==0])
+table(morekids, samesex)
+N<-dim(x)[1]
+table(morekids, samesex)/N
+.31+.18+.29+.21
+.311+.218
+t.test(incomem[morekids==0],incomem[morekids==1])
+mean(incomem[morekids==0])
+mean(incomem[morekids==1])
+mean(incomem[morekids==0])
+mean(incomem[morekids==1])
+mean(incomem[samesex==0])
+mean(incomem[samesex==1])
+t.test(incomem[samesex==0],incomem[samesex==1])
+mean(incomem[samesex==1])-mean(incomem[samesex==0])
+sqrt(var(incomem[samesex==1])+var(incomem[samesex==0]))
+sqrt(var(incomem[samesex==1])+var(incomem[samesex==0])/n)
+sqrt(var(incomem[samesex==1])+var(incomem[samesex==0]))/sqrt(N)
+mean(incomem[samesex==1])-mean(incomem[samesex==0])
+sqrt(var(incomem[samesex==1])+var(incomem[samesex==0]))/sqrt(N)
+1.96*2*sqrt(var(incomem[samesex==1])+var(incomem[samesex==0]))/sqrt(N)
+t.test(incomem[samesex==0],incomem[samesex==1])
+7226.668 - 7096.367
+62.9009 -197.7000
+ttd<-t.test(incomem[samesex==0],incomem[samesex==1])
+summary(ttd)
+names(ttd)
+names(summary(ttd))
+names((ttd))
+sqrt(var(incomem[samesex==1])+var(incomem[samesex==0]))/sqrt(N)
+mean(incomem[samesex==1])-mean(incomem[samesex==0])
+130/24
+p2-p1
+p1<-incomem[samesex==1])
+p2<-incomem[samesex==0])
+p1<-incomem[samesex==1]
+p2<-incomem[samesex==0]
+p1-p2
+dim(p1)
+length(p1)
+p1<-mean(incomem[samesex==1])
+p2<-mean(incomem[samesex==0])
+p1
+p2
+mean(incomem[samesex==1])-mean(incomem[samesex==0])
+var(incomem[samesex==1])
+var(incomem[samesex==0])
+sqrt(var(incomem[samesex==1])+var(incomem[samesex==0]))
+sqrt(var(incomem[samesex==1])+var(incomem[samesex==0]))/sqrt(N)
+1.96*sqrt(var(incomem[samesex==1])+var(incomem[samesex==0]))/sqrt(N)
+t.test(incomem[samesex==0],incomem[samesex==1])
+diff<-  197.7000 - 62.9009
+diff
+1.96*2*sqrt(var(incomem[samesex==1])+var(incomem[samesex==0]))/sqrt(N)
+diff/2
+( 7226.668  -7096.367 )*2/diff
+ttd<-t.test(incomem[samesex==0],incomem[samesex==1])
+ttd
+?t.test
+t.test(incomem[samesex==0],incomem[samesex==1])
+t.test(incomem[samesex==0],incomem[samesex==1],alternative='two.sided')
+p2-p1
+(p2-p1)/3.7891
+43*4
+34*4
+n_ss<-sum(samesex==1)
+n_ds<-sum(samesex==0)
+sqrt(var(incomem[samesex==1])/n_ss+var(incomem[samesex==0])/n_ds)
+Effectmean(incomem[samesex==1])-mean(incomem[samesex==0])n_ss<-sum(samesex==1)n_ds<-sum(samesex==0)#Std Errorsqrt(var(incomem[samesex==1])/n_ss+var(incomem[samesex==0])/n_ds)
+t.test(mean(incomem[samesex==1])-mean(incomem[samesex==0]))
+t.test(incomem[samesex==1]-incomem[samesex==0])
+t.test(incomem[samesex==1],incomem[samesex==0])
+t.test(incomem[morekids==1],incomem[morekids==0])
+t.test(incomem[morekids==1&samesex==1],
+incomem[morekids==0&samesex==0])
+5606.098 0 8206.238
+5606.098 - 8206.238
+5564.169 - 8157.067
+library(sem)
+install.packages(sem)
+install.packages('sem')
+library(sem)
+tsls(incomem~morekids,morekids~samesex)
+?tsls
+tsls(incomem~morekids,~samesex)
+tsls1<-tsls(incomem~morekids,~samesex)
+summary(tsls1)
+tsls2<-tsls(incomem~morekids+AGEM+agefstm,~samesex)
+tsls2<-tsls(incomem~morekids+AGEM+ agefstm+ blackm+hispm+ othracem+boy1st+boy2nd,~samesex)
+tsls2<-tsls(incomem~morekids+AGEM+ agefstm+ blackm+hispm+ othracem+boy1st+boy2nd,~samesex+AGEM+ agefstm+ blackm+hispm+ othracem+boy1st+boy2nd)
+summary(tsls2)
+sqrt(var(incomem[samesex==1])/n_ss+var(incomem[samesex==0])/n_ds)
+mean(incomem[samesex==1])-mean(incomem[samesex==0])
+tsls1<-tsls(incomem~morekids,~samesex)
+summary(tsls1)
+hist(incomem)
+mean(incomem[samesex==1])
+mean(incomem[samesex==0])
+mean(incomem)
+quantile(incomem)
+D ##t.test(incomem[samesex==1],incomem[samesex==0])#Effectmean(incomem[samesex==1])-mean(incomem[samesex==0])n_ss<-sum(samesex==1)n_ds<-sum(samesex==0)#Std Errorsqrt(var(incomem[samesex==1])/n_ss+var(incomem[samesex==0])/n_ds)
+summary(tsls1)
+130/0.529
+PROBLEM 4   ########
+##  A  ##x<-read.csv(file='/Users/aaronfisher/Documents/JH/Causal Liz Stewart/HW3/dat80.csv')#note, this takes a whileclass(x)dim(x)names(x)attach(x)#
+mean(morekids[samesex==0])mean(morekids[samesex==1])mean(morekids[samesex==1])-mean(morekids[samesex==0])t.test(morekids[samesex==0],morekids[samesex==1])##  B  ##N<-dim(x)[1]table(morekids, samesex)/N#
+## D ##t.test(incomem[samesex==1],incomem[samesex==0])#Effectmean(incomem[samesex==1])-mean(incomem[samesex==0])n_ss<-sum(samesex==1)n_ds<-sum(samesex==0)#Std Errorsqrt(var(incomem[samesex==1])/n_ss+var(incomem[samesex==0])/n_ds)#
+## E ###Nieve "as treated"t.test(incomem[morekids==1],incomem[morekids==0])#"Per protocol"t.test(incomem[morekids==1&samesex==1],		incomem[morekids==0&samesex==0])#
+##  G  ##130/0.529##  H  ##library(sem)tsls1<-tsls(incomem~morekids,~samesex)summary(tsls1)##  I  ##tsls2<-tsls(incomem~morekids+AGEM+ agefstm+ blackm+hispm+ othracem+boy1st+boy2nd,~samesex+AGEM+ agefstm+ blackm+hispm+ othracem+boy1st+boy2nd)summary(tsls2)
+summary(tsls1)
+tsls1<-tsls(incomem~morekids,~samesex)
+summary(tsls1)
+tsls2<-tsls(incomem~morekids+AGEM+ agefstm+ blackm+hispm+ othracem+boy1st+boy2nd,~samesex+AGEM+ agefstm+ blackm+hispm+ othracem+boy1st+boy2nd)
+summary(tsls2)
+?qexp
++3.5-1.75
++3.5-1.75-1.5
++3.5-1.75-1.5-1
+To prevent outliers where we don't want them, we generate 10 extra xes, and then chop off the bottom and top 5.set.seed(234032)#Intro question:setwd("/Users/aaronfisher/Documents/JH/EDA Versions/EDA Git Repo/Coursera")nversions<-5 #how many times to generate the data?pbreaks<-c(.023,.025,.33,.35,1)pbins.base<-rep(c(2,4),times=7)nes.base<-c(35,35,100,100,200,200,rep(100,times=8))+10 #last 10 will be trimmed offpres.base<-(rep(c('n35','n100ref','n200','bestFit','axesScale','axesLabel','outlier'),each=2))version.base<-rep(1:nversions)#Note, divide by two because sig and nonsig are two diff versionsprobnum.base<-paste0(rep(1:7,each=2),rep(c('-1','-2'),times=7))#
+probnum<-rep(probnum.base,each=nversions) #before versionpbins<-rep(pbins.base,each=nversions)nes<-rep(nes.base,each=nversions)pres<-rep(pres.base,each=nversions)version<-rep(version.base,times=length(pbins.base))cbind(pbins,nes,pres,version)nreps<-length(pbins)yes<-matrix(nrow=nreps,ncol=max(nes))xes<-matrix(nrow=nreps,ncol=max(nes))pvals<-1 #initialize variablestvals<-1
+i<-1
+t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)
+if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size
+n<-nes[i]
+x<-rnorm(n)
+hist(x)
+x<-x[order(x)[c(1:5,(n-5):n)]
+]
+hist(x)
+x<-rnorm(n)
+x2<-x[order(x)[c(1:5,(n-5):n)]]
+par(mfrow=c(1,2))
+hist(x)
+hist(x2)
+hist(x,breaks=20)
+hist(x2,breaks=20)
+x<-rnorm(n)
+x2<-x[order(x)[6:(n-5)] ]
+hist(x,breaks=20)
+hist(x2,breaks=20)
+rm(list=ls())
+COURSERA STUFF#Here we're using 8 questions#Each with 2 options people can see (with one exception), one significant one not#Questions are: Small sample (35), medium sample (100) (reference),#large sample (200), axis scale, labels, outlier, bestfit#For the medium "reference" sample, each person HAS to see both questions (sig and not) so we have something to compare against.#Then, to cancel out any effects of a "bad generated sample" we make 5 versions of each #All p-values are fixed to be in the range (.023,.025) or in the range (.33,.35).#To prevent outliers where we don't want them, we generate 10 extra xes, and then chop off the bottom and top 5.set.seed(234032)#Intro question:setwd("/Users/aaronfisher/Documents/JH/EDA Versions/EDA Git Repo/Coursera")nversions<-5 #how many times to generate the data?pbreaks<-c(.023,.025,.33,.35,1)pbins.base<-rep(c(2,4),times=7)nes.base<-c(35,35,100,100,200,200,rep(100,times=8))+10 #last 10 will be trimmed offpres.base<-(rep(c('n35','n100ref','n200','bestFit','axesScale','axesLabel','outlier'),each=2))version.base<-rep(1:nversions)#Note, divide by two because sig and nonsig are two diff versionsprobnum.base<-paste0(rep(1:7,each=2),rep(c('-1','-2'),times=7))#
+probnum<-rep(probnum.base,each=nversions) #before versionpbins<-rep(pbins.base,each=nversions)nes<-rep(nes.base,each=nversions)pres<-rep(pres.base,each=nversions)version<-rep(version.base,times=length(pbins.base))cbind(pbins,nes,pres,version)nreps<-length(pbins)yes<-matrix(nrow=nreps,ncol=max(nes))xes<-matrix(nrow=nreps,ncol=max(nes))pvals<-1 #initialize variablestvals<-1#dropping Lowess here#First generate baseline data#then add presentation data (same data + presentaion vector)#then change data for when the twist is adding an outlierprint(paste('nreps = ',nreps))pb<-txtProgressBar(min = 1, max = nreps,  char = "=", style = 3)for(i in 1:nreps){	tryagain<-T	while(tryagain){ #to ENSURE that we get a good mix of p-value ranges		#get t close to what we want		t<-qnorm(pbreaks[pbins[i]],mean=0,sd=1,lower.tail=F)		if(abs(t)>5)t<-0 #guards against when the bin is 1, and quantile has infinite size		n<-nes[i]		x<-rnorm(n)		x2<-x[order(x)[6:(n-5)] ] #trim off extra x's		e<-rnorm(n)		bhat<-t*sd(e)/(sqrt(n)*sd(x))		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null		y<-x*bhat*sample(c(-1,1),1)+e		tvals[i]<-summary(lm(y~x))$coeff[2,3]		pvals[i]<-summary(lm(y~x))$coeff[2,4]		xes[i,1:n]<-x		yes[i,1:n]<-y		pi<-pvals[i]		bini<-min(which(pi<pbreaks))		if(bini==pbins[i]) tryagain<-F	}		setTxtProgressBar(pb,i)	#plot(x,y,main=n)	#readline(prompt='go')}#
+#################################################Fix those that now get an extra outlier#add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works#if it's not sig, add the outlier close to above the mean.for(i in which(pres=='outlier')){  	n<-nes[i]  	x<-xes[i,1:n]  	y<-yes[i,1:n]    sig.i<-pvals[i]<.05  	#grab the middle point from x and y  	mx<-rep(mean(x),n)  	my<-rep(mean(y),n)  	distvec<-sqrt((mx-x)^2+(my-y)^2)  	switch<-which(distvec==min(distvec))#
+    #NOTE IT PREV VERSIONS THIS NICE DEALY LET US RANDOMLY PUT THE OUTLIER IN W/E CORNER WE WANTED    #Put it in an UPPER CORNER  	if(tvals[i]<0 & sig.i) { #slope going down  		x[switch]<-min(x)-sd(x)  		y[switch]<-max(y)+sd(y)  	}  	if(tvals[i]>0 & sig.i) {  		x[switch]<-max(x)+sd(x)  		y[switch]<-max(y)+sd(y)  	}    if(!sig.i){      #leave X where it is now      y[switch]<-max(y)+sd(y)*sqrt(2)    }#
+  	tvals[i]<-summary(lm(y~x))$coeff[2,3]  	pvals[i]<-summary(lm(y~x))$coeff[2,4]	xes[i,1:n]<-x	yes[i,1:n]<-y}#save(list=c('xes','yes','nreps','pbins','pvals','tvals','nes','pres'),file='data_for_1plots_coursera2.RData')#load('data_for_1plots_coursera2.RData')for(i in 1:nreps){  n<-nes[i]  x<-xes[i,1:n]  y<-yes[i,1:n]  pval<-pvals[i]  tval<-tvals[i]  m<-lm(y~x)  style<-pres[i]  t2<-'Data'  if(style=='lowess') t2<-'with Lowess Line'  if(style=='bestFit') t2<-'with OLS Best Fit Line'  title<-paste('Sample ',t2,sep='')  xl<-paste("Cranial Electrode",floor(runif(1,11,44)),"(Standardized)")  yl<-paste("Cranial Electrode",floor(runif(1,53,97)),"(Standardized)")  drx<-diff(range(x))  dry<-diff(range(y))#
+  probnum.base<-paste0(rep(1:7,each=2),rep(c('-1','-2'),times=7))  png(paste0("images no outliers/coursera2_#",probnum[i],'_datVer-',version[i],'_',pres[i],'_pval-',round(pvals[i],digits=3),".png"), width = 400, height = 400)    par(mfrow=c(1,1))  	plot(x,y,xlab='X',ylab='Y',main=title)  	if(style=='lowess') lines(lowess(x,y))  	if(style=='bestFit') abline(m$coef)  	if(style=='axesScale')plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-1.5*sd(x),max(x)+1.5*sd(x)),ylim=c(min(y)-1.5*sd(y),max(y)+1.5*sd(y)))    if(style=='outlier')plot(x,y,xlab='X',ylab='Y',main=title,xlim=c(min(x)-.1*drx,max(x)+.1*drx),ylim=c(min(y)-.1*dry,max(y)+.1*dry) )  	if(style=='axesLabel') plot(x,y,xlab=xl,ylab=yl,main=title)  dev.off()}#rm(list=ls())
