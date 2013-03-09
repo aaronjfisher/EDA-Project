@@ -76,13 +76,14 @@ pal(mycol)
 
 #6 different group sizes, 2:7
 #3 difficulty levels, with different max magnitudes of signal
-groupsizes<-rep(2:7,times=3)
-magnitudes<-rep(c(3,2,1)*sd.x,each=6)
-Xes<-list()
 
 N<-40
 p<-500
 sd.x<-1
+
+groupsizes<-rep(2:7,times=3)
+magnitudes<-rep(c(3,2,1)*sd.x,each=6)
+Xes<-list()
 
 maxIndex<-6*3
 pb<-txtProgressBar(min = 1, max = maxIndex,  char = "=", style = 3)
@@ -119,6 +120,13 @@ for(i in 1:length(magnitudes)){
 	png(filename=filename.i,height=600,width=600)
 	pheatmap(XSort,cluster_rows=FALSE,col=mycol)
 	dev.off()
+
+	filename.i<-paste0('Dendrogram_Images/' , 'Q-', QNum,'_Ver-', VerNum,'_Mag-',mag.i,'_ngroups-',ngroups.i,'.png')
+	png(filename=filename.i,height=450,width=450)
+	dx<-dist(t(X))
+	plot(hclust(dx),xlab='ID Number',sub='',ylab='Distance')
+	dev.off()
+
 
 	Xes[[i]]<-X
 	

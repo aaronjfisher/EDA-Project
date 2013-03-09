@@ -16,7 +16,8 @@
 	#true slope, just update tvals & pvals.
 #You have deleted out line here that could have zoomed out a little bit for the outlier plots, to make that last point more visible, but seems too complicated any subjectively justified.
 
-set.seed(234032)
+seedForPlots<-234032
+set.seed(seedForPlots)
 
 #Intro question:
 setwd("/Users/aaronfisher/Documents/JH/EDA Versions/EDA Git Repo/Coursera")
@@ -92,6 +93,8 @@ for(i in 1:nreps){
 	#plot(x,y,main=n)
 	#readline(prompt='go')
 }
+
+cbind(pbreaks[pbins],round(pvals,digits=3),nes,apply(xes,1,function(v){sum(!is.na(v))}),pres,version)
 
 plot(bhat.theory,abs(bhat.emp))
 abline(0,1)
