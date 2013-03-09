@@ -15,9 +15,9 @@ pvalue plot images
 ----------------
   * Each image filename has it's number, a 1 or 2 denoting the sig or non sig version respectively, the dataversion #, style & actual p-value (rounded)
   * For example: 
-  	 * "coursera2_#1-1_datVer-1_n35_pval-0.025.png" is one version of first question they could see, with small sample and significant pvalue (denoted by either 1-1, or by looking at the actual size of the pvalue)
-  	 * "coursera2_#1-1_datVer-2_n35_pval-0.023.png" will have different data, but otherwise exactly all the same problems as the previous filename
-  	 * "coursera2_#1-2_datVer-1_n35_pval-0.338.png" is the same as the first file, but now with insignificant data. Note, a user would only see one of these three mentioned files, or maybe even a different version.
+  	 * (EX1) "coursera2_#1-1_datVer-1_n35_pval-0.025.png" is one version of first question they could see, with small sample and significant pvalue (denoted by either 1-1, or by looking at the actual size of the pvalue)
+  	 * (EX2) "coursera2_#1-1_datVer-2_n35_pval-0.023.png" will have different data, but otherwise exactly the same trend as EX1.
+  	 * (EX3) "coursera2_#1-2_datVer-1_n35_pval-0.338.png" Same sample size as EX1, but now with insignificant data. (Any given use would only be assigned to see one of these files).
 
 
 Heatmap_Images and Dendrogram_images
