@@ -4,28 +4,35 @@ COURSERA FILES
 
 
 * Current plan is to have 8 questions
-* Each with 2 versions (except 2-3), one significant one not
+* Each with 2 versions (except questions 2-3), one version with significant data, and one without
 * To cancel out any effects of a "bad generated sample" we make 5 versions of each
 	* This is shown in the "datVer" part of the file name. Each person just sees one version.
-* Questions are: Small sample (n35), medium sample sig & nonsig (n100) (reference), large sample (n200), axis scale, labels, outlier, bestfit
-* Add an extra 10 to n, and then trim off the top and bottom 5 before proceeding to ensure we only get outliers when we want them?
+* Questions are: Small sample (n35), medium sample sig & nonsig (n100) (reference), large sample (n200), bestfit, axis scale, labels, & outlier
+* To ensure we only get outliers when we want them, we add an extra 10 entries to the x vector, and then trim off the top and bottom 5% before proceeding
 
 
 pvalue plot images
 ----------------
   * Each image filename has it's number, a 1 or 2 denoting the sig or non sig version respectively, the dataversion #, style & actual p-value (rounded)
   * For example: 
-  	 * "coursera2_#1-1_datVer-1_n35_pval-0.025.png" is one version of first question they could see, with small sample and significant pvalue (denoted by either 1-1, or by looking at the actual size of the pvalue)
-  	 * "coursera2_#1-1_datVer-2_n35_pval-0.023.png" will have different data, but otherwise exactly all the same problems as the previous filename
-  	 * "coursera2_#1-2_datVer-1_n35_pval-0.338.png" is the same as the first file, but now with insignificant data. Note, a user would only see one of these three mentioned files, or maybe even a different version.
+  	 * (EX1) "coursera2_#1-1_datVer-1_n35_pval-0.025.png" is one version of first question they could see, with small sample and significant pvalue (denoted by either 1-1, or by looking at the actual size of the pvalue)
+  	 * (EX2) "coursera2_#1-1_datVer-2_n35_pval-0.023.png" will have different data, but otherwise exactly the same trend as EX1.
+  	 * (EX3) "coursera2_#1-2_datVer-1_n35_pval-0.338.png" Same sample size as EX1, but now with insignificant data. (Any given use would only be assigned to see one of these files).
 
 
+<<<<<<< HEAD
 Heatmaps
 -----
 * Images for heatmap in heatmaps_images. The generating script is in this folder
 * "mag" in file name denotes absolute value of max signal (normal noise has stdev=1.
+=======
+Heatmap_Images and Dendrogram_images
+-----
+* Images are in the folders. There are 6*3=18 graphs in each.
+* The generating script is in this folder (Heatmaps.R). This generates the heatmaps and the dendrograms from the same data. In other words, across all the heatmaps & dendrograms, there are only 18 total data matrixes.
+>>>>>>> 44a94b35f5db014296c5e619392c329643f1ca77
 
-Some stuff in the "old stuff" folder
+Some stuff in the "old stuff" folder (ignorable)
 ----------
 * The "alt" plan was the have 3 questions about size, and then 2 or three where the data is the same for all people, but each person is randomized to see a different presentation style
 * "alt" images have the same data, and give all different presentation styles over the same data. This essentially "holds the data constant" but it doesn't seem like that's the best use of resources. The data should be replicatable, so it's not the most important thing to hold *exactly* constant. It's more useful to hold *person* constant by comparing against the reference with the same people in it. Ex, compare the accuracy rate of people in bestFit-sig with *their* accuracy in in n100-sig. 
