@@ -20,12 +20,7 @@ pvalue plot images
   	 * (EX3) "coursera2_#1-2_datVer-1_n35_pval-0.338.png" Same sample size as EX1, but now with insignificant data. (Any given use would only be assigned to see one of these files).
 
 
-<<<<<<< HEAD
-Heatmaps
------
-* Images for heatmap in heatmaps_images. The generating script is in this folder
-* "mag" in file name denotes absolute value of max signal (normal noise has stdev=1.
-=======
+
 Heatmap_Images and Dendrogram_images
 -----
 * N=40 ("people"); p=500 ("measurements")
