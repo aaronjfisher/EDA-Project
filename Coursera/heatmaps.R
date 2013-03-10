@@ -5,6 +5,7 @@
 # Load Aaron's little functions for plotting with colorspace
 library(colorspace)
 library(plotrix)
+library(pheatmap)
 
 pal <- function(col, border = "light gray", ...)
 #Copy pasted from HCL-Based Color Palettes in R
@@ -67,12 +68,14 @@ c.d.hcl<-function(x,n=1000, h=c(0,260), ...){ #cut divergent_hcl
 set.seed(148192)
 setwd('~/Documents/JH/EDA Versions/EDA Git Repo/Coursera')
 
+par(mfrow=c(3,1))
 testcol<-c.r.hcl(0:18*20,c=60,l=50)
 pal(testcol)
-mycol<-c.d.hcl(-50:50,h=c(0,180),c=100)
+mycol<-c.d.hcl(-80:80,h=c(295,40),c=120)
 pal(mycol)
-mycol<-c.d.hcl(-80:80,h=c(295,40))
+mycol<-c.d.hcl(-80:80,h=c(0,260),c=120,l=c(30,90))
 pal(mycol)
+
 
 #6 different group sizes, 2:7
 #3 difficulty levels, with different max magnitudes of signal
@@ -131,13 +134,12 @@ for(i in 1:length(magnitudes)){
 	Xes[[i]]<-X
 	
 }
-
+save.image('Clustering_coursera.RData')
 
 ############################################################
 ############################################################
 #Workspace
 
-library(pheatmap)
 
 X.ind<-heatmap(X,col=mycol)
 XSort<-X[X.ind$rowInd[p:1],X.ind$colInd]
