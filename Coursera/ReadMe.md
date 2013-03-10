@@ -28,9 +28,13 @@ Heatmaps
 =======
 Heatmap_Images and Dendrogram_images
 -----
-* Images are in the folders. There are 6*3=18 graphs in each.
+* N=40 ("people"); p=500 ("measurements")
+* There are 3 levels of signal (magnitude, or "mag" in the file name).
+* Level of signal has a versions with 6 - 7 clusters in it (6 options).
+* 3 levels of signal * 6 options for #clusters = 18 plots total.
+* The dendrograms at the top of the columns are really useful for guessing the right # of clusters.
+* Heatmap_images folder also has some other older color choices, which are ignorable.
 * The generating script is in this folder (Heatmaps.R). This generates the heatmaps and the dendrograms from the same data. In other words, across all the heatmaps & dendrograms, there are only 18 total data matrixes.
->>>>>>> 44a94b35f5db014296c5e619392c329643f1ca77
 
 Some stuff in the "old stuff" folder (ignorable)
 ----------
