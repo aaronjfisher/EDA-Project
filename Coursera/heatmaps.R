@@ -36,7 +36,8 @@ c.s.hcl<-function(x,n=1000,only.up.to=n, ...){ #cut sequantial_hcl
 	return(out)
 }
 
-c.d.hcl<-function(x,n=1000, h=c(0,260), ...){ #cut divergent_hcl
+c.d.hcl<-function(x,n=1000, h=c(0,260),c=80,...){ #cut divergent_hcl
+#c is the max chroma, 
 #hues: 0 is low, 260 is the higher.
 	xNegInd <- which(x<0)
 	xPosInd <- which(x>=0)
@@ -47,11 +48,11 @@ c.d.hcl<-function(x,n=1000, h=c(0,260), ...){ #cut divergent_hcl
 	
 	out<-rep(0,length(x))	
 	if(!length(xNegInd)==0){
-		xNegCol<-c.s.hcl(abs(x[xNegInd]),n=biggerN,only.up.to=nNeg,h=h[1])
+		xNegCol<-c.s.hcl(abs(x[xNegInd]),n=biggerN,only.up.to=nNeg,h=h[1],c=c(c,0),...)
 		out[xNegInd]<-xNegCol
 	}
 	if(!length(xPosInd)==0){
-		xPosCol<-c.s.hcl(x[xPosInd],n=biggerN,only.up.to=nPos,h=h[2])
+		xPosCol<-c.s.hcl(x[xPosInd],n=biggerN,only.up.to=nPos,h=h[2],c=c(c,0),...)
 		out[xPosInd]<-xPosCol
 	}
 
@@ -73,9 +74,8 @@ testcol<-c.r.hcl(0:18*20,c=60,l=50)
 pal(testcol)
 mycol<-c.d.hcl(-80:80,h=c(295,40),c=120)
 pal(mycol)
-mycol<-c.d.hcl(-80:80,h=c(0,260),c=120,l=c(30,90))
+mycol<-c.d.hcl(-80:80,h=c(0,260),c=80,l=c(30,90))
 pal(mycol)
-
 
 #6 different group sizes, 2:7
 #3 difficulty levels, with different max magnitudes of signal

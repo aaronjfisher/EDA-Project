@@ -15,6 +15,7 @@
 	#However, in the outlier plots, we don't update the bhat.emp vector to reflect the new
 	#true slope, just update tvals & pvals.
 #You have deleted out line here that could have zoomed out a little bit for the outlier plots, to make that last point more visible, but seems too complicated any subjectively justified.
+#2013/03/12 - Added lowess. Since these are the new "last plots," the random first plots are still exactly the same as previous versions.
 
 seedForPlots<-234032
 set.seed(seedForPlots)
@@ -26,15 +27,15 @@ nversions<-5 #how many times to generate the data?
 
 #will be used to ensure that each plot has the right pvalue
 pbreaks<-c(.023,.025,.33,.35,1)
-pbins.base<-rep(c(2,4),times=7)
-nes.base<-c(35,35,100,100,200,200,rep(100,times=8)) #10 will be added IN THE GENERATION PROCESS and then trimmed off
-pres.base<-(rep(c('n35','n100ref','n200','bestFit','axesScale','axesLabel','outlier'),each=2))
+pbins.base<-rep(c(2,4),times=8)
+nes.base<-c(35,35,100,100,200,200,rep(100,times=10)) #10 will be added IN THE GENERATION PROCESS and then trimmed off
+pres.base<-(rep(c('n35','n100ref','n200','bestFit','axesScale','axesLabel','outlier','lowess'),each=2))
 pbins<-rep(pbins.base,each=nversions)
 nes<-rep(nes.base,each=nversions)
 pres<-rep(pres.base,each=nversions)
 
 version.base<-rep(1:nversions)#Note, divide by two because sig and nonsig are two diff versions
-probnum.base<-c('1-1','1-2','2','3',paste0(rep(4:8,each=2),rep(c('-1','-2'),times=5)))
+probnum.base<-c('1-1','1-2','2','3',paste0(rep(4:9,each=2),rep(c('-1','-2'),times=5)))
 version<-rep(version.base,times=length(pbins.base))  
 probnum<-rep(probnum.base,each=nversions) 
 
@@ -46,16 +47,14 @@ nreps<-length(pbins)
 yes<-matrix(nrow=nreps,ncol=max(nes))
 xes<-matrix(nrow=nreps,ncol=max(nes))
 
-pvals<-rep(0,nreps) #initialize variables
+#initialize variables
+pvals<-rep(0,nreps)
 tvals<-rep(0,nreps)
 bhat.theory<-rep(0,nreps)
 bhat.emp<-rep(0,nreps)
 
-#No Lowess here
-
-#First generate baseline data
-#then add presentation data (same data + presentaion vector)
-#then change data for when the twist is adding an outlier
+#First make basic data
+#then add outliers
 
 print(paste('nreps = ',nreps))
 pb<-txtProgressBar(min = 1, max = nreps,  char = "=", style = 3)
