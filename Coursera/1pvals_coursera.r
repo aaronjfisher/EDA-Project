@@ -70,8 +70,9 @@ for(i in 1:nreps){
 		x.pre<-rnorm(n +10)
 		x<-x.pre[order(x.pre)[6:(length(x.pre)-5)] ] #trim off extra x's
 		e<-rnorm(n)
-		bhat<-t.i*sd(e)/(sqrt(n)*sd(x))
-		if(pbins[i]>=5 & sample(c(2,2,1),1)==2) bhat<-0 #sometimes generate it actually from a null
+		bhat<-t.i*sd(e)/(sqrt(n)*sd(x)) #sd(e)=true σ, sqrt(n)*sd(x) = Σ[(x-bar(x))^2]
+    #In previous iterations of this code, we had it set up to sometimes generate from an actual null (if pval=0). Below, we disable that option with the added FALSE statement, but it will still affect the seed & later random #'s generated.
+		if(FALSE & pbreaks[pbins[i]]>.5 & sample(c(2,2,1),1)==2) {bhat<-0}
 		y<-x*bhat*sample(c(-1,1),1)+e
 		
 		bhat.theory[i]<-bhat
@@ -85,12 +86,8 @@ for(i in 1:nreps){
 		bini<-min(which(pi<pbreaks))
 		if(bini==pbins[i]) tryagain<-FALSE
 		
-
-		
 	}	
 	setTxtProgressBar(pb,i)
-	#plot(x,y,main=n)
-	#readline(prompt='go')
 }
 
 cbind(pbreaks[pbins],round(pvals,digits=3),nes,apply(xes,1,function(v){sum(!is.na(v))}),pres,version)
