@@ -120,8 +120,9 @@ shinyServer(function(input, output) {
   },digits=4)
   
   
-  output$pval<-renderText(pval() ) 
-  output$test<-renderText(data22()$pval.emp)
+  #note, right now we're showing the empirical pval
+  output$pval<-renderText(paste('p-value =',prettyNum(data22()$pval.emp)) ) 
+  #output$test<-renderText(data22()$pval.emp)
   output$formula<-renderText('Model: Y=α+Xβ+ε')
   output$genParams<-renderText(paste0('Generating Parameters: α=0; β =',round(data22()$bhat,digits=4)) )
   output$fitParams<-renderText(paste0('Fitted Parameters: α=',round(coefs()[1],digits=4), '; β =',round(coefs()[2],digits=4) ))

@@ -1,7 +1,5 @@
-setwd('/Users/aaronfisher/Documents/JH/EDA Versions/EDA Git Repo/Shiny/tutorial')
-
 library(shiny)
-runApp("/Users/aaronfisher/Documents/JH/EDA Versions/EDA Git Repo/Shiny/tutorial/shinyapp")
+#runApp("/Users/aaronfisher/Documents/JH/EDA Versions/EDA Git Repo/Shiny/tutorial/shinyapp")
 runApp("/Users/aaronfisher/Documents/JH/EDA Versions/EDA Git Repo/Shiny/EDA Shiny")
 
 

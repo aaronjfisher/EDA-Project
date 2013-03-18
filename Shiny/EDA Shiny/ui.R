@@ -10,7 +10,7 @@ shinyUI(pageWithSidebar(
     
     #max n must be <1000
     sliderInput("n", "Sample Size (n):", 
-                min=0, max=500, value=100,step=1),
+                min=0, max=500, value=100,step=1,animate=FALSE),
     
     numericInput("logp", "p-value=10^", -2,min=-10,max=-.2,step=.2),
     
@@ -29,8 +29,8 @@ shinyUI(pageWithSidebar(
     h3(textOutput("test")),
     plotOutput("outplot"),
     h3(textOutput("formula")),
-    h3(textOutput("genParams")),
-    h3(textOutput("fitParams")),
+    #h3(textOutput("genParams")),
+    #h3(textOutput("fitParams")),
     tableOutput('detailTable')
   )
 ))
