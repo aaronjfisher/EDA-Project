@@ -46,6 +46,8 @@ nreps<-length(pbins)
 
 yes<-matrix(nrow=nreps,ncol=max(nes))
 xes<-matrix(nrow=nreps,ncol=max(nes))
+ees<-matrix(nrow=nreps,ncol=max(nes))
+resids<-matrix(nrow=nreps,ncol=max(nes))
 
 #initialize variables
 pvals<-rep(0,nreps)
@@ -81,7 +83,9 @@ for(i in 1:nreps){
 		pvals[i]<-summary(lm(y~x))$coeff[2,4]
 		xes[i,1:n]<-x
 		yes[i,1:n]<-y
-
+    ees[i,1:n]<-e
+    resids[i,1:n]<-summary(lm(y~x))$resid
+    
 		pi<-pvals[i]
 		bini<-min(which(pi<pbreaks))
 		if(bini==pbins[i]) tryagain<-FALSE
@@ -94,7 +98,10 @@ cbind(pbreaks[pbins],round(pvals,digits=3),nes,apply(xes,1,function(v){sum(!is.n
 
 plot(bhat.theory,abs(bhat.emp))
 abline(0,1)
+
+
 ################################################
+
 #Fix those that now get an extra outlier
 #add it one sd above the max x and max y, or w/e is appropriate for the upper corner that works
 #if it's not sig, add the outlier close to above the mean.
@@ -165,4 +172,65 @@ for(i in 1:nreps){
   	if(style=='axesLabel') plot(x,y,xlab=xl,ylab=yl,main=title)
   dev.off()
 }
+
+################################################
+#resid diagnostics
+
+#Note, it could be argued that you didn't really simulated from a normal, because you culled from a normal to get the pvals you wanted. Here we check to make sure that the process of culling didn't effect the dist of the errors you generated, or the dist of the fitted errors from the models
+#we compare the qqplots of these errors (generating and fitted) against a qqplot for nrep of random Z's, varying vector size according to nes (so the Z vectors match the e & resid vectors in length)
+
+library(colorspace)
+c.r.hcl<-function(x,n=1000, ...){ #cut rainbow_hcl
+  xCut<-cut(x,breaks=n)
+  colors<-rainbow_hcl(n=n, ...)
+	out<-colors[xCut]
+	return(out)
+}
+pal <- function(col, border = "light gray", ...)
+#Copy pasted from HCL-Based Color Palettes in R
+#http://cran.r-project.org/web/packages/colorspace/vignettes/hcl-colors.pdf
+ {
+ n <- length(col)
+ plot(0, 0, type="n", xlim = c(0, 1), ylim = c(0, 1),
+ axes = FALSE, xlab = "", ylab = "", ...)
+ rect(0:(n-1)/n, 0, 1:n/n, 1, col = col, border = border)
+ }
+
+pal(c.r.hcl(1:nreps,l=60,))
+mypal<-c.r.hcl(1:nreps,l=50)
+mypal<-sample(mypal)
+
+par(mfrow=c(1,3))
+
+xy<-qqnorm(ees[1,],plot=F)
+plot(xy$x[order(xy$x)],xy$y[order(xy$x)],type='l',xlim=c(-2.5,2.5),ylim=c(-2.5,2.5),main='generated errors')
+for(i in 2:nreps){
+  xy<-qqnorm(ees[i,],plot=F)
+  lines(xy$x[order(xy$x)],xy$y[order(xy$x)],type='l',col=mypal[i],lwd=2)
+}
+abline(0,1,lwd=4)
+
+xy<-qqnorm(resids[1,],plot=F)
+plot(xy$x[order(xy$x)],xy$y[order(xy$x)],type='l',xlim=c(-2.5,2.5),ylim=c(-2.5,2.5),main='fitted errors')
+for(i in 2:nreps){
+  xy<-qqnorm(resids[i,],plot=F)
+  lines(xy$x[order(xy$x)],xy$y[order(xy$x)],type='l',col=mypal[i],lwd=2)
+}
+abline(0,1,lwd=4)
+
+
+xy<-qqnorm(rnorm(nes[1]),plot=F)
+plot(xy$x[order(xy$x)],xy$y[order(xy$x)],type='l',xlim=c(-2.5,2.5),ylim=c(-2.5,2.5),main='reference random Z')
+for(i in 2:nreps){
+  xy<-qqnorm(rnorm(nes[i]),plot=F)
+  lines(xy$x[order(xy$x)],xy$y[order(xy$x)],type='l',col=mypal[i],lwd=2)
+}
+abline(0,1,lwd=4)
+
+par(mfrow=c(1,1))
+
+######################################################
+
 #rm(list=ls())
+
+

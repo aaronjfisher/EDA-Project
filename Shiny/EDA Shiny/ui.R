@@ -10,9 +10,11 @@ shinyUI(pageWithSidebar(
     
     #max n must be <1000
     sliderInput("n", "Sample Size (n):", 
-                min=0, max=500, value=100,step=1,animate=FALSE),
+                min=20, max=500, value=100,step=1,animate=FALSE),
     
-    numericInput("logp", "p-value=10^", -2,min=-10,max=-.2,step=.2),
+    #numericInput("logp", "p-value=10^", -2,min=-20,max=-.2,step=.2),
+    sliderInput("logp", "p-value=10^", 
+                min=-20, max=-.02, value=-2,step=.2,animate=FALSE),
     
     checkboxInput("nulldist", "Generate from an actual null", FALSE),
         
