@@ -1,5 +1,9 @@
+THIS PROJECT CURRENTLY NOW HOSTED ON BITBUCKET
+=======================================
+
+
 EDA-Project
-===========
+-------------
 
 Here's a transfer of our dropbox files (done on Jan 2012)
 
